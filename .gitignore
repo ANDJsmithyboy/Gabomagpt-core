@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+build/
+dist/
+.svelte-kit/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Data volumes (ne pas commit les données)
+backend/data/
+*.sqlite
+*.db
+
+# Capacitor build artifacts (regénérés par cap sync)
+android/.gradle/
+android/app/build/
+ios/App/Pods/
+
+# Logs
+*.log
+npm-debug.log*

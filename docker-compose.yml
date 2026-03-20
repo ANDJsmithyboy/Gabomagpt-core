@@ -1,0 +1,190 @@
+# ══════════════════════════════════════════════════════════
+# GabomaGPT v6.0 — Docker Compose Full Stack
+# SmartANDJ AI Technologies · Constitution Zion Core
+# Fondateur : Daniel Jonathan ANDJ
+# ══════════════════════════════════════════════════════════
+
+services:
+  # ── Frontend SvelteKit (Open WebUI fork) ───────────────────
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    image: gabomagpt-web:latest
+    container_name: gabomagpt-web
+    ports:
+      - "${GABOMAGPT_PORT:-3000}:8080"
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - WEBUI_NAME=GabomaGPT
+      - CUSTOM_NAME=GabomaGPT
+      - WEBUI_AUTH=true
+      - ENABLE_SIGNUP=true
+      - DEFAULT_USER_ROLE=pending
+      - WEBUI_FAVICON_URL=/static/favicon.png
+      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY}
+      - DATABASE_URL=postgresql+asyncpg://gabomagpt:${POSTGRES_PASSWORD:-gabomagpt_secret}@postgres/gabomagpt
+      - REDIS_URL=redis://redis:6379
+      - CHROMA_HTTP_HOST=chromadb
+      - CHROMA_HTTP_PORT=8000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      chromadb:
+        condition: service_started
+      ollama:
+        condition: service_started
+    volumes:
+      - webui_data:/app/backend/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    restart: unless-stopped
+    networks:
+      - gabomagpt-net
+
+  # ── Ollama (modèles locaux) ────────────────────────────────
+  ollama:
+    image: ollama/ollama:${OLLAMA_DOCKER_TAG:-latest}
+    container_name: gabomagpt-ollama
+    volumes:
+      - ollama_data:/root/.ollama
+    pull_policy: always
+    tty: true
+    restart: unless-stopped
+    networks:
+      - gabomagpt-net
+
+  # ── Go Payment Service (Fiber) ─────────────────────────────
+  payment:
+    build:
+      context: ./services/payment
+      dockerfile: Dockerfile
+    image: gabomagpt-payment:latest
+    container_name: gabomagpt-payment
+    environment:
+      - PORT=8001
+      - FASTAPI_INTERNAL_URL=http://web:8080
+      - INTERNAL_API_SECRET=${INTERNAL_API_SECRET:-gabomagpt_internal_2026}
+      - PAYMENT_RETURN_URL=https://gabomagpt.ga/payment/confirm
+      - CORS_ALLOW_ORIGIN=http://web:8080
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/ping"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      web:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - gabomagpt-net
+
+  # ── Nginx Reverse Proxy ─────────────────────────────────────
+  nginx:
+    image: nginx:alpine
+    container_name: gabomagpt-nginx
+    ports:
+      - "${GABOMAGPT_PUBLIC_PORT:-80}:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      web:
+        condition: service_healthy
+      payment:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - gabomagpt-net
+
+  # ── Rust RAG Engine + Parser (Actix-web) ───────────────────
+  rag-engine:
+    build:
+      context: ./backend/rust
+      dockerfile: Dockerfile
+    image: gabomagpt-rag:latest
+    container_name: gabomagpt-rag
+    ports:
+      - "8002:8002"
+    environment:
+      - RUST_PORT=8002
+      - RUST_LOG=info
+      - CHROMA_HOST=chromadb
+      - CHROMA_PORT=8000
+    depends_on:
+      chromadb:
+        condition: service_started
+    restart: unless-stopped
+    networks:
+      - gabomagpt-net
+
+  # ── PostgreSQL 16 ──────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: gabomagpt-postgres
+    environment:
+      POSTGRES_USER: gabomagpt
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-gabomagpt_secret}
+      POSTGRES_DB: gabomagpt
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gabomagpt"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - gabomagpt-net
+
+  # ── Redis 7 (cache + sessions + OTP + rate limiting) ───────
+  redis:
+    image: redis:7-alpine
+    container_name: gabomagpt-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - gabomagpt-net
+
+  # ── ChromaDB (vector store RAG) ────────────────────────────
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: gabomagpt-chromadb
+    ports:
+      - "8003:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+    environment:
+      - IS_PERSISTENT=TRUE
+      - ANONYMIZED_TELEMETRY=FALSE
+    restart: unless-stopped
+    networks:
+      - gabomagpt-net
+
+volumes:
+  webui_data:
+  ollama_data:
+  postgres_data:
+  redis_data:
+  chroma_data:
+
+networks:
+  gabomagpt-net:
+    driver: bridge

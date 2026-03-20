@@ -1,0 +1,1971 @@
+/* ── Google Fonts — Outfit + Sora + JetBrains Mono ── */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ══════════════════════════════════════════════════════════
+   GabomaGPT · app.css
+   SmartANDJ AI Technologies · Constitution Zion Core
+   Fondateur : Daniel Jonathan ANDJ
+   Design System : Zion Core Obsidian
+   ══════════════════════════════════════════════════════════ */
+
+@reference "./tailwind.css";
+
+/* ── Polices locales existantes (fallback) ── */
+@font-face {
+	font-family: 'Vazirmatn';
+	src: url('/assets/fonts/Vazirmatn-Variable.ttf');
+	font-display: swap;
+}
+
+/* ── ZION CORE OBSIDIAN — Design System ─────────────── */
+:root {
+	--app-text-scale: 1;
+
+	/* ── BACKGROUNDS — Nuits profondes du Gabon ── */
+	--bg-void:              #050505;
+	--bg-deep:              #080B12;
+	--bg-panel:             #0B0F1A;
+	--bg-surface:           #0F1520;
+	--bg-elevated:          #141C2A;
+	--bg-overlay:           #1A2438;
+	--bg-glass:             rgba(15,21,32,0.85);
+
+	/* ── VERTS FORÊT GABONAISE — Ogooué ── */
+	--green-void:           #040D08;
+	--green-forest:         #0A1F14;
+	--green-bottle:         #0F2D1C;
+	--green-hunter:         #1A4A2E;
+	--green-malachite:      #1F6B3B;
+	--green-emerald:        #2ECC8A;
+	--green-neon:           #00FF88;
+
+	/* ── BLEUS NUIT ATLANTIQUE — Drapeau gabonais ── */
+	--blue-night:           #0D1526;
+	--blue-marine:          #0F2040;
+	--blue-sapphire:        #1A3A6B;
+	--blue-accent:          #2D6BE4;
+	--blue-sky:             #4A9EFF;
+
+	/* ── 5 PÉTALES — LOGO OFFICIEL GABOMAGPT ── */
+	--gabon-green:          #22C55E;
+	--gabon-blue:           #38BDF8;
+	--gabon-yellow:         #FACC15;
+	--gabon-red:            #EF4444;
+	--gabon-purple:         #7C3AED;
+
+	--petal-panther:        #1B5E20;
+	--petal-panther-glow:   #4CAF50;
+	--petal-parrot:         #F57F17;
+	--petal-parrot-glow:    #FFD54F;
+	--petal-dolphin:        #01579B;
+	--petal-dolphin-glow:   #29B6F6;
+	--petal-mask:           #B71C1C;
+	--petal-mask-glow:      #EF5350;
+	--petal-elephant:       #4A148C;
+	--petal-elephant-glow:  #CE93D8;
+
+	/* ── OR GABONAIS — Mines de Moanda ── */
+	--gold-earth:           #7A4800;
+	--gold-gabon:           #C9A84C;
+	--gold-bright:          #E8C86A;
+
+	/* ── BLACK PANTHER ── */
+	--gabon-gold:           #D4A417;
+	--gabon-neon:           #00FF87;
+	--gabon-orange:         #FF6B00;
+
+	/* ── ADN SMARTANDJ — Signature fondateur ── */
+	--andj-cyan:            #00BFFF;
+	--andj-magenta:         #FF007F;
+	--andj-yellow:          #FFE600;
+
+	/* ── IBOGA / BLACK PANTHER — Vision Bwiti ── */
+	--iboga-void:           #050008;
+	--iboga-deep:           #1A0010;
+	--iboga-bwiti:          #CC0033;
+	--iboga-fire:           #FF2244;
+
+	/* ── ACCENT DYNAMIQUE (change selon thème choisi) ── */
+	--accent:               var(--gabon-green);
+	--accent-10:            color-mix(in srgb, var(--accent) 10%, transparent);
+	--accent-20:            color-mix(in srgb, var(--accent) 20%, transparent);
+	--accent-35:            color-mix(in srgb, var(--accent) 35%, transparent);
+	--accent-foreground:    #000000;
+
+	/* ── BACKGROUNDS APPLE-DARK ── */
+	--bg-primary:           #04061A;
+	--bg-surface-2:         #111438;
+	--bg-surface-3:         #171B4A;
+
+	/* ── BORDURES ── */
+	--border:               rgba(255,255,255,0.07);
+	--border-hover:         rgba(255,255,255,0.14);
+	--border-focus:         var(--accent-35);
+	--border-subtle:        rgba(255,255,255,0.04);
+	--border-default:       rgba(255,255,255,0.07);
+	--border-strong:        rgba(255,255,255,0.12);
+	--border-gold:          rgba(201,168,76,0.2);
+	--border-emerald:       rgba(46,204,138,0.15);
+	--border-bp:            rgba(255,34,68,0.25);
+
+	/* ── TEXTE ── */
+	--text-primary:         #EEF2FF;
+	--text-secondary:       rgba(238,242,255,0.6);
+	--text-tertiary:        rgba(238,242,255,0.35);
+	--text-muted:           #4A566E;
+	--text-gold:            #C9A84C;
+	--text-emerald:         #2ECC8A;
+
+	/* ── OMBRES APPLE ── */
+	--shadow-sm:            0 1px 2px rgba(0,0,0,0.4);
+	--shadow-md:            0 4px 16px rgba(0,0,0,0.5);
+	--shadow-lg:            0 12px 40px rgba(0,0,0,0.6);
+	--shadow-accent:        0 4px 20px color-mix(in srgb, var(--accent) 40%, transparent);
+	--shadow-card:          0 4px 24px rgba(0,0,0,0.5);
+	--shadow-focus:         0 0 0 2px rgba(46,204,138,0.3);
+	--shadow-gold:          0 0 20px rgba(201,168,76,0.15);
+	--shadow-bp:            0 0 30px rgba(255,34,68,0.2);
+
+	/* ── TYPOGRAPHIE ── */
+	--font-display:         'Outfit', sans-serif;
+	--font-body:            'Sora', sans-serif;
+	--font-mono:            'JetBrains Mono', monospace;
+
+	/* ── RAYONS ── */
+	--radius-sm:            6px;
+	--radius-md:            10px;
+	--radius-lg:            14px;
+	--radius-xl:            20px;
+	--radius-msg-ai:        18px 18px 4px 18px;
+	--radius-msg-user:      18px 4px 18px 18px;
+}
+
+/* ── Thèmes des 5 pétales ── */
+[data-theme="foret"]    { --accent: #22C55E; }
+[data-theme="ocean"]    { --accent: #38BDF8; }
+[data-theme="soleil"]   { --accent: #FACC15; --accent-foreground: #1a1a1a; }
+[data-theme="flamme"]   { --accent: #EF4444; }
+[data-theme="nuit"]     { --accent: #7C3AED; }
+
+/* ── GABOMAGPT — BLEU NUIT ─────────────────────────── */
+/* Inspiré du ciel de Libreville à minuit              */
+[data-theme="bleu-nuit"] {
+  --color-gray-800:       #1A2235;
+  --color-gray-850:       #111827;
+  --color-gray-900:       #0C101A;
+  --color-gray-950:       #07090F;
+
+  --accent:               #3B82F6;
+  --accent-10:            rgba(59, 130, 246, 0.10);
+  --accent-20:            rgba(59, 130, 246, 0.20);
+  --accent-35:            rgba(59, 130, 246, 0.35);
+  --accent-foreground:    #ffffff;
+
+  --bg-deep:              #07090F;
+  --bg-panel:             #0C101A;
+  --bg-surface:           #111827;
+  --bg-elevated:          #1A2235;
+  --bg-overlay:           #1F2A40;
+
+  --text-primary:         rgba(236, 240, 255, 1.00);
+  --text-secondary:       rgba(236, 240, 255, 0.65);
+  --text-tertiary:        rgba(236, 240, 255, 0.35);
+  --text-muted:           rgba(236, 240, 255, 0.18);
+
+  --border:               rgba(236, 240, 255, 0.07);
+  --border-hover:         rgba(236, 240, 255, 0.14);
+  --border-default:       rgba(236, 240, 255, 0.07);
+
+  color-scheme: dark;
+}
+
+/* ── GABOMAGPT — VERT FORÊT ────────────────────────── */
+/* Inspiré de la forêt équatoriale du Lopé et du Waka  */
+[data-theme="vert-foret"] {
+  --color-gray-800:       #122016;
+  --color-gray-850:       #0D1A10;
+  --color-gray-900:       #080F0A;
+  --color-gray-950:       #040B06;
+
+  --accent:               #16A34A;
+  --accent-10:            rgba(22, 163, 74, 0.10);
+  --accent-20:            rgba(22, 163, 74, 0.20);
+  --accent-35:            rgba(22, 163, 74, 0.35);
+  --accent-foreground:    #ffffff;
+
+  --bg-deep:              #040B06;
+  --bg-panel:             #080F0A;
+  --bg-surface:           #0D1A10;
+  --bg-elevated:          #122016;
+  --bg-overlay:           #17291C;
+
+  --text-primary:         rgba(230, 245, 235, 1.00);
+  --text-secondary:       rgba(230, 245, 235, 0.65);
+  --text-tertiary:        rgba(230, 245, 235, 0.35);
+  --text-muted:           rgba(230, 245, 235, 0.18);
+
+  --border:               rgba(230, 245, 235, 0.07);
+  --border-hover:         rgba(230, 245, 235, 0.14);
+  --border-default:       rgba(230, 245, 235, 0.07);
+
+  color-scheme: dark;
+}
+
+/* ── Corps principal — Zion Core ── */
+body {
+	background: var(--bg-deep) !important;
+	color: var(--text-primary);
+	font-family: var(--font-body);
+}
+
+h1, h2, h3, h4 {
+	font-family: var(--font-display);
+}
+
+code, pre, .agent-trace {
+	font-family: var(--font-mono);
+}
+
+/* ── Black Panther mode — toute l'interface bascule ── */
+body.panther {
+	--accent:            #D4A417;
+	--accent-foreground: #000000;
+	--bg-primary:        #020509;
+	--bg-deep:           #020509;
+	--bg-surface:        #080D18;
+	--bg-surface-2:      #0D1424;
+	--bg-surface-3:      #121B30;
+	--bg-panel:          #060A14;
+	--border:            rgba(212,164,23,0.12);
+	--border-hover:      rgba(212,164,23,0.22);
+	--border-default:    rgba(212,164,23,0.12);
+	--text-primary:      #EEF2FF;
+}
+
+body.mode-bp {
+	--bg-deep: var(--iboga-void);
+	--bg-surface: #0D000D;
+	--bg-panel: #0A0008;
+	--border-default: var(--border-bp);
+	--text-primary: #FFE8E8;
+}
+
+/* ── Aura de réflexion — animation 5 couleurs ── */
+@keyframes aura-spin {
+	from { transform: rotate(0deg); }
+	to   { transform: rotate(360deg); }
+}
+
+@keyframes pulse-soft {
+	0%, 100% { opacity: 1; }
+	50% { opacity: 0.7; }
+}
+
+html {
+	word-break: break-word;
+	/* font-size scales the entire document via the same UI control */
+	font-size: calc(1rem * var(--app-text-scale, 1));
+}
+
+#sidebar-chat-item {
+	/* sidebar item sizing scales for the chat list entries */
+	min-height: calc(32px * var(--app-text-scale, 1));
+	padding-inline: calc(11px * var(--app-text-scale, 1));
+	padding-block: calc(6px * var(--app-text-scale, 1));
+}
+
+#sidebar-chat-item div[dir='auto'] {
+	/* chat title line height follows the text scale */
+	height: calc(20px * var(--app-text-scale, 1));
+	line-height: calc(20px * var(--app-text-scale, 1));
+}
+
+#sidebar-chat-item input {
+	/* editing state input height is kept in sync */
+	min-height: calc(20px * var(--app-text-scale, 1));
+}
+
+code {
+	/* white-space-collapse: preserve !important; */
+	overflow-x: auto;
+	width: auto;
+}
+
+.editor-selection {
+	background: rgba(180, 213, 255, 0.5);
+	border-radius: 2px;
+}
+
+.font-secondary {
+	font-family: var(--font-display);
+}
+
+.marked a {
+	@apply underline;
+}
+
+math {
+	margin-top: 1rem;
+}
+
+.hljs {
+	@apply rounded-lg;
+}
+
+input::placeholder {
+	direction: auto;
+}
+
+textarea::placeholder {
+	direction: auto;
+}
+
+.input-prose {
+	@apply prose dark:prose-invert prose-headings:font-semibold prose-hr:my-4 prose-hr:border-gray-50 prose-hr:dark:border-gray-850 prose-p:my-1 prose-img:my-1 prose-headings:my-2 prose-pre:my-0 prose-table:my-1 prose-blockquote:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0.5 whitespace-pre-line;
+}
+
+.input-prose-sm {
+	@apply prose dark:prose-invert prose-headings:font-medium prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-hr:my-4 prose-hr:border-gray-50 prose-hr:dark:border-gray-850 prose-p:my-1 prose-img:my-1 prose-headings:my-2 prose-pre:my-0 prose-table:my-1 prose-blockquote:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-1 whitespace-pre-line text-sm;
+}
+
+.markdown-prose {
+	@apply prose dark:prose-invert prose-blockquote:border-s-gray-100 prose-blockquote:dark:border-gray-800 prose-blockquote:border-s-2 prose-blockquote:not-italic prose-blockquote:font-normal  prose-headings:font-semibold prose-hr:my-4 prose-hr:border-gray-50 prose-hr:dark:border-gray-850 prose-p:my-0 prose-img:my-1 prose-headings:my-1 prose-pre:my-0 prose-table:my-0 prose-blockquote:my-0 prose-ul:-my-0 prose-ol:-my-0 prose-li:-my-0 whitespace-pre-line;
+}
+
+.markdown-prose-sm {
+	@apply text-sm prose dark:prose-invert prose-blockquote:border-s-gray-100 prose-blockquote:dark:border-gray-800 prose-blockquote:border-s-2 prose-blockquote:not-italic prose-blockquote:font-normal  prose-headings:font-semibold prose-hr:my-2  prose-hr:border-gray-50 prose-hr:dark:border-gray-850 prose-p:my-0 prose-img:my-1 prose-headings:my-1 prose-pre:my-0 prose-table:my-0 prose-blockquote:my-0 prose-ul:-my-0 prose-ol:-my-0 prose-li:-my-0 whitespace-pre-line;
+}
+
+.markdown-prose-xs {
+	@apply text-xs prose dark:prose-invert prose-blockquote:border-s-gray-100 prose-blockquote:dark:border-gray-800 prose-blockquote:border-s-2 prose-blockquote:not-italic prose-blockquote:font-normal  prose-headings:font-semibold prose-hr:my-0.5  prose-hr:border-gray-50 prose-hr:dark:border-gray-850 prose-p:my-0 prose-img:my-1 prose-headings:my-1 prose-pre:my-0 prose-table:my-0 prose-blockquote:my-0 prose-ul:-my-0 prose-ol:-my-0 prose-li:-my-0 whitespace-pre-line;
+}
+
+.markdown a {
+	@apply underline;
+}
+
+.font-primary {
+	font-family: var(--font-body);
+}
+
+.drag-region {
+	-webkit-app-region: drag;
+}
+
+.drag-region a,
+.drag-region button {
+	-webkit-app-region: no-drag;
+}
+
+.no-drag-region {
+	-webkit-app-region: no-drag;
+}
+
+li p {
+	display: inline;
+}
+
+::-webkit-scrollbar-thumb {
+	--tw-border-opacity: 1;
+	background-color: rgba(215, 215, 215, 0.6);
+	border-color: rgba(255, 255, 255, var(--tw-border-opacity));
+	border-radius: 9999px;
+	border-width: 1px;
+}
+
+/* Dark theme scrollbar styles */
+.dark ::-webkit-scrollbar-thumb {
+	background-color: rgba(67, 67, 67, 0.6); /* Darker color for dark theme */
+	border-color: rgba(0, 0, 0, var(--tw-border-opacity));
+}
+
+::-webkit-scrollbar {
+	height: 0.45rem;
+	width: 0.45rem;
+}
+
+::-webkit-scrollbar-track {
+	background-color: transparent;
+	border-radius: 9999px;
+}
+
+select {
+	background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+	background-position: right 0rem center;
+	background-repeat: no-repeat;
+	background-size: 1.5em 1.5em;
+	-webkit-print-color-adjust: exact;
+	print-color-adjust: exact;
+	/* padding-right: 2.5rem; */
+	/* for Firefox */
+	-moz-appearance: none;
+	/* for Chrome */
+	-webkit-appearance: none;
+}
+
+.dark select:not([class*='bg-transparent']) {
+	@apply bg-gray-900 text-gray-300;
+}
+
+.dark select option {
+	@apply bg-gray-850 text-white;
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: 200% 0;
+	}
+	100% {
+		background-position: -200% 0;
+	}
+}
+
+.shimmer {
+	background: linear-gradient(90deg, #9a9b9e 25%, #2a2929 50%, #9a9b9e 75%);
+	background-size: 200% 100%;
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	animation: shimmer 4s linear infinite;
+	color: #818286; /* Fallback color */
+}
+
+:global(.dark) .shimmer {
+	background: linear-gradient(90deg, #818286 25%, #eae5e5 50%, #818286 75%);
+	background-size: 200% 100%;
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	animation: shimmer 4s linear infinite;
+	color: #a1a3a7; /* Darker fallback color for dark mode */
+}
+
+@keyframes smoothFadeIn {
+	0% {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.status-description {
+	animation: smoothFadeIn 0.2s forwards;
+}
+
+.katex-mathml {
+	display: none;
+}
+
+.scrollbar-hidden:active::-webkit-scrollbar-thumb,
+.scrollbar-hidden:focus::-webkit-scrollbar-thumb,
+.scrollbar-hidden:hover::-webkit-scrollbar-thumb {
+	visibility: visible;
+}
+.scrollbar-hidden::-webkit-scrollbar-thumb {
+	visibility: hidden;
+}
+
+.scrollbar-hidden::-webkit-scrollbar-corner {
+	display: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+	display: none; /* for Chrome, Safari and Opera */
+}
+
+.scrollbar-none::-webkit-scrollbar-corner {
+	display: none;
+}
+
+.scrollbar-none {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	/* display: none; <- Crashes Chrome on hover */
+	-webkit-appearance: none;
+	margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type='number'] {
+	-moz-appearance: textfield; /* Firefox */
+}
+
+.katex-display {
+	@apply overflow-y-hidden overflow-x-auto max-w-full;
+}
+
+.katex-display::-webkit-scrollbar {
+	height: 0.4rem;
+	width: 0.4rem;
+}
+
+.katex-display:active::-webkit-scrollbar-thumb,
+.katex-display:focus::-webkit-scrollbar-thumb,
+.katex-display:hover::-webkit-scrollbar-thumb {
+	visibility: visible;
+}
+.katex-display::-webkit-scrollbar-thumb {
+	visibility: hidden;
+}
+
+.katex-display::-webkit-scrollbar-corner {
+	display: none;
+}
+
+.cm-editor {
+	height: 100%;
+	width: 100%;
+}
+
+.cm-scroller:active::-webkit-scrollbar-thumb,
+.cm-scroller:focus::-webkit-scrollbar-thumb,
+.cm-scroller:hover::-webkit-scrollbar-thumb {
+	visibility: visible;
+}
+
+.cm-scroller::-webkit-scrollbar-thumb {
+	visibility: hidden;
+}
+
+.cm-scroller::-webkit-scrollbar-corner {
+	display: none;
+}
+
+.cm-editor.cm-focused {
+	outline: none;
+}
+
+.cm-gutters {
+	@apply !bg-white dark:!bg-black !border-none;
+}
+
+.cm-editor {
+	@apply bg-white dark:bg-black;
+}
+
+.tippy-box[data-theme~='dark'] {
+	@apply rounded-lg bg-gray-950 text-xs border border-gray-900 shadow-xl;
+}
+
+.password {
+	-webkit-text-security: disc;
+}
+
+.codespan {
+	padding: 0.15rem 0.3rem;
+	font-size: 0.85em;
+	@apply font-mono rounded-md text-gray-800 bg-gray-100 dark:text-gray-200 dark:bg-gray-800 mx-0.5;
+}
+
+.svelte-flow {
+	background-color: transparent !important;
+}
+
+.svelte-flow__edge > path {
+	stroke-width: 0.5;
+}
+
+.svelte-flow__edge.animated > path {
+	stroke-width: 2;
+	@apply stroke-gray-600 dark:stroke-gray-500;
+}
+
+.bg-gray-950-90 {
+	background-color: rgba(var(--color-gray-950, #0d0d0d), 0.9);
+}
+
+.ProseMirror {
+	@apply h-full min-h-fit max-h-full whitespace-pre-wrap;
+}
+
+.ProseMirror:focus {
+	outline: none;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+	content: attr(data-placeholder);
+	float: left;
+	/* Below color is from tailwind, and has the proper contrast
+	text-gray-600 from: https://tailwindcss.com/docs/color */
+	color: #676767;
+	pointer-events: none;
+
+	@apply line-clamp-1 absolute;
+}
+
+.tiptap ul[data-type='taskList'] {
+	list-style: none;
+	margin-left: 0;
+	padding: 0;
+
+	li {
+		align-items: start;
+		display: flex;
+
+		> label {
+			flex: 0 0 auto;
+			margin-right: 0.5rem;
+			margin-top: 0.2rem;
+			user-select: none;
+			display: flex;
+		}
+
+		> div {
+			flex: 1 1 auto;
+
+			align-items: center;
+		}
+	}
+
+	/* checked data-checked="true" */
+
+	li[data-checked='true'] {
+		> div {
+			opacity: 0.5;
+			text-decoration: line-through;
+		}
+	}
+
+	input[type='checkbox'] {
+		cursor: pointer;
+	}
+
+	ul[data-type='taskList'] {
+		margin: 0;
+	}
+
+	/* Reset nested regular ul elements to default styling */
+	ul:not([data-type='taskList']) {
+		list-style: disc;
+		padding-left: 1rem;
+
+		li {
+			align-items: initial;
+			display: list-item;
+
+			label {
+				flex: initial;
+				margin-right: initial;
+				margin-top: initial;
+				user-select: initial;
+				display: initial;
+			}
+
+			div {
+				flex: initial;
+				align-items: initial;
+			}
+		}
+	}
+}
+
+.mention {
+	border-radius: 0.4rem;
+	box-decoration-break: clone;
+	padding: 0.1rem 0.3rem;
+	@apply text-sky-800 dark:text-sky-200 bg-sky-300/15 dark:bg-sky-500/15;
+}
+
+.mention::after {
+	content: '\200B';
+}
+
+.tiptap .suggestion {
+	border-radius: 0.4rem;
+	box-decoration-break: clone;
+	padding: 0.1rem 0.3rem;
+	@apply text-sky-800 dark:text-sky-200 bg-sky-300/15 dark:bg-sky-500/15;
+}
+
+.tiptap .suggestion::after {
+	content: '\200B';
+}
+
+.tiptap .suggestion.is-empty::after {
+	content: '\00A0';
+	border-bottom: 1px dotted rgba(31, 41, 55, 0.12);
+}
+
+.input-prose .tiptap ul[data-type='taskList'] {
+	list-style: none;
+	margin-left: 0;
+	padding: 0;
+
+	li {
+		align-items: start;
+		display: flex;
+
+		> label {
+			flex: 0 0 auto;
+			margin-right: 0.5rem;
+			margin-top: 0.4rem;
+			user-select: none;
+			display: flex;
+		}
+
+		> div {
+			flex: 1 1 auto;
+
+			align-items: center;
+		}
+	}
+
+	/* checked data-checked="true" */
+
+	li[data-checked='true'] {
+		> div {
+			opacity: 0.5;
+			text-decoration: line-through;
+		}
+	}
+
+	input[type='checkbox'] {
+		cursor: pointer;
+	}
+
+	ul[data-type='taskList'] {
+		margin: 0;
+	}
+
+	/* Reset nested regular ul elements to default styling */
+	ul:not([data-type='taskList']) {
+		list-style: disc;
+		padding-left: 1rem;
+
+		li {
+			align-items: initial;
+			display: list-item;
+
+			label {
+				flex: initial;
+				margin-right: initial;
+				margin-top: initial;
+				user-select: initial;
+				display: initial;
+			}
+
+			div {
+				flex: initial;
+				align-items: initial;
+			}
+		}
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.ProseMirror p.is-editor-empty:first-child::before {
+		color: #757575;
+	}
+}
+
+.ai-autocompletion::after {
+	color: #a0a0a0;
+
+	content: attr(data-suggestion);
+	pointer-events: none;
+}
+
+.tiptap pre > code {
+	border-radius: 0.4rem;
+	font-size: 0.85rem;
+	padding: 0.25em 0.3em;
+
+	@apply dark:bg-gray-800 bg-gray-50;
+}
+
+.tiptap pre {
+	border-radius: 0.5rem;
+	font-family: 'JetBrainsMono', monospace;
+	margin: 1.5rem 0;
+	padding: 0.75rem 1rem;
+
+	@apply dark:bg-gray-800 bg-gray-50;
+}
+
+.tiptap p code {
+	padding: 0.15rem 0.3rem;
+	font-size: 0.85em;
+	@apply font-mono rounded-md text-gray-800 bg-gray-50 dark:text-gray-200 dark:bg-gray-800 mx-0.5;
+}
+
+/* Code styling */
+.hljs-comment,
+.hljs-quote {
+	color: #616161;
+}
+
+.hljs-variable,
+.hljs-template-variable,
+.hljs-attribute,
+.hljs-tag,
+.hljs-regexp,
+.hljs-link,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+	color: #f98181;
+}
+
+.hljs-number,
+.hljs-meta,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params {
+	color: #fbbc88;
+}
+
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet {
+	color: #b9f18d;
+}
+
+.hljs-title,
+.hljs-section {
+	color: #faf594;
+}
+
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #70cff8;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: 700;
+}
+
+/* Table styling for tiptap editors */
+.tiptap table {
+	@apply w-full text-sm text-start text-gray-500 dark:text-gray-400 max-w-full;
+}
+
+.tiptap thead {
+	@apply text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-850 dark:text-gray-400 border-none;
+}
+
+.tiptap th,
+.tiptap td {
+	@apply px-3 py-1.5 border border-gray-100/30 dark:border-gray-850/30;
+}
+
+.tiptap th {
+	@apply cursor-pointer text-start text-xs text-gray-700 dark:text-gray-400 font-semibold uppercase bg-gray-50 dark:bg-gray-850;
+}
+
+.tiptap td {
+	@apply text-gray-900 dark:text-white w-max;
+}
+
+.tiptap tr {
+	@apply bg-white dark:bg-gray-900 dark:border-gray-850 text-xs;
+}
+
+.tippy-box[data-theme~='transparent'] {
+	@apply bg-transparent p-0 m-0;
+}
+
+/* this is a rough fix for the first cursor position when the first paragraph is empty */
+.ProseMirror > .ProseMirror-yjs-cursor:first-child {
+	margin-top: 16px;
+}
+/* This gives the remote user caret. The colors are automatically overwritten*/
+.ProseMirror-yjs-cursor {
+	position: relative;
+	margin-left: -1px;
+	margin-right: -1px;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-color: orange;
+	word-break: normal;
+	pointer-events: none;
+}
+/* This renders the username above the caret */
+.ProseMirror-yjs-cursor > div {
+	position: absolute;
+	top: -1.05em;
+	left: -1px;
+	font-size: 13px;
+	background-color: rgb(250, 129, 0);
+	user-select: none;
+	color: white;
+	padding-left: 2px;
+	padding-right: 2px;
+	white-space: nowrap;
+}
+
+/* body background défini dans :root Zion Core — pas de fallback blanc */
+
+/* Position the handle relative to each LI */
+.pm-li--with-handle {
+	position: relative;
+	margin-left: 12px; /* make space for the handle */
+}
+
+.tiptap ul[data-type='taskList'] .pm-list-drag-handle {
+	margin-left: 0px;
+}
+
+/* The drag handle itself */
+.pm-list-drag-handle {
+	position: absolute;
+	left: -36px; /* pull into the left gutter */
+	top: 1px;
+	width: 18px;
+	height: 18px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 12px;
+	line-height: 1;
+	border-radius: 4px;
+	cursor: grab;
+	user-select: none;
+	opacity: 0.35;
+	transition:
+		opacity 120ms ease,
+		background 120ms ease;
+}
+
+.tiptap ul[data-type='taskList'] .pm-list-drag-handle {
+	left: -16px; /* pull into the left gutter more to avoid the checkbox */
+}
+
+.pm-list-drag-handle:active {
+	cursor: grabbing;
+}
+.pm-li--with-handle:hover > .pm-list-drag-handle {
+	opacity: 1;
+}
+.pm-list-drag-handle:hover {
+	background: rgba(0, 0, 0, 0.06);
+}
+
+:root {
+	--pm-accent: color-mix(in oklab, Highlight 70%, transparent);
+	--pm-fill-target: color-mix(in oklab, Highlight 26%, transparent);
+	--pm-fill-ancestor: color-mix(in oklab, Highlight 16%, transparent);
+}
+
+.pm-li-drop-before,
+.pm-li-drop-after,
+.pm-li-drop-into,
+.pm-li-drop-outdent {
+	position: relative;
+}
+
+/* BEFORE/AFTER lines */
+.pm-li-drop-before::before,
+.pm-li-drop-after::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 3px;
+	background: var(--pm-accent);
+	pointer-events: none;
+}
+.pm-li-drop-before::before {
+	top: -2px;
+}
+.pm-li-drop-after::after {
+	bottom: -2px;
+}
+
+.pm-li-drop-before,
+.pm-li-drop-after,
+.pm-li-drop-into,
+.pm-li-drop-outdent {
+	background: var(--pm-fill-target);
+	border-radius: 6px;
+}
+
+.pm-li-drop-outdent::before {
+	content: '';
+	position: absolute;
+	inset-block: 0;
+	inset-inline-start: 0;
+	width: 3px;
+	background: color-mix(in oklab, Highlight 35%, transparent);
+}
+
+.pm-li--with-handle:has(.pm-li-drop-before),
+.pm-li--with-handle:has(.pm-li-drop-after),
+.pm-li--with-handle:has(.pm-li-drop-into),
+.pm-li--with-handle:has(.pm-li-drop-outdent) {
+	background: var(--pm-fill-ancestor);
+	border-radius: 6px;
+}
+
+.pm-li-drop-before,
+.pm-li-drop-after,
+.pm-li-drop-into,
+.pm-li-drop-outdent {
+	position: relative;
+	z-index: 0;
+}
+
+#note-content-container .ProseMirror {
+	padding-bottom: 2rem; /* space for the bottom toolbar */
+}
+
+/* ══════════════════════════════════════════════════════════
+   SECTION 4C — APPLE-LEVEL PREMIUM UX
+   GabomaGPT = qualité Apple + âme du Gabon
+   SmartANDJ AI Technologies · Constitution Zion Core
+   ══════════════════════════════════════════════════════════ */
+
+/* ── 1. DEPTH BLUR — Apple frosted glass ── */
+.glass {
+	backdrop-filter: blur(20px) saturate(180%);
+	-webkit-backdrop-filter: blur(20px) saturate(180%);
+	background: rgba(11, 15, 26, 0.75);
+	border: 0.5px solid rgba(255,255,255,0.08);
+}
+
+.glass-gold {
+	backdrop-filter: blur(20px) saturate(180%);
+	-webkit-backdrop-filter: blur(20px) saturate(180%);
+	background: rgba(201, 168, 76, 0.06);
+	border: 0.5px solid rgba(201, 168, 76, 0.15);
+}
+
+.glass-bp {
+	backdrop-filter: blur(20px) saturate(180%);
+	-webkit-backdrop-filter: blur(20px) saturate(180%);
+	background: rgba(5, 0, 8, 0.85);
+	border: 0.5px solid rgba(255, 34, 68, 0.2);
+}
+
+/* ── 2. SHIMMER SKELETON — Apple loading (pas de spinners) ── */
+.skeleton {
+	background: linear-gradient(
+		90deg,
+		var(--bg-surface) 25%,
+		rgba(255,255,255,0.05) 50%,
+		var(--bg-surface) 75%
+	);
+	background-size: 200% 100%;
+	animation: skeleton-shimmer 1.5s infinite;
+	border-radius: var(--radius-md);
+}
+
+@keyframes skeleton-shimmer {
+	0%   { background-position: -200% 0; }
+	100% { background-position:  200% 0; }
+}
+
+/* ── 3. TYPOGRAPHY — Apple SF Pro rhythm avec Outfit ── */
+h1 {
+	font-size: clamp(28px, 5vw, 48px);
+	font-weight: 700;
+	letter-spacing: -0.035em;
+	line-height: 1.08;
+}
+
+h2 {
+	font-size: clamp(20px, 3.5vw, 32px);
+	font-weight: 600;
+	letter-spacing: -0.025em;
+	line-height: 1.15;
+}
+
+h3 {
+	font-size: 18px;
+	font-weight: 500;
+	letter-spacing: -0.015em;
+	line-height: 1.3;
+}
+
+p, .body {
+	font-size: 15px;
+	font-weight: 400;
+	letter-spacing: -0.005em;
+	line-height: 1.65;
+}
+
+.caption {
+	font-size: 12px;
+	font-weight: 400;
+	letter-spacing: 0.01em;
+	line-height: 1.5;
+	color: var(--text-muted);
+}
+
+/* Gradient text — Apple Vision Pro style */
+.text-gradient-gabon {
+	background: linear-gradient(135deg, #C9A84C, #2ECC8A);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.text-gradient-bp {
+	background: linear-gradient(135deg, #FF2244, #CC0033);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+/* ── 4. SCROLL FADE EDGES — pas de bords durs ── */
+.scroll-fade {
+	mask-image: linear-gradient(
+		to bottom,
+		transparent 0%,
+		black 8%,
+		black 92%,
+		transparent 100%
+	);
+	-webkit-mask-image: linear-gradient(
+		to bottom,
+		transparent 0%,
+		black 8%,
+		black 92%,
+		transparent 100%
+	);
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+/* ── 5. MODE TRANSITION — morphing couleur 400ms ── */
+*, *::before, *::after {
+	transition:
+		background-color 400ms ease,
+		border-color 400ms ease,
+		color 300ms ease,
+		box-shadow 400ms ease;
+}
+
+/* Exception : pas de transition sur les animations elles-mêmes */
+.reflection-ring, .aura-ring, .aura-svg, .skeleton, .arc {
+	transition: none !important;
+}
+
+/* ── 6. SPLASH CINÉMATIQUE — première impression mémorable ── */
+.splash-logo {
+	opacity: 0;
+	transform: scale(0.7);
+}
+
+.splash-title {
+	opacity: 0;
+	transform: translateY(20px);
+}
+
+.splash-subtitle {
+	opacity: 0;
+	transform: translateY(10px);
+}
+
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  GABOMAGPT · BLACK PANTHER MODE                                ║
+   ║  SmartANDJ AI Technologies · Fondateur: Daniel Jonathan ANDJ   ║
+   ║  JIA 2026 — Libreville, Gabon                                  ║
+   ║  "Le Gabon parle, le monde s'inspire."                         ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+
+/* ===== SECTION 0 : ROOT VARIABLES ===== */
+:root {
+  --glass-0: #020304;
+  --glass-1: #050810;
+  --glass-2: #080D18;
+  --gold: #C9A227;
+  --gold-light: #E8C547;
+  --gold-dark: #8B6914;
+  --gold-glow: rgba(201,162,39,0.15);
+  --panther-eye: #FFB300;
+  --panther-scan: rgba(255,179,0,0.8);
+  --bp-cyan: #00B4D8;
+  --bp-magenta: #ec4899;
+  --bp-text-primary: rgba(248,250,252,0.92);
+  --bp-text-muted: rgba(248,250,252,0.45);
+  --bp-text-hint: rgba(248,250,252,0.2);
+  --bp-ease: cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* ===== SECTION 1 : BODY GLOBAL ===== */
+.dark.panther-mode body,
+body.panther-mode {
+  background: var(--glass-1) !important;
+  background-image: radial-gradient(
+    ellipse 60% 50% at 50% 40%,
+    rgba(201,162,39,0.04) 0%,
+    transparent 70%
+  ) !important;
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  color: var(--bp-text-primary) !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* Safe area padding for native apps (Capacitor) */
+.panther-mode {
+  padding-top: env(safe-area-inset-top) !important;
+  padding-bottom: env(safe-area-inset-bottom) !important;
+  padding-left: env(safe-area-inset-left) !important;
+  padding-right: env(safe-area-inset-right) !important;
+}
+
+/* ===== SECTION 2 : SIDEBAR PANTHER ===== */
+.panther-mode #sidebar,
+.panther-mode [id*="sidebar"],
+.panther-mode aside,
+.panther-mode nav[class*="sidebar"],
+.panther-mode .sidebar {
+  background: var(--glass-0) !important;
+  border-right: 1px solid rgba(201,162,39,0.1) !important;
+  font-family: 'Outfit', sans-serif !important;
+}
+
+/* Barre dorée en haut du sidebar */
+.panther-mode #sidebar::before,
+.panther-mode aside::before {
+  content: '' !important;
+  display: block !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent) !important;
+  opacity: 0.6 !important;
+}
+
+/* Sidebar items hover */
+.panther-mode #sidebar a:hover,
+.panther-mode #sidebar button:hover,
+.panther-mode aside a:hover,
+.panther-mode aside button:hover {
+  background: rgba(201,162,39,0.05) !important;
+  box-shadow: inset 3px 0 0 rgba(201,162,39,0.4) !important;
+  transition: all 0.25s var(--bp-ease) !important;
+}
+
+/* Sidebar active item */
+.panther-mode #sidebar a[aria-current],
+.panther-mode #sidebar .active,
+.panther-mode aside .bg-gray-900,
+.panther-mode aside .bg-gray-850 {
+  background: rgba(201,162,39,0.08) !important;
+  border-left: 2px solid var(--gold) !important;
+}
+
+/* New chat button */
+.panther-mode #sidebar-new-chat-button,
+.panther-mode [id*="new-chat"] {
+  border: 1px solid rgba(201,162,39,0.25) !important;
+  border-radius: 12px !important;
+  color: var(--gold) !important;
+  transition: all 0.25s var(--bp-ease) !important;
+}
+
+.panther-mode #sidebar-new-chat-button:hover,
+.panther-mode [id*="new-chat"]:hover {
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 20px rgba(201,162,39,0.12) !important;
+  background: rgba(201,162,39,0.06) !important;
+}
+
+/* Sidebar footer signature */
+.panther-mode #sidebar::after,
+.panther-mode aside::after {
+  content: 'by SmartANDJ AI 🇬🇦' !important;
+  display: block !important;
+  text-align: center !important;
+  font-size: 9px !important;
+  opacity: 0.2 !important;
+  color: var(--gold) !important;
+  padding: 8px 0 !important;
+  letter-spacing: 1px !important;
+  font-family: 'Outfit', sans-serif !important;
+}
+
+/* ===== SECTION 3 : HEADER GLASS ===== */
+.panther-mode nav[class*="sticky"],
+.panther-mode .sticky.top-0,
+.panther-mode header {
+  background: rgba(5,8,16,0.88) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(201,162,39,0.08) !important;
+  font-family: 'Outfit', sans-serif !important;
+}
+
+/* Fil d'or shimmer */
+.panther-mode nav[class*="sticky"]::before,
+.panther-mode .sticky.top-0::before {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -1px !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 1.5px !important;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(201,162,39,0.0) 20%,
+    rgba(201,162,39,0.6) 50%,
+    rgba(201,162,39,0.0) 80%,
+    transparent 100%
+  ) !important;
+  background-size: 200% 100% !important;
+  animation: gold-shimmer 4s ease-in-out infinite !important;
+  z-index: 10 !important;
+}
+
+@keyframes gold-shimmer {
+  0%   { background-position: -200% 0; }
+  50%  { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ===== SECTION 4 : WELCOME SCREEN "TRÔNE GABONAIS" ===== */
+
+/* Main welcome title */
+.panther-mode .text-3xl,
+.panther-mode .text-4xl,
+.panther-mode [class*="font-bold"][class*="text-3"],
+.panther-mode [class*="font-bold"][class*="text-4"] {
+  background: linear-gradient(135deg, var(--bp-cyan) 0%, var(--gold) 60%, var(--gold-light) 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -1px !important;
+}
+
+/* Subtitle */
+.panther-mode .text-sm.text-gray-500,
+.panther-mode .text-sm.text-gray-400,
+.panther-mode [class*="text-gray-"][class*="text-sm"] {
+  color: rgba(201,162,39,0.6) !important;
+  font-size: 14px !important;
+  font-weight: 300 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  font-family: 'Outfit', sans-serif !important;
+}
+
+/* Suggestion cards — Manus style but refined */
+.panther-mode button[class*="suggestion"],
+.panther-mode [class*="prompt-suggestion"],
+.panther-mode .flex.gap-2 > button,
+.panther-mode .grid > button {
+  background: rgba(2,3,4,0.8) !important;
+  border: 1px solid rgba(201,162,39,0.25) !important;
+  border-radius: 12px !important;
+  padding: 14px 20px !important;
+  color: var(--bp-text-primary) !important;
+  font-family: 'Outfit', sans-serif !important;
+  transition: all 0.25s var(--bp-ease) !important;
+}
+
+.panther-mode button[class*="suggestion"]:hover,
+.panther-mode [class*="prompt-suggestion"]:hover,
+.panther-mode .flex.gap-2 > button:hover,
+.panther-mode .grid > button:hover {
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 20px rgba(201,162,39,0.12) !important;
+  transform: translateY(-2px) !important;
+  background: rgba(201,162,39,0.04) !important;
+}
+
+/* ===== SECTION 5 : THOUGHT PROCESS "ŒIL PANTHÈRE" ===== */
+
+/* Container pour le thought process */
+.panther-mode .thinking,
+.panther-mode details summary,
+.panther-mode details[open] summary,
+.panther-mode [class*="reasoning"],
+.panther-mode [class*="thinking"],
+.panther-mode .message-status,
+.panther-mode .animate-pulse {
+  position: relative !important;
+  background: rgba(2,3,4,0.6) !important;
+  border: 1px solid rgba(201,162,39,0.12) !important;
+  border-radius: 16px !important;
+  padding: 16px !important;
+  overflow: hidden !important;
+  font-family: 'Outfit', sans-serif !important;
+}
+
+/* Panther Eyes — SVG data URI */
+.panther-mode .thinking::before,
+.panther-mode details[open] summary::before,
+.panther-mode [class*="reasoning"]::before {
+  content: '' !important;
+  display: block !important;
+  width: 140px !important;
+  height: 28px !important;
+  margin: 0 auto 12px auto !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='28' viewBox='0 0 140 28'%3E%3Cdefs%3E%3CradialGradient id='iris' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23000'/%3E%3Cstop offset='35%25' stop-color='%23FFB300'/%3E%3Cstop offset='70%25' stop-color='%23C9A227'/%3E%3Cstop offset='100%25' stop-color='%238B6914'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cellipse cx='30' cy='14' rx='26' ry='12' fill='%23111' stroke='%23C9A227' stroke-width='0.5'/%3E%3Cellipse cx='30' cy='14' rx='18' ry='10' fill='url(%23iris)'/%3E%3Cellipse cx='30' cy='14' rx='6' ry='9' fill='%23000'/%3E%3Cellipse cx='110' cy='14' rx='26' ry='12' fill='%23111' stroke='%23C9A227' stroke-width='0.5'/%3E%3Cellipse cx='110' cy='14' rx='18' ry='10' fill='url(%23iris)'/%3E%3Cellipse cx='110' cy='14' rx='6' ry='9' fill='%23000'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+  filter: drop-shadow(0 0 20px rgba(255,179,0,0.35)) !important;
+  animation: panther-breathe 3s ease-in-out infinite !important;
+}
+
+@keyframes panther-breathe {
+  0%, 100% { filter: drop-shadow(0 0 20px rgba(255,179,0,0.35)); transform: scaleY(1); }
+  15%      { transform: scaleY(0.15); }
+  20%      { transform: scaleY(1); }
+  50%      { filter: drop-shadow(0 0 30px rgba(255,179,0,0.5)); }
+}
+
+/* Scan line across eyes */
+.panther-mode .thinking::after,
+.panther-mode details[open] summary::after,
+.panther-mode [class*="reasoning"]::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 16px !important;
+  left: 0 !important;
+  height: 1.5px !important;
+  width: 100% !important;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,179,0,0.0) 30%,
+    rgba(255,179,0,0.9) 50%,
+    rgba(255,179,0,0.0) 70%,
+    transparent 100%
+  ) !important;
+  animation: gold-scan 2s ease-in-out infinite !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+}
+
+@keyframes gold-scan {
+  0%   { transform: translateX(-100%); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateX(100%); opacity: 0; }
+}
+
+/* THOUGHT PROCESS label */
+.panther-mode details[open] summary span,
+.panther-mode .thinking > span:first-child {
+  font-size: 10px !important;
+  letter-spacing: 3px !important;
+  color: var(--gold) !important;
+  opacity: 0.7 !important;
+  text-transform: uppercase !important;
+  font-weight: 600 !important;
+  font-family: 'Outfit', sans-serif !important;
+}
+
+/* Agent steps cascade */
+.panther-mode details[open] > div > *,
+.panther-mode .thinking > div > *,
+.panther-mode [class*="reasoning"] > div > * {
+  animation: step-appear 0.4s var(--bp-ease) forwards !important;
+  opacity: 0 !important;
+}
+
+.panther-mode details[open] > div > *:nth-child(1),
+.panther-mode .thinking > div > *:nth-child(1) { animation-delay: 0.1s !important; }
+.panther-mode details[open] > div > *:nth-child(2),
+.panther-mode .thinking > div > *:nth-child(2) { animation-delay: 0.4s !important; }
+.panther-mode details[open] > div > *:nth-child(3),
+.panther-mode .thinking > div > *:nth-child(3) { animation-delay: 0.7s !important; }
+.panther-mode details[open] > div > *:nth-child(4),
+.panther-mode .thinking > div > *:nth-child(4) { animation-delay: 1.0s !important; }
+.panther-mode details[open] > div > *:nth-child(5),
+.panther-mode .thinking > div > *:nth-child(5) { animation-delay: 1.3s !important; }
+
+@keyframes step-appear {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Step icons — pulse dot for active, check for done */
+.panther-mode .animate-pulse::before {
+  content: '' !important;
+  display: inline-block !important;
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  background: var(--gold) !important;
+  margin-right: 8px !important;
+  animation: pulse-gold 1.5s ease-in-out infinite !important;
+  vertical-align: middle !important;
+}
+
+/* ===== SECTION 6 : INPUT BAR "PANTHÈRE PRÊTE" ===== */
+.panther-mode textarea,
+.panther-mode [id*="chat-input"],
+.panther-mode #chat-input,
+.panther-mode .chat-input {
+  background: rgba(2,3,4,0.9) !important;
+  border: 1px solid rgba(201,162,39,0.18) !important;
+  border-radius: 24px !important;
+  color: var(--bp-text-primary) !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 15px !important;
+  transition: all 0.25s var(--bp-ease) !important;
+}
+
+.panther-mode textarea:focus,
+.panther-mode [id*="chat-input"]:focus,
+.panther-mode #chat-input:focus {
+  border-color: var(--gold) !important;
+  box-shadow:
+    0 0 0 1px rgba(201,162,39,0.4),
+    0 0 30px rgba(201,162,39,0.08) !important;
+  outline: none !important;
+}
+
+.panther-mode textarea::placeholder {
+  color: var(--bp-text-hint) !important;
+  font-family: 'Outfit', sans-serif !important;
+}
+
+/* ===== SECTION 7 : BOUTON ENVOI "OR MASSIF" ===== */
+.panther-mode button[type="submit"],
+.panther-mode [id*="send-message"],
+.panther-mode button[aria-label*="Send"],
+.panther-mode button[aria-label*="send"],
+.panther-mode .send-button {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%) !important;
+  color: var(--glass-0) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  font-weight: 700 !important;
+  font-family: 'Outfit', sans-serif !important;
+  transition: all 0.2s var(--bp-ease) !important;
+  animation: pulse-gold 2s ease-in-out infinite !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+}
+
+.panther-mode button[type="submit"]:hover,
+.panther-mode [id*="send-message"]:hover,
+.panther-mode button[aria-label*="Send"]:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 0 24px rgba(201,162,39,0.35), 0 0 60px rgba(201,162,39,0.12) !important;
+}
+
+.panther-mode button[type="submit"]:active,
+.panther-mode [id*="send-message"]:active {
+  transform: scale(0.96) !important;
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 8px rgba(201,162,39,0.2); }
+  50%      { box-shadow: 0 0 18px rgba(201,162,39,0.4), 0 0 40px rgba(201,162,39,0.1); }
+}
+
+/* ===== SECTION 8 : MESSAGES ===== */
+
+/* User bubble */
+.panther-mode [class*="user-message"],
+.panther-mode .bg-gray-50.dark\:bg-gray-800,
+.panther-mode [class*="rounded"][class*="bg-gray"] {
+  background: rgba(201,162,39,0.06) !important;
+  border: 1px solid rgba(201,162,39,0.1) !important;
+  border-radius: 18px 18px 4px 18px !important;
+  font-family: 'Outfit', sans-serif !important;
+  animation: msg-appear 0.3s var(--bp-ease) both !important;
+}
+
+/* AI bubble — transparent */
+.panther-mode [class*="assistant-message"],
+.panther-mode .prose {
+  background: transparent !important;
+  color: var(--bp-text-primary) !important;
+  font-family: 'Outfit', sans-serif !important;
+  animation: msg-appear 0.3s var(--bp-ease) both !important;
+}
+
+@keyframes msg-appear {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== SECTION 9 : CODE BLOCKS ===== */
+.panther-mode pre,
+.panther-mode pre[class*="language-"],
+.panther-mode code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace !important;
+}
+
+.panther-mode pre,
+.panther-mode pre[class*="language-"] {
+  background: var(--glass-0) !important;
+  border-left: 2px solid var(--gold) !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(201,162,39,0.08) !important;
+  border-left: 3px solid var(--gold) !important;
+}
+
+.panther-mode code {
+  color: var(--gold-light) !important;
+}
+
+.panther-mode pre code {
+  color: var(--bp-text-primary) !important;
+}
+
+/* Inline code */
+.panther-mode :not(pre) > code {
+  background: rgba(201,162,39,0.08) !important;
+  border: 1px solid rgba(201,162,39,0.12) !important;
+  border-radius: 6px !important;
+  padding: 2px 6px !important;
+  font-size: 0.9em !important;
+  color: var(--gold-light) !important;
+}
+
+/* ===== SECTION 10 : SCROLLBAR ===== */
+.panther-mode ::-webkit-scrollbar {
+  width: 3px !important;
+  height: 3px !important;
+}
+
+.panther-mode ::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.panther-mode ::-webkit-scrollbar-thumb {
+  background: rgba(201,162,39,0.25) !important;
+  border-radius: 10px !important;
+}
+
+.panther-mode ::-webkit-scrollbar-thumb:hover {
+  background: rgba(201,162,39,0.45) !important;
+}
+
+/* Firefox scrollbar */
+.panther-mode * {
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(201,162,39,0.25) transparent !important;
+}
+
+/* ===== SECTION 11 : SÉLECTION TEXTE ===== */
+.panther-mode ::selection {
+  background: rgba(201,162,39,0.2) !important;
+  color: #fff !important;
+}
+
+.panther-mode ::-moz-selection {
+  background: rgba(201,162,39,0.2) !important;
+  color: #fff !important;
+}
+
+/* ===== SECTION 12 : MODALS GLASS ===== */
+.panther-mode [role="dialog"],
+.panther-mode .modal,
+.panther-mode [class*="modal"],
+.panther-mode [class*="Modal"] {
+  background: rgba(5,8,16,0.95) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid rgba(201,162,39,0.12) !important;
+  border-radius: 20px !important;
+  font-family: 'Outfit', sans-serif !important;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.6) !important;
+}
+
+/* Modal titles */
+.panther-mode [role="dialog"] h2,
+.panther-mode [role="dialog"] h3,
+.panther-mode .modal h2,
+.panther-mode .modal h3 {
+  background: linear-gradient(135deg, var(--bp-cyan), var(--gold)) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 700 !important;
+}
+
+/* Modal backdrop */
+.panther-mode [class*="backdrop"],
+.panther-mode .fixed.inset-0[class*="bg-black"] {
+  background: rgba(0,0,0,0.7) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+/* ===== SECTION 13 : BUTTONS GLOBAL ===== */
+.panther-mode button {
+  font-family: 'Outfit', sans-serif !important;
+  transition: all 0.2s var(--bp-ease) !important;
+}
+
+.panther-mode button:hover {
+  transform: translateY(-1px) !important;
+}
+
+.panther-mode button:active {
+  transform: scale(0.97) !important;
+}
+
+/* ===== SECTION 14 : TOKEN BAR CONSUMPTION ===== */
+@keyframes gold-consume {
+  0%   { width: 100%; background: var(--gold); }
+  70%  { background: var(--gold); }
+  85%  { background: #EF4444; }
+  100% { width: 0%; background: #EF4444; }
+}
+
+.panther-mode .token-bar {
+  animation: gold-consume 300s linear forwards !important;
+}
+
+/* ===== SECTION 15 : LINKS ===== */
+.panther-mode a {
+  color: var(--gold) !important;
+  text-decoration: none !important;
+  transition: all 0.2s var(--bp-ease) !important;
+}
+
+.panther-mode a:hover {
+  color: var(--gold-light) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+}
+
+/* ===== SECTION 16 : DROPDOWN / SELECT ===== */
+.panther-mode select,
+.panther-mode [role="listbox"],
+.panther-mode [role="menu"] {
+  background: var(--glass-0) !important;
+  border: 1px solid rgba(201,162,39,0.15) !important;
+  border-radius: 12px !important;
+  color: var(--bp-text-primary) !important;
+  font-family: 'Outfit', sans-serif !important;
+}
+
+.panther-mode option {
+  background: var(--glass-1) !important;
+  color: var(--bp-text-primary) !important;
+}
+
+/* ===== SECTION 17 : TOOLTIPS ===== */
+.panther-mode [role="tooltip"],
+.panther-mode .tooltip {
+  background: rgba(5,8,16,0.95) !important;
+  border: 1px solid rgba(201,162,39,0.15) !important;
+  border-radius: 8px !important;
+  color: var(--bp-text-primary) !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 12px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important;
+}
+
+/* ===== SECTION 18 : LOADING / SPINNER ===== */
+.panther-mode .spinner,
+.panther-mode [class*="Spinner"],
+.panther-mode svg.animate-spin {
+  color: var(--gold) !important;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   MOBILE-FIRST RESPONSIVE — PHASE 2
+   Cible : iPhone SE → iPhone 15 Pro Max, Galaxy S24
+   Touch targets 44×44px minimum partout
+   ════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  /* === MOBILE : Safe areas (Capacitor/PWA) === */
+  .panther-mode {
+    padding-top: env(safe-area-inset-top) !important;
+    padding-bottom: env(safe-area-inset-bottom) !important;
+  }
+
+  /* === MOBILE : Sidebar slide-over === */
+  .panther-mode #sidebar,
+  .panther-mode aside,
+  .panther-mode [id*="sidebar"] {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    z-index: 50 !important;
+    width: 80vw !important;
+    max-width: 320px !important;
+    transform: translateX(-100%) !important;
+    transition: transform 0.3s var(--bp-ease) !important;
+    box-shadow: 8px 0 40px rgba(0,0,0,0.6) !important;
+  }
+
+  .panther-mode #sidebar.show,
+  .panther-mode aside.show,
+  .panther-mode [id*="sidebar"][class*="show"],
+  .panther-mode [id*="sidebar"][style*="translate(0"] {
+    transform: translateX(0) !important;
+  }
+
+  /* === MOBILE : Touch targets 44px minimum === */
+  .panther-mode button,
+  .panther-mode a,
+  .panther-mode [role="button"] {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+
+  /* === MOBILE : Suggestion cards stack === */
+  .panther-mode button[class*="suggestion"],
+  .panther-mode [class*="prompt-suggestion"],
+  .panther-mode .flex.gap-2 > button,
+  .panther-mode .grid > button {
+    padding: 16px !important;
+    font-size: 14px !important;
+    border-radius: 14px !important;
+  }
+
+  /* === MOBILE : Input bar floating above keyboard === */
+  .panther-mode textarea,
+  .panther-mode [id*="chat-input"],
+  .panther-mode #chat-input {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+    border-radius: 20px !important;
+    padding: 14px 16px !important;
+    padding-bottom: calc(14px + env(safe-area-inset-bottom)) !important;
+  }
+
+  /* Input container fixed at bottom */
+  .panther-mode [class*="bottom-0"],
+  .panther-mode .fixed.bottom-0 {
+    padding-bottom: env(safe-area-inset-bottom) !important;
+  }
+
+  /* === MOBILE : Send button larger === */
+  .panther-mode button[type="submit"],
+  .panther-mode [id*="send-message"],
+  .panther-mode button[aria-label*="Send"] {
+    min-width: 48px !important;
+    min-height: 48px !important;
+    border-radius: 14px !important;
+  }
+
+  /* === MOBILE : Thought Process eyes reduced 30% === */
+  .panther-mode .thinking::before,
+  .panther-mode details[open] summary::before,
+  .panther-mode [class*="reasoning"]::before {
+    width: 98px !important;
+    height: 20px !important;
+    margin-bottom: 8px !important;
+  }
+
+  /* === MOBILE : Messages full width === */
+  .panther-mode [class*="user-message"],
+  .panther-mode [class*="assistant-message"],
+  .panther-mode .prose {
+    max-width: 100% !important;
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+  }
+
+  /* === MOBILE : Code blocks horizontal scroll === */
+  .panther-mode pre,
+  .panther-mode pre[class*="language-"] {
+    font-size: 13px !important;
+    padding: 12px !important;
+    border-radius: 10px !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* === MOBILE : Modals full-screen === */
+  .panther-mode [role="dialog"],
+  .panther-mode .modal,
+  .panther-mode [class*="modal"],
+  .panther-mode [class*="Modal"] {
+    border-radius: 16px 16px 0 0 !important;
+    max-height: 90vh !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+
+  /* === MOBILE : Header compact === */
+  .panther-mode nav[class*="sticky"],
+  .panther-mode .sticky.top-0 {
+    padding-top: env(safe-area-inset-top) !important;
+  }
+
+  /* === MOBILE : Welcome title smaller === */
+  .panther-mode .text-3xl,
+  .panther-mode .text-4xl {
+    font-size: 1.8rem !important;
+    letter-spacing: -0.5px !important;
+  }
+}
+
+/* ── Extra small devices (iPhone SE, Galaxy A) ── */
+@media (max-width: 375px) {
+  .panther-mode .text-3xl,
+  .panther-mode .text-4xl {
+    font-size: 1.5rem !important;
+  }
+
+  .panther-mode .thinking::before,
+  .panther-mode details[open] summary::before {
+    width: 80px !important;
+    height: 16px !important;
+  }
+
+  .panther-mode button[class*="suggestion"],
+  .panther-mode .grid > button {
+    padding: 12px 14px !important;
+    font-size: 13px !important;
+  }
+}
+
+/* ── Landscape mobile ── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .panther-mode .thinking::before,
+  .panther-mode details[open] summary::before {
+    width: 70px !important;
+    height: 14px !important;
+    margin-bottom: 6px !important;
+  }
+}
+
+/* ── iPad / Tablet tweaks ── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .panther-mode #sidebar,
+  .panther-mode aside {
+    width: 280px !important;
+  }
+
+  .panther-mode [role="dialog"],
+  .panther-mode .modal {
+    max-width: 560px !important;
+    border-radius: 20px !important;
+  }
+}
+
+/* ── Dark mode forced — no light leaks ── */
+.panther-mode,
+.panther-mode *,
+.panther-mode *::before,
+.panther-mode *::after {
+  color-scheme: dark !important;
+}
+
+/* ── iOS tap highlight removal ── */
+.panther-mode * {
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* ── Prevent iOS rubber banding on main container ── */
+.panther-mode .app {
+  overscroll-behavior: none !important;
+}
+
+/* ===== END GABOMAGPT BLACK PANTHER MODE ===== */
