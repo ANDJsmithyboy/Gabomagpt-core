@@ -132,8 +132,12 @@ RUN apt-get update && \
     ffmpeg libsm6 libxext6 zstd \
     && rm -rf /var/lib/apt/lists/*
 
+
 # install python dependencies
 COPY --chown=$UID:$GID ./backend/requirements.txt ./requirements.txt
+
+# --- INJECTION ZION-CORE : Force l'installation du moteur web ---
+RUN pip3 install --no-cache-dir uvicorn fastapi
 
 RUN pip3 install --no-cache-dir uv && \
     if [ "$USE_CUDA" = "true" ]; then \
