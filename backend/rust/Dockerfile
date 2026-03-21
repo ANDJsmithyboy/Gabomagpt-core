@@ -4,21 +4,40 @@
 FROM rust:1.77-slim-bookworm AS builder
 
 WORKDIR /app
-RUN apt-get update && apt-get install -y protobuf-compiler pkg-config libssl-dev && rm -rf /var/lib/apt/lists/*
 
+# 1. On installe toutes les armes système d'un coup, proprement
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    protobuf-compiler pkg-config libssl-dev build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# 2. Le système de Cache (Pré-compilation)
 COPY Cargo.toml Cargo.lock* ./
-# Créer un dummy src pour pré-compiler les dépendances
-RUN mkdir src && echo 'fn main() {}' > src/main.rs
-RUN cargo build --release 2>/dev/null || true
+RUN mkdir src && echo 'fn main() { println!("Dummy build"); }' > src/main.rs
+RUN cargo build --release || true
 RUN rm -rf src
 
+# 3. On ramène le vrai code source de GabomaGPT
 COPY . .
-RUN apt-get update && apt-get install -y pkg-config libssl-dev build-essential
 
+# 4. LA LIGNE MANQUANTE : On lance la VRAIE compilation !
+RUN cargo build --release
+
+# ==========================================
+# PHASE 2 : L'image de production (Ultra légère)
+# ==========================================
 FROM debian:bookworm-slim
-RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
+
+# On installe les certificats web et libssl (souvent requis par Rust pour les requêtes HTTP)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates libssl3 \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
-COPY --from=builder /app/target/release/gabomagpt-rag .
+
+# 5. L'astuce du wildcard (*) pour s'assurer que Docker trouve le fichier
+COPY --from=builder /app/target/release/gabomagpt-rag* ./
 
 EXPOSE 8002
+
+# 6. Démarrage de l'engin
 CMD ["./gabomagpt-rag"]
