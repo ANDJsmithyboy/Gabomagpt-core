@@ -136,8 +136,8 @@ RUN apt-get update && \
 # install python dependencies
 COPY --chown=$UID:$GID ./backend/requirements.txt ./requirements.txt
 
-# --- INJECTION ZION-CORE : Force l'installation du moteur web ---
-RUN pip3 install --no-cache-dir uvicorn fastapi
+# --- INJECTION ZION-CORE : Force l'installation complète et fiable ---
+RUN pip3 install --no-cache-dir -r requirements.txt uvicorn fastapi
 
 RUN pip3 install --no-cache-dir uv && \
     if [ "$USE_CUDA" = "true" ]; then \
