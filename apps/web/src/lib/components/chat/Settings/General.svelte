@@ -141,7 +141,7 @@
 		document.documentElement.classList.add(themeToApply);
 
 		/* Nettoyage inline styles (ancien système) */
-		['--color-gray-700','--color-gray-800','--color-gray-850','--color-gray-900','--color-gray-950'].forEach(v => {
+		['--color-gray-50','--color-gray-100','--color-gray-200','--color-gray-300','--color-gray-400','--color-gray-500','--color-gray-600','--color-gray-700','--color-gray-800','--color-gray-850','--color-gray-900','--color-gray-950'].forEach(v => {
 			document.documentElement.style.removeProperty(v);
 		});
 

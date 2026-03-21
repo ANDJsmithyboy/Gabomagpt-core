@@ -15,3 +15,4 @@ export { default as ThinkingStates } from './ThinkingStates.svelte';
 export { default as ErrorHandler } from './ErrorHandler.svelte';
 export { default as MaintenancePage } from './MaintenancePage.svelte';
 export { default as WelcomeScreen } from './WelcomeScreen.svelte';
+export { default as BPWorkspace } from './BPWorkspace.svelte';

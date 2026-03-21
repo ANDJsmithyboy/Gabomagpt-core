@@ -37,7 +37,7 @@
 	import ChatPlus from '../icons/ChatPlus.svelte';
 	import ChatCheck from '../icons/ChatCheck.svelte';
 	import Knobs from '../icons/Knobs.svelte';
-	import { WEBUI_API_BASE_URL } from '$lib/constants';
+	import { WEBUI_API_BASE_URL, WEBUI_BASE_URL } from '$lib/constants';
 
 	/* GabomaGPT */
 	import { TokenBadge, UpgradeButton } from '$lib/components/gabomagpt';
@@ -94,20 +94,23 @@
 
 		<div class=" flex max-w-full w-full mx-auto px-1.5 md:px-2 pt-0.5 bg-transparent">
 			<div class="flex items-center w-full max-w-full">
-				{#if $mobile && !$showSidebar}
+				{#if !$showSidebar}
 					<div
-						class="-translate-x-0.5 mr-1 mt-1 self-start flex flex-none items-center text-gray-600 dark:text-gray-400"
+						class="-translate-x-0.5 mr-1 self-start flex flex-none items-center"
 					>
-						<Tooltip content={$showSidebar ? $i18n.t('Close Sidebar') : $i18n.t('Open Sidebar')}>
+						<Tooltip content={$i18n.t('Open Sidebar')}>
 							<button
-								class=" cursor-pointer flex rounded-lg hover:bg-gray-100 dark:hover:bg-gray-850 transition"
+								class="cursor-pointer flex items-center gap-2 rounded-xl px-1.5 py-1 hover:bg-gray-100 dark:hover:bg-gray-850 transition"
 								on:click={() => {
-									showSidebar.set(!$showSidebar);
+									showSidebar.set(true);
 								}}
 							>
-								<div class=" self-center p-1.5">
-									<Sidebar />
-								</div>
+								<img
+									src="{WEBUI_BASE_URL}/static/gabomagpt-logo.jpeg"
+									alt="GabomaGPT"
+									class="size-7 rounded-lg object-cover"
+									draggable="false"
+								/>
 							</button>
 						</Tooltip>
 					</div>

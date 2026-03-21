@@ -17,6 +17,7 @@ export interface ModeConfig {
 	color: string;
 	colorGlow: string;
 	description: string;
+	tokenCost: number;
 }
 
 /* ── Mapping modèles → fournisseurs ─────────────── */
@@ -28,7 +29,8 @@ export const MODEL_MAP: Record<Mode, ModeConfig> = {
 		provider: 'groq',
 		color: '#F57F17',
 		colorGlow: '#FFD54F',
-		description: 'Rapide et léger — réponses instantanées'
+		description: 'Rapide et léger — réponses instantanées',
+		tokenCost: 1
 	},
 	pro: {
 		label: 'Pro',
@@ -37,7 +39,8 @@ export const MODEL_MAP: Record<Mode, ModeConfig> = {
 		provider: 'groq',
 		color: '#01579B',
 		colorGlow: '#29B6F6',
-		description: 'Puissant et polyvalent — raisonnement avancé'
+		description: 'Puissant et polyvalent — raisonnement avancé',
+		tokenCost: 3
 	},
 	bp: {
 		label: 'Black Panther',
@@ -46,7 +49,8 @@ export const MODEL_MAP: Record<Mode, ModeConfig> = {
 		provider: 'anthropic',
 		color: '#FF2244',
 		colorGlow: '#FF2244',
-		description: 'Agent autonome — actions Airtel Money, navigation web'
+		description: 'Agent autonome — actions Airtel Money, navigation web',
+		tokenCost: 10
 	}
 };
 
@@ -83,6 +87,7 @@ export const activeModeConfig = derived(activeMode, ($mode: Mode) => MODEL_MAP[$
 export const activeModel = derived(activeMode, ($mode: Mode) => MODEL_MAP[$mode].model);
 export const activeProvider = derived(activeMode, ($mode: Mode) => MODEL_MAP[$mode].provider);
 export const isBPMode = derived(activeMode, ($mode: Mode) => $mode === 'bp');
+export const activeTokenCost = derived(activeMode, ($mode: Mode) => MODEL_MAP[$mode].tokenCost);
 
 /* ── Initialisation au chargement — appliquer la classe body si BP ── */
 if (browser) {

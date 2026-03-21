@@ -1438,6 +1438,13 @@
 						</div>
 					</UserMenu>
 				{/if}
+
+				<!-- GabomaGPT — SmartANDJ footer -->
+				<div class="text-center pt-1 pb-0.5 select-none">
+					<span class="text-[9px] tracking-wide text-gray-500/60 font-light" style="font-family: 'Outfit', 'Sora', sans-serif;">
+						&copy; 2026 SmartANDJ AI Technologies
+					</span>
+				</div>
 			</div>
 		</div>
 		</div>

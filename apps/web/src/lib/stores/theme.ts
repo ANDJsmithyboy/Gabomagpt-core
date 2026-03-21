@@ -40,7 +40,7 @@ function loadTheme(): ThemeKey {
 
 function applyTheme(key: ThemeKey) {
 	if (!browser) return;
-	document.documentElement.setAttribute('data-theme', key);
+	document.documentElement.setAttribute('data-accent', key);
 }
 
 // ── Store ──────────────────────────────────────────────

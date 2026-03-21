@@ -141,11 +141,11 @@
 }
 
 /* ── Thèmes des 5 pétales (accent uniquement) ── */
-[data-theme="foret"]    { --accent: #22C55E; }
-[data-theme="ocean"]    { --accent: #38BDF8; }
-[data-theme="soleil"]   { --accent: #FACC15; --accent-foreground: #1a1a1a; }
-[data-theme="flamme"]   { --accent: #EF4444; }
-[data-theme="nuit"]     { --accent: #7C3AED; }
+[data-accent="foret"]    { --accent: #22C55E; }
+[data-accent="ocean"]    { --accent: #38BDF8; }
+[data-accent="soleil"]   { --accent: #FACC15; --accent-foreground: #1a1a1a; }
+[data-accent="flamme"]   { --accent: #EF4444; }
+[data-accent="nuit"]     { --accent: #7C3AED; }
 
 /* ══════════════════════════════════════════════════════════
    ZION-CORE THEMES — Propagation totale
@@ -155,6 +155,13 @@
 
 /* ── SOMBRE (Obsidian) — Défaut ZION-CORE ──────────── */
 [data-theme="sombre"] {
+  --color-gray-50:        #0A0F1A;
+  --color-gray-100:       #111827;
+  --color-gray-200:       #1E293B;
+  --color-gray-300:       #334155;
+  --color-gray-400:       #475569;
+  --color-gray-500:       #64748B;
+  --color-gray-600:       #94A3B8;
   --color-gray-950:       #020304;
   --color-gray-900:       #050810;
   --color-gray-850:       #0A0F1A;
@@ -186,6 +193,13 @@
 
 /* ── NOIR OLED — Fond pur #000000, surface #050505 ─── */
 [data-theme="noir-oled"] {
+  --color-gray-50:        #0A0A0A;
+  --color-gray-100:       #121212;
+  --color-gray-200:       #1A1A1A;
+  --color-gray-300:       #2A2A2A;
+  --color-gray-400:       #3A3A3A;
+  --color-gray-500:       #5A5A5A;
+  --color-gray-600:       #7A7A7A;
   --color-gray-950:       #000000;
   --color-gray-900:       #050505;
   --color-gray-850:       #0A0A0A;
@@ -218,6 +232,13 @@
 /* ── BLEU NUIT — Fond #05081A, surface #030511 ─────── */
 /* Inspiré des nuits sans lune sur l'Atlantique gabonais */
 [data-theme="bleu-nuit"] {
+  --color-gray-50:        #0C1025;
+  --color-gray-100:       #141A35;
+  --color-gray-200:       #1E2850;
+  --color-gray-300:       #2A3668;
+  --color-gray-400:       #3B4A80;
+  --color-gray-500:       #5668A0;
+  --color-gray-600:       #7B8DC0;
   --color-gray-950:       #030511;
   --color-gray-900:       #05081A;
   --color-gray-850:       #0C1025;
@@ -256,6 +277,13 @@
 /* ── VERT FORÊT — Fond #06150C, surface #040E08 ────── */
 /* Inspiré de la canopée du Parc de la Lopé             */
 [data-theme="vert-foret"] {
+  --color-gray-50:        #0C1F14;
+  --color-gray-100:       #142A1C;
+  --color-gray-200:       #1E3D2A;
+  --color-gray-300:       #2A5238;
+  --color-gray-400:       #3A6A4A;
+  --color-gray-500:       #508560;
+  --color-gray-600:       #70A580;
   --color-gray-950:       #040E08;
   --color-gray-900:       #06150C;
   --color-gray-850:       #0C1F14;
@@ -295,6 +323,13 @@
 /* Activé via body.mode-bp — Obsidian #020304 + Or #FFD700 */
 [data-theme="black-panther"],
 body.mode-bp {
+  --color-gray-50:        #060A14;
+  --color-gray-100:       #0D1424;
+  --color-gray-200:       #121B30;
+  --color-gray-300:       #1A2540;
+  --color-gray-400:       #253258;
+  --color-gray-500:       #3A4A70;
+  --color-gray-600:       #5A6A90;
   --color-gray-950:       #010102;
   --color-gray-900:       #020304;
   --color-gray-850:       #060A14;
@@ -350,9 +385,31 @@ code, pre, .agent-trace {
 }
 
 /* ── Forcer la propagation des thèmes sur sidebar/navbar/input ── */
+
+/* Zone principale — suit --zc-background */
+.app > div {
+	background: var(--zc-background, var(--bg-deep)) !important;
+}
+
 /* Sidebar — utilise --zc-surface (le plus sombre) */
 #sidebar {
 	background: var(--zc-surface, var(--bg-panel)) !important;
+}
+
+/* Sidebar gradients haut/bas */
+#sidebar .sidebar-bg-gradient-to-b,
+#sidebar .sidebar-bg-gradient-to-t {
+	--tw-gradient-from: var(--zc-surface, var(--bg-panel)) !important;
+}
+
+/* Sidebar inner elements — texte + hover */
+#sidebar .sidebar {
+	color: var(--text-secondary) !important;
+}
+
+/* Sidebar user/profile section */
+#sidebar .font-primary {
+	color: var(--text-primary) !important;
 }
 
 /* Navbar — utilise --zc-navbar avec blur */
@@ -366,6 +423,27 @@ nav.sticky {
 #chat-input-container {
 	background: var(--zc-input, var(--bg-surface)) !important;
 	border-color: var(--border) !important;
+}
+
+/* Outer input wrapper — subtle themed bg */
+#message-input-container {
+	background: color-mix(in srgb, var(--zc-input, var(--bg-surface)) 30%, transparent) !important;
+	border-color: var(--border, rgba(255,255,255,0.07)) !important;
+}
+
+/* BP mode — deeper input bg */
+body.mode-bp #message-input-container {
+	background: rgba(5, 8, 16, 0.95) !important;
+	border-color: rgba(212, 164, 23, 0.12) !important;
+}
+body.mode-bp #chat-input-container {
+	background: rgba(6, 10, 20, 0.98) !important;
+}
+
+/* Chat main area background */
+.chat-container,
+[id^="chat-"] {
+	background: transparent !important;
 }
 
 /* ── Aura de réflexion — animation 5 couleurs ── */

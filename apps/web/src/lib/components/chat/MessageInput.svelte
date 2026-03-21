@@ -102,8 +102,20 @@
 	import Expand from '../icons/Expand.svelte';
 	import QueuedMessageItem from './MessageInput/QueuedMessageItem.svelte';
 
-	// GabomaGPT — DisclaimerBar
+	// GabomaGPT — DisclaimerBar + Token Gating
 	import { DisclaimerBar } from '$lib/components/gabomagpt';
+	import { gabomaStore } from '$lib/stores/gabomagpt';
+	import { activeMode, MODEL_MAP } from '$lib/stores/mode';
+
+	function guardedSubmit(promptText: string) {
+		const cost = MODEL_MAP[$activeMode].tokenCost;
+		const ok = gabomaStore.consumeTokens(cost);
+		if (!ok) {
+			toast.error(`Jetons insuffisants (${cost} requis). Rechargez votre compte.`);
+			return;
+		}
+		dispatch('submit', promptText);
+	}
 
 	const i18n = getContext('i18n');
 
@@ -1164,7 +1176,7 @@
 								document.getElementById('chat-input')?.focus();
 
 								if ($settings?.speechAutoSend ?? false) {
-									dispatch('submit', prompt);
+									guardedSubmit(prompt);
 								}
 							}}
 						/>
@@ -1173,7 +1185,7 @@
 						class="w-full flex flex-col gap-1.5 {recording ? 'hidden' : ''}"
 						on:submit|preventDefault={() => {
 							// check if selectedModels support image input
-							dispatch('submit', prompt);
+							guardedSubmit(prompt);
 						}}
 					>
 						<button
@@ -1465,7 +1477,7 @@
 																if (enterPressed) {
 																	e.preventDefault();
 																	if (prompt !== '' || files.length > 0) {
-																		dispatch('submit', prompt);
+																		guardedSubmit(prompt);
 																	}
 																}
 															}
