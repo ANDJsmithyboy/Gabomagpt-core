@@ -1,11 +1,10 @@
 # ══════════════════════════════════════════════════════════
-# GabomaGPT v6.0 — Docker Compose Full Stack
+# GabomaGPT v6.0 — NOYAU DUR (Core Deployment)
 # SmartANDJ AI Technologies · Constitution Zion Core
-# Fondateur : Daniel Jonathan ANDJ
 # ══════════════════════════════════════════════════════════
 
 services:
-  # ── Frontend SvelteKit (Open WebUI fork) ───────────────────
+  # ── Frontend & Backend (Open WebUI) ───────────────────
   web:
     build:
       context: ./apps/web
@@ -62,69 +61,6 @@ services:
     networks:
       - gabomagpt-net
 
-  # ── Go Payment Service (Fiber) ─────────────────────────────
-  payment:
-    build:
-      context: ./services/payment
-      dockerfile: Dockerfile
-    image: gabomagpt-payment:latest
-    container_name: gabomagpt-payment
-    environment:
-      - PORT=8001
-      - FASTAPI_INTERNAL_URL=http://web:8080
-      - INTERNAL_API_SECRET=${INTERNAL_API_SECRET:-gabomagpt_internal_2026}
-      - PAYMENT_RETURN_URL=https://gabomagpt.ga/payment/confirm
-      - CORS_ALLOW_ORIGIN=http://web:8080
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8001/ping"]
-      interval: 15s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      web:
-        condition: service_healthy
-    restart: unless-stopped
-    networks:
-      - gabomagpt-net
-
-  # ── Nginx Reverse Proxy ─────────────────────────────────────
-  nginx:
-    image: nginx:alpine
-    container_name: gabomagpt-nginx
-    ports:
-      - "${GABOMAGPT_PUBLIC_PORT:-80}:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
-    depends_on:
-      web:
-        condition: service_healthy
-      payment:
-        condition: service_healthy
-    restart: unless-stopped
-    networks:
-      - gabomagpt-net
-
-  # ── Rust RAG Engine + Parser (Actix-web) ───────────────────
-  rag-engine:
-    build:
-      context: ./backend/rust
-      dockerfile: Dockerfile
-    image: gabomagpt-rag:latest
-    container_name: gabomagpt-rag
-    ports:
-      - "8002:8002"
-    environment:
-      - RUST_PORT=8002
-      - RUST_LOG=info
-      - CHROMA_HOST=chromadb
-      - CHROMA_PORT=8000
-    depends_on:
-      chromadb:
-        condition: service_started
-    restart: unless-stopped
-    networks:
-      - gabomagpt-net
-
   # ── PostgreSQL 16 ──────────────────────────────────────────
   postgres:
     image: postgres:16-alpine
@@ -142,11 +78,11 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-    restart: unless-stopped
+      restart: unless-stopped
     networks:
       - gabomagpt-net
 
-  # ── Redis 7 (cache + sessions + OTP + rate limiting) ───────
+  # ── Redis 7 (cache + sessions) ───────
   redis:
     image: redis:7-alpine
     container_name: gabomagpt-redis
@@ -159,7 +95,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-    restart: unless-stopped
+      restart: unless-stopped
     networks:
       - gabomagpt-net
 
