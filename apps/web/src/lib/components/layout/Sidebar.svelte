@@ -1398,44 +1398,6 @@
 					<UpgradePrompt />
 				{/if}
 
-				<!-- GabomaGPT — Toggle Black Panther -->
-				<button
-					class={cn(
-						'flex items-center justify-between rounded-xl px-3 py-2',
-						'border transition-all duration-200',
-						'hover:opacity-80 active:scale-[0.97]',
-						panther
-							? 'border-[rgba(212,164,23,0.2)] bg-[rgba(212,164,23,0.06)]'
-							: 'border-[var(--border)] bg-transparent'
-					)}
-					on:click={() => gabomaStore.togglePantherMode()}
-					aria-label="Activer ou désactiver le mode Black Panther"
-				>
-					<div class="flex items-center gap-2">
-						<span class="text-sm">⚫</span>
-						<span class={cn(
-							'text-xs font-medium',
-							panther ? 'text-[#D4A417]' : 'text-[var(--text-secondary)]'
-						)}>
-							Mode Black Panther
-						</span>
-					</div>
-					<!-- Toggle switch -->
-					<div
-						class={cn(
-							'relative h-5 w-9 rounded-full transition-colors duration-200',
-							panther ? 'bg-[#D4A417]' : 'bg-[rgba(255,255,255,0.1)]'
-						)}
-					>
-						<div
-							class={cn(
-								'absolute top-0.5 h-4 w-4 rounded-full bg-white transition-transform duration-200',
-								panther ? 'translate-x-4' : 'translate-x-0.5'
-							)}
-						></div>
-					</div>
-				</button>
-
 				<!-- Utilisateur -->
 				{#if $user !== undefined && $user !== null}
 					<UserMenu

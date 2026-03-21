@@ -51,10 +51,12 @@
 	// GabomaGPT — Composants globaux
 	import { PaymentModal, PantherBar, UpgradeModal } from '$lib/components/gabomagpt';
 	import { gabomaStore, isPantherMode, isUpgradeModalOpen, isLowTokens } from '$lib/stores/gabomagpt';
+	import { isBPMode } from '$lib/stores/mode';
 
 	$: showPaymentModal = $gabomaStore.isPaymentModalOpen;
 	$: showUpgradeModal = $isUpgradeModalOpen;
 	$: panther = $isPantherMode;
+	$: bpActive = $isBPMode;
 
 	const i18n = getContext('i18n');
 
@@ -417,7 +419,7 @@
 		{/if}
 
 		<div
-			class=" text-gray-700 dark:text-gray-100 bg-white dark:bg-gray-900 h-screen max-h-[100dvh] overflow-auto flex flex-row justify-end"
+			class="text-gray-700 dark:text-gray-100 bg-white dark:bg-gray-900 h-screen max-h-[100dvh] overflow-auto flex flex-row justify-end"
 		>
 			{#if !['user', 'admin'].includes($user?.role)}
 				<AccountPending />
@@ -477,7 +479,9 @@
 					</div>
 				{/if}
 
-				<Sidebar />
+				{#if !bpActive}
+					<Sidebar />
+				{/if}
 
 				{#if loaded}
 					<slot />

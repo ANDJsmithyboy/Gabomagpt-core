@@ -21,7 +21,6 @@
 	import { goto } from '$app/navigation';
 
 	import ShareChatModal from '../chat/ShareChatModal.svelte';
-	import ModelSelector from '../chat/ModelSelector.svelte';
 	import Tooltip from '../common/Tooltip.svelte';
 	import Menu from '$lib/components/layout/Navbar/Menu.svelte';
 	import UserMenu from '$lib/components/layout/Sidebar/UserMenu.svelte';
@@ -40,8 +39,7 @@
 	import Knobs from '../icons/Knobs.svelte';
 	import { WEBUI_API_BASE_URL } from '$lib/constants';
 
-	/* GabomaGPT — Sélecteur de mode Flash/Pro/BP */
-	import ModeSwitch from '../chat/ModeSwitch.svelte';
+	/* GabomaGPT */
 	import { TokenBadge, UpgradeButton } from '$lib/components/gabomagpt';
 	import { isPantherMode } from '$lib/stores/gabomagpt';
 
@@ -83,7 +81,7 @@
 	class="sticky top-0 z-30 w-full {chat?.id
 		? 'pt-0.5 pb-1'
 		: 'pt-1 pb-1'} -mb-12 flex flex-col items-center drag-region
-		{panther ? 'bg-[rgba(2,5,9,0.9)] border-b border-[rgba(212,164,23,0.18)]' : 'bg-[rgba(11,14,42,0.85)] backdrop-blur-xl border-b border-[var(--border)]'}
+		border-b border-[var(--border)]
 		transition-all duration-200"
 >
 	<div class="flex items-center w-full pl-1.5 pr-1">
@@ -115,20 +113,8 @@
 					</div>
 				{/if}
 
-				<div
-					class="flex-1 overflow-hidden max-w-full mt-0.5 py-0.5
-			{$showSidebar ? 'ml-1' : ''}
-			"
-				>
-					{#if showModelSelector}
-						<ModelSelector bind:selectedModels showSetDefault={!shareEnabled} />
-					{/if}
-				</div>
-
-				<!-- GabomaGPT — Sélecteur de mode 3 pilules -->
-				<div class="flex-none mx-1">
-					<ModeSwitch />
-				</div>
+				<!-- ZION-CORE: Espace libéré — ModelSelector et ModeSwitch déplacés dans l'input -->
+				<div class="flex-1"></div>
 
 				<div class="self-start flex flex-none items-center gap-1 text-gray-600 dark:text-gray-400">
 					<!-- GabomaGPT — Upgrade + Badge jetons -->

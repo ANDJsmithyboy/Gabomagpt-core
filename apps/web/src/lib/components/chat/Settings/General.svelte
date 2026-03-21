@@ -14,7 +14,7 @@
 	export let getModels: Function;
 
 	// General
-	let themes = ['dark', 'light', 'oled-dark', 'bleu-nuit', 'vert-foret'];
+	let themes = ['sombre', 'noir-oled', 'bleu-nuit', 'vert-foret', 'light'];
 	let selectedTheme = 'system';
 
 	let languages: Awaited<ReturnType<typeof getLanguages>> = [];
@@ -124,75 +124,65 @@
 	});
 
 	const applyTheme = (_theme: string) => {
-		let themeToApply = _theme === 'oled-dark' ? 'dark' : _theme === 'her' ? 'light' : _theme === 'bleu-nuit' ? 'dark' : _theme === 'vert-foret' ? 'dark' : _theme;
+		/* ZION-CORE: Tous les thèmes sombres utilisent data-theme
+		   pour une propagation CSS totale via --color-gray-* et --zc-* */
+		const darkThemes = ['sombre', 'noir-oled', 'bleu-nuit', 'vert-foret'];
+		const isDark = darkThemes.includes(_theme) || _theme === 'dark' || _theme === 'oled-dark';
+		const isLight = _theme === 'light' || _theme === 'her';
+		const isSystem = _theme === 'system';
 
-		if (_theme === 'system') {
+		let themeToApply = isLight ? 'light' : 'dark';
+		if (isSystem) {
 			themeToApply = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 		}
 
-		if (themeToApply === 'dark' && !_theme.includes('oled')) {
-			document.documentElement.style.setProperty('--color-gray-800', '#333');
-			document.documentElement.style.setProperty('--color-gray-850', '#262626');
-			document.documentElement.style.setProperty('--color-gray-900', '#171717');
-			document.documentElement.style.setProperty('--color-gray-950', '#0d0d0d');
-		}
+		/* Nettoyage classes HTML */
+		document.documentElement.classList.remove('dark', 'light');
+		document.documentElement.classList.add(themeToApply);
 
-		themes
-			.filter((e) => e !== themeToApply)
-			.forEach((e) => {
-				e.split(' ').forEach((e) => {
-					document.documentElement.classList.remove(e);
-				});
-			});
-
-		themeToApply.split(' ').forEach((e) => {
-			document.documentElement.classList.add(e);
+		/* Nettoyage inline styles (ancien système) */
+		['--color-gray-700','--color-gray-800','--color-gray-850','--color-gray-900','--color-gray-950'].forEach(v => {
+			document.documentElement.style.removeProperty(v);
 		});
 
+		/* Appliquer data-theme pour propagation CSS variables */
+		const dataThemeMap: Record<string, string> = {
+			'sombre': 'sombre',
+			'dark': 'sombre',
+			'noir-oled': 'noir-oled',
+			'oled-dark': 'noir-oled',
+			'bleu-nuit': 'bleu-nuit',
+			'vert-foret': 'vert-foret'
+		};
+
+		const dataThemeValue = dataThemeMap[_theme];
+		if (dataThemeValue) {
+			document.documentElement.setAttribute('data-theme', dataThemeValue);
+		} else if (isSystem && themeToApply === 'dark') {
+			document.documentElement.setAttribute('data-theme', 'sombre');
+		} else {
+			document.documentElement.removeAttribute('data-theme');
+		}
+
+		/* Meta theme-color */
 		const metaThemeColor = document.querySelector('meta[name="theme-color"]');
 		if (metaThemeColor) {
-			if (_theme.includes('system')) {
-				const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-					? 'dark'
-					: 'light';
-				console.log('Setting system meta theme color: ' + systemTheme);
-				metaThemeColor.setAttribute('content', systemTheme === 'light' ? '#ffffff' : '#171717');
-			} else {
-				console.log('Setting meta theme color: ' + _theme);
-				metaThemeColor.setAttribute(
-					'content',
-					_theme === 'dark'
-						? '#171717'
-						: _theme === 'oled-dark'
-							? '#000000'
-							: _theme === 'her'
-								? '#983724'
-								: '#ffffff'
-				);
-			}
+			const metaColorMap: Record<string, string> = {
+				'sombre': '#050810',
+				'dark': '#050810',
+				'noir-oled': '#000000',
+				'oled-dark': '#000000',
+				'bleu-nuit': '#05081A',
+				'vert-foret': '#06150C',
+				'light': '#ffffff',
+				'her': '#983724'
+			};
+			metaThemeColor.setAttribute('content', metaColorMap[_theme] ?? (themeToApply === 'dark' ? '#050810' : '#ffffff'));
 		}
 
 		if (typeof window !== 'undefined' && window.applyTheme) {
 			window.applyTheme();
 		}
-
-		if (_theme.includes('oled')) {
-			document.documentElement.style.setProperty('--color-gray-800', '#101010');
-			document.documentElement.style.setProperty('--color-gray-850', '#050505');
-			document.documentElement.style.setProperty('--color-gray-900', '#000000');
-			document.documentElement.style.setProperty('--color-gray-950', '#000000');
-			document.documentElement.classList.add('dark');
-		}
-
-		// GabomaGPT — Bleu Nuit et Vert Forêt
-		if (_theme === 'bleu-nuit' || _theme === 'vert-foret') {
-			document.documentElement.setAttribute('data-theme', _theme);
-			document.documentElement.classList.add('dark');
-		} else {
-			document.documentElement.removeAttribute('data-theme');
-		}
-
-		console.log(_theme);
 	};
 
 	const themeChangeHandler = (_theme: string) => {
@@ -219,9 +209,9 @@
 						on:change={() => themeChangeHandler(selectedTheme)}
 					>
 						<option value="system">⚙️ {$i18n.t('System')}</option>
-						<option value="dark">🌑 {$i18n.t('Dark')}</option>
-						<option value="oled-dark">🌃 {$i18n.t('OLED Dark')}</option>
-						<option value="light">☀️ {$i18n.t('Light')}</option>
+						<option value="sombre">🌑 Sombre</option>
+						<option value="noir-oled">🌃 Noir OLED</option>
+						<option value="light">☀️ Clair</option>
 						<option value="bleu-nuit">🌌 Bleu Nuit</option>
 						<option value="vert-foret">🌿 Vert Forêt</option>
 						{#if $config?.features?.enable_easter_eggs}
@@ -231,7 +221,7 @@
 				</div>
 			</div>
 
-			<div class=" flex w-full justify-between">
+			<div class="flex w-full justify-between">
 				<div class=" self-center text-xs font-medium">{$i18n.t('Language')}</div>
 				<div class="flex items-center relative">
 					<select

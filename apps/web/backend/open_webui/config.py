@@ -1266,31 +1266,28 @@ except Exception as e:
 if default_prompt_suggestions == []:
     default_prompt_suggestions = [
         {
-            "title": ["Help me study", "vocabulary for a college entrance exam"],
-            "content": "Help me study vocabulary: write a sentence for me to fill in the blank, and I'll try to pick the correct option.",
+            "title": ["Explique-moi le Code Civil gabonais", "les droits fondamentaux"],
+            "content": "Explique-moi les droits fondamentaux dans le Code Civil gabonais, avec des exemples concrets pour un citoyen de Libreville.",
         },
         {
-            "title": ["Give me ideas", "for what to do with my kids' art"],
-            "content": "What are 5 creative things I could do with my kids' art? I don't want to throw them away, but it's also so much clutter.",
+            "title": ["Comment cr\u00e9er une entreprise au Gabon", "proc\u00e9dure ANPI"],
+            "content": "Quelles sont les \u00e9tapes pour cr\u00e9er une entreprise au Gabon via l'ANPI ? D\u00e9lais, co\u00fbts, documents n\u00e9cessaires.",
         },
         {
-            "title": ["Tell me a fun fact", "about the Roman Empire"],
-            "content": "Tell me a random fun fact about the Roman Empire",
+            "title": ["Aide-moi \u00e0 coder", "une application mobile avec Flutter"],
+            "content": "Guide-moi pour cr\u00e9er une application mobile de livraison adapt\u00e9e au march\u00e9 gabonais avec Flutter.",
         },
         {
-            "title": ["Show me a code snippet", "of a website's sticky header"],
-            "content": "Show me a code snippet of a website's sticky header in CSS and JavaScript.",
+            "title": ["R\u00e9dige un business plan", "pour un projet au Gabon"],
+            "content": "Aide-moi \u00e0 r\u00e9diger un business plan pour une startup tech \u00e0 Libreville. Budget initial : 5 millions FCFA.",
         },
         {
-            "title": [
-                "Explain options trading",
-                "if I'm familiar with buying and selling stocks",
-            ],
-            "content": "Explain options trading in simple terms if I'm familiar with buying and selling stocks.",
+            "title": ["Parle-moi de l'histoire du Gabon", "les grandes dates"],
+            "content": "Raconte-moi les grandes dates de l'histoire du Gabon, de l'ind\u00e9pendance \u00e0 aujourd'hui, avec le contexte culturel.",
         },
         {
-            "title": ["Overcome procrastination", "give me tips"],
-            "content": "Could you start by asking me about instances when I procrastinate the most and then give me some suggestions to overcome it?",
+            "title": ["Aide-moi \u00e0 r\u00e9viser", "pour le Bac gabonais"],
+            "content": "Aide-moi \u00e0 r\u00e9viser les math\u00e9matiques pour le Bac gabonais. Commence par les exercices les plus fr\u00e9quents.",
         },
     ]
 

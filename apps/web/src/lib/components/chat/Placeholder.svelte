@@ -150,7 +150,7 @@
 								</span>
 							</Tooltip>
 						{:else}
-							{$i18n.t('Hello, {{name}}', { name: $user?.name })}
+							{$i18n.t('Mbolo {{name}} !', { name: $user?.name })}
 						{/if}
 					</div>
 				</div>
@@ -218,7 +218,7 @@
 					{toolServers}
 					{stopResponse}
 					{createMessagePair}
-					placeholder={$i18n.t('How can I help you today?')}
+					placeholder={$i18n.t('On gère quoi aujourd\'hui ?')}
 					{onChange}
 					{onUpload}
 					on:submit={(e) => {
