@@ -7,7 +7,7 @@ services:
     environment:
       - WEBUI_NAME=GabomaGPT
       - WEBUI_SECRET_KEY=votre_cle_secrete_ici
-      - DATABASE_URL=postgresql+asyncpg://gabomagpt:gabomagpt_secret@postgres/gabomagpt
+      - DATABASE_URL=postgresql://gabomagpt:gabomagpt_secret@postgres/gabomagpt
     depends_on:
       - postgres
     networks:
