@@ -132,13 +132,17 @@ RUN apt-get update && \
     ffmpeg libsm6 libxext6 zstd \
     && rm -rf /var/lib/apt/lists/*
 
-
 # install python dependencies
 COPY --chown=$UID:$GID ./backend/requirements.txt ./requirements.txt
 
-# --- INJECTION ZION-CORE : Force l'installation des modules vitaux ---
-RUN pip3 install --no-cache-dir uvicorn fastapi typer
+# --- INJECTION ZION-CORE : COMME EN LOCAL ---
+# 1. On installe le traducteur Postgres qui manquait à Linux
+RUN apt-get update && apt-get install -y libpq-dev
 
+# 2. On installe l'intégralité des dépendances d'un coup, comme sur ton ordi
+RUN pip3 install --no-cache-dir -r requirements.txt uvicorn fastapi
+
+# 3. Le reste du script d'origine peut continuer...
 RUN pip3 install --no-cache-dir uv && \
     if [ "$USE_CUDA" = "true" ]; then \
     # If you use CUDA the whisper and embedding model will be downloaded on first use
