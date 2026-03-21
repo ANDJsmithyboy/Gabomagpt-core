@@ -13,7 +13,7 @@ RUN cargo build --release 2>/dev/null || true
 RUN rm -rf src
 
 COPY . .
-RUN cargo build --release
+RUN apt-get update && apt-get install -y pkg-config libssl-dev build-essential
 
 FROM debian:bookworm-slim
 RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
