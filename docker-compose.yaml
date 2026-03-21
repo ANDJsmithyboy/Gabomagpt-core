@@ -1,32 +1,28 @@
-# ── Frontend & Backend (Open WebUI) ───────────────────
+services:
   web:
     image: ghcr.io/open-webui/open-webui:main
     container_name: gabomagpt-web
     ports:
-      - "${GABOMAGPT_PORT:-3000}:8080"
+      - "3000:8080"
     environment:
-      - OLLAMA_BASE_URL=http://ollama:11434
       - WEBUI_NAME=GabomaGPT
-      - CUSTOM_NAME=GabomaGPT
-      - WEBUI_AUTH=true
-      - ENABLE_SIGNUP=true
-      - DEFAULT_USER_ROLE=pending
-      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY}
-      - DATABASE_URL=postgresql+asyncpg://gabomagpt:${POSTGRES_PASSWORD:-gabomagpt_secret}@postgres/gabomagpt
-      - REDIS_URL=redis://redis:6379
-      - CHROMA_HTTP_HOST=chromadb
-      - CHROMA_HTTP_PORT=8000
+      - WEBUI_SECRET_KEY=votre_cle_secrete_ici
+      - DATABASE_URL=postgresql+asyncpg://gabomagpt:gabomagpt_secret@postgres/gabomagpt
     depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      chromadb:
-        condition: service_started
-      ollama:
-        condition: service_started
-    volumes:
-      - webui_data:/app/backend/data
-    restart: unless-stopped
+      - postgres
     networks:
       - gabomagpt-net
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: gabomagpt-postgres
+    environment:
+      POSTGRES_USER: gabomagpt
+      POSTGRES_PASSWORD: gabomagpt_secret
+      POSTGRES_DB: gabomagpt
+    networks:
+      - gabomagpt-net
+
+networks:
+  gabomagpt-net:
+    driver: bridge
