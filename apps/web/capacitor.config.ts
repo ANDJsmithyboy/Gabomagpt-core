@@ -1,6 +1,6 @@
 /* GabomaGPT · capacitor.config.ts · SmartANDJ AI Technologies
-   Configuration Capacitor — Network-First Wrapper
-   Pointe vers l'URL de production GabomaGPT
+   Configuration Capacitor — Network-First Hybrid Mobile App
+   VPS Production: 31.220.80.217
    Fondateur: Daniel Jonathan ANDJ */
 
 import type { CapacitorConfig } from '@capacitor/cli';
@@ -10,24 +10,21 @@ const config: CapacitorConfig = {
   appName: 'GabomaGPT',
   webDir: 'build',
 
-  // Network-First : l'app pointe vers le backend de production
   server: {
-    // En dev, utiliser l'URL locale ; en prod, l'URL Coolify
-    url: process.env.CAPACITOR_SERVER_URL || 'https://gabomagpt.smartandj.ai',
-    cleartext: true, // Autoriser HTTP en dev (à retirer en prod si HTTPS only)
-    androidScheme: 'https'
+    url: process.env.CAPACITOR_SERVER_URL || 'http://31.220.80.217',
+    cleartext: true,
+    androidScheme: 'https',
+    iosScheme: 'ionic',
+    allowNavigation: ['31.220.80.217', '*.smartandj.ai', 'api.groq.com']
   },
 
-  // Plugins natifs
   plugins: {
     SplashScreen: {
-      launchShowDuration: 2000,
+      launchShowDuration: 2200,
       launchAutoHide: true,
+      launchFadeOutDuration: 600,
       backgroundColor: '#050810',
       showSpinner: false,
-      androidSpinnerStyle: 'small',
-      iosSpinnerStyle: 'small',
-      spinnerColor: '#C9A227',
       splashFullScreen: true,
       splashImmersive: true,
       layoutName: 'launch_screen',
@@ -36,33 +33,50 @@ const config: CapacitorConfig = {
     StatusBar: {
       style: 'DARK',
       backgroundColor: '#050810',
-      overlaysWebView: false
+      overlaysWebView: true
     },
     Keyboard: {
       resize: 'body',
       style: 'DARK',
       resizeOnFullScreen: true
     },
+    Haptics: {},
+    PushNotifications: {
+      presentationOptions: ['badge', 'sound', 'alert']
+    },
+    LocalNotifications: {
+      smallIcon: 'ic_stat_gabomagpt',
+      iconColor: '#C9A84C',
+      sound: 'notification.wav'
+    },
     App: {
-      // Deep links (futur)
-      // url: 'gabomagpt://'
+      url: 'gabomagpt://app',
+      androidDefaultNavigationBarColor: '#050810'
     }
   },
 
-  // Android specific
   android: {
     backgroundColor: '#050810',
     allowMixedContent: true,
     captureInput: true,
-    webContentsDebuggingEnabled: false // true en dev
+    webContentsDebuggingEnabled: false,
+    overrideUserAgent: 'GabomaGPT-Android/1.0',
+    appendUserAgent: 'GabomaGPT-Mobile',
+    initialFocus: false,
+    buildOptions: {
+      keystorePath: undefined,
+      keystoreAlias: undefined
+    }
   },
 
-  // iOS specific
   ios: {
     backgroundColor: '#050810',
     contentInset: 'automatic',
     scrollEnabled: true,
-    preferredContentMode: 'mobile'
+    preferredContentMode: 'mobile',
+    overrideUserAgent: 'GabomaGPT-iOS/1.0',
+    appendUserAgent: 'GabomaGPT-Mobile',
+    limitsNavigationsToAppBoundDomains: true
   }
 };
 
