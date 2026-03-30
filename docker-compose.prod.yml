@@ -20,6 +20,7 @@ services:
     volumes:
       - gabomagpt-data:/app/backend/data
     environment:
+      - NODE_OPTIONS=--max-old-space-size=4000
       - WEBUI_NAME=GabomaGPT
       - CUSTOM_NAME=GabomaGPT
       - WEBUI_AUTH=true
@@ -31,9 +32,13 @@ services:
       - RAG_WEB_SEARCH_ENGINE=tavily
       - RAG_WEB_SEARCH_RESULT_COUNT=5
       - TAVILY_API_KEY=${TAVILY_API_KEY}
-      # Performance
-      - WEBUI_WORKERS=2
+      # Performance — VPS 2GB RAM
+      - WEBUI_WORKERS=1
       - ENV=prod
+    deploy:
+      resources:
+        limits:
+          memory: 1536M
     networks:
       - gabomagpt-net
     healthcheck:

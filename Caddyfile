@@ -2,7 +2,7 @@
 # Replace YOUR_DOMAIN with your actual domain (e.g. gabomagpt.com)
 # Caddy auto-provisions SSL via Let's Encrypt
 
-{$DOMAIN:localhost} {
+{$DOMAIN:31.220.80.217} {
 	reverse_proxy gabomagpt:8080
 
 	header {
