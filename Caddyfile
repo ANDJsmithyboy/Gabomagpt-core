@@ -1,0 +1,36 @@
+# GabomaGPT · Caddyfile · SmartANDJ AI Technologies
+# Replace YOUR_DOMAIN with your actual domain (e.g. gabomagpt.com)
+# Caddy auto-provisions SSL via Let's Encrypt
+
+{$DOMAIN:localhost} {
+	reverse_proxy gabomagpt:8080
+
+	header {
+		# Security headers
+		X-Content-Type-Options nosniff
+		X-Frame-Options SAMEORIGIN
+		Referrer-Policy strict-origin-when-cross-origin
+		X-XSS-Protection "1; mode=block"
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		# Remove server header
+		-Server
+	}
+
+	# Gzip compression
+	encode gzip zstd
+
+	# WebSocket support for real-time streaming
+	@websockets {
+		header Connection *Upgrade*
+		header Upgrade websocket
+	}
+	reverse_proxy @websockets gabomagpt:8080
+
+	# Logging
+	log {
+		output file /data/access.log {
+			roll_size 10mb
+			roll_keep 5
+		}
+	}
+}

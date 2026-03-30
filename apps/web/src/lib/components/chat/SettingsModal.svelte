@@ -31,10 +31,9 @@
 
 	// GabomaGPT — ThemeSelector + stores
 	import { ThemeSelector } from '$lib/components/gabomagpt';
-	import { gabomaStore, isPantherMode, PLANS } from '$lib/stores/gabomagpt';
+	import { gabomaStore, PLANS } from '$lib/stores/gabomagpt';
 	import { cn } from '$lib/utils/cn';
 
-	$: panther = $isPantherMode;
 	$: gabomaState = $gabomaStore;
 
 	const i18n = getContext('i18n');
@@ -440,8 +439,6 @@
 				'couleur',
 				'color',
 				'accent',
-				'panther',
-				'panthère',
 				'jetons',
 				'tokens',
 				'plan',
@@ -486,10 +483,10 @@
 				'terms of use',
 				'termsandconditions',
 				'termsofuse',
-				'timothy jae ryang baek',
-				'timothy j baek',
-				'timothyjaeryangbaek',
-				'timothyjbaek',
+				'daniel jonathan andj',
+				'daniel andj',
+				'danieljonathanandj',
+				'smartandj',
 				'twitter',
 				'update info',
 				'updateinfo',
@@ -984,39 +981,6 @@
 						<div>
 							<h3 class="text-sm font-semibold mb-3">Couleur d'accentuation</h3>
 							<ThemeSelector />
-						</div>
-
-						<!-- Mode Black Panther -->
-						<div>
-							<h3 class="text-sm font-semibold mb-3">Mode Black Panther</h3>
-							<button
-								class={cn(
-									'flex w-full items-center justify-between rounded-xl px-4 py-3',
-									'border transition-all duration-200',
-									panther
-										? 'border-[rgba(212,164,23,0.25)] bg-[rgba(212,164,23,0.06)]'
-										: 'border-[var(--border)] bg-transparent'
-								)}
-								on:click={() => gabomaStore.togglePantherMode()}
-								aria-label="Activer ou désactiver le mode Black Panther"
-							>
-								<div class="flex items-center gap-3">
-									<span class="text-lg">⚫</span>
-									<div class="text-left">
-										<div class={cn('text-sm font-medium', panther ? 'text-[#D4A417]' : '')}>Black Panther</div>
-										<div class="text-[11px] text-gray-500">Interface dorée, ombre profonde, agent autonome</div>
-									</div>
-								</div>
-								<div class={cn(
-									'relative h-6 w-11 rounded-full transition-colors duration-200',
-									panther ? 'bg-[#D4A417]' : 'bg-gray-300 dark:bg-gray-700'
-								)}>
-									<div class={cn(
-										'absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform duration-200',
-										panther ? 'translate-x-5' : 'translate-x-0.5'
-									)}></div>
-								</div>
-							</button>
 						</div>
 
 						<!-- Info plan actuel -->

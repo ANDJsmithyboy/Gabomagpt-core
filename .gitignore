@@ -44,3 +44,13 @@ ios/App/Pods/
 # Logs
 *.log
 npm-debug.log*
+
+# Docker volumes
+docker-data/
+caddy-data/
+caddy-config/
+
+# Screenshots & docs (ne pas commit)
+*.jpg
+!apps/web/static/*.jpg
+!apps/web/static/*.jpeg

@@ -1,0 +1,135 @@
+# =====================================================
+# GabomaGPT v6.0 - Docker Compose pour Coolify
+# SmartANDJ AI Technologies - Constitution Zion Core
+# Fondateur : Daniel Jonathan ANDJ
+#
+# IMPORTANT: Ce fichier build depuis TON code source.
+# Il ne pull PAS l'image officielle Open WebUI.
+# =====================================================
+
+services:
+  gabomagpt:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+      args:
+        USE_CUDA: "false"
+        USE_OLLAMA: "false"
+        USE_SLIM: "false"
+        BUILD_HASH: "gabomagpt-jia2026"
+    image: gabomagpt:latest
+    container_name: gabomagpt
+    ports:
+      - "${PORT:-3000}:8080"
+    environment:
+      # -- Branding GabomaGPT --
+      - WEBUI_NAME=GabomaGPT
+      - CUSTOM_NAME=GabomaGPT
+      - WEBUI_AUTH=true
+      - ENABLE_SIGNUP=true
+      - DEFAULT_USER_ROLE=pending
+      # -- Securite --
+      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:-changez_cette_cle_en_production}
+      - WEBUI_JWT_SECRET_KEY=${WEBUI_JWT_SECRET_KEY:-}
+      # -- Base de donnees --
+      - DATABASE_URL=postgresql+asyncpg://gabomagpt:${POSTGRES_PASSWORD:-gabomagpt_secret}@postgres:5432/gabomagpt
+      # -- Redis --
+      - REDIS_URL=redis://redis:6379
+      # -- ChromaDB (RAG) --
+      - CHROMA_HTTP_HOST=chromadb
+      - CHROMA_HTTP_PORT=8000
+      # -- Connexion Groq (OpenAI-compatible) --
+      - OPENAI_API_BASE_URLS=https://api.groq.com/openai/v1
+      - OPENAI_API_KEYS=${GROQ_API_KEY:-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}
+      # -- API Keys supplementaires --
+      - GROQ_API_KEY=${GROQ_API_KEY:-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}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      # -- Modele par defaut (GPT-OSS 120B sur Groq) --
+      - DEFAULT_MODELS=openai/gpt-oss-120b
+      # -- Recherche Web --
+      - ENABLE_RAG_WEB_SEARCH=true
+      - RAG_WEB_SEARCH_ENGINE=tavily
+      - TAVILY_API_KEY=${TAVILY_API_KEY:-}
+      # -- RAG Embedding --
+      - RAG_EMBEDDING_ENGINE=openai
+      - RAG_EMBEDDING_MODEL=text-embedding-3-small
+      - RAG_EMBEDDING_MODEL_AUTO_UPDATE=false
+      # -- CORS --
+      - CORS_ALLOW_ORIGIN=*
+      # -- Telemetrie off --
+      - SCARF_NO_ANALYTICS=true
+      - DO_NOT_TRACK=true
+      - ANONYMIZED_TELEMETRY=false
+    volumes:
+      - webui_data:/app/backend/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      chromadb:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8080/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+    restart: unless-stopped
+    networks:
+      - gabomagpt-net
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: gabomagpt-postgres
+    environment:
+      POSTGRES_USER: gabomagpt
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-gabomagpt_secret}
+      POSTGRES_DB: gabomagpt
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gabomagpt"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - gabomagpt-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: gabomagpt-redis
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - gabomagpt-net
+
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: gabomagpt-chromadb
+    volumes:
+      - chroma_data:/chroma/chroma
+    environment:
+      - IS_PERSISTENT=TRUE
+      - ANONYMIZED_TELEMETRY=FALSE
+    restart: unless-stopped
+    networks:
+      - gabomagpt-net
+
+volumes:
+  webui_data:
+  postgres_data:
+  redis_data:
+  chroma_data:
+
+networks:
+  gabomagpt-net:
+    driver: bridge

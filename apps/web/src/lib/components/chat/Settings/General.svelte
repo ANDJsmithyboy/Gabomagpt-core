@@ -5,8 +5,11 @@
 	const dispatch = createEventDispatcher();
 
 	import { config, models, settings, theme, user } from '$lib/stores';
+	import { gabomaStore, PLANS, isPaymentModalOpen } from '$lib/stores/gabomagpt';
 
 	const i18n = getContext('i18n');
+
+	$: gabomaState = $gabomaStore;
 
 	import AdvancedParams from './Advanced/AdvancedParams.svelte';
 	import Textarea from '$lib/components/common/Textarea.svelte';
@@ -128,13 +131,13 @@
 		   pour une propagation CSS totale via --color-gray-* et --zc-* */
 		const darkThemes = ['sombre', 'noir-oled', 'bleu-nuit', 'vert-foret'];
 		const isDark = darkThemes.includes(_theme) || _theme === 'dark' || _theme === 'oled-dark';
-		const isLight = _theme === 'light' || _theme === 'her';
+		const isLight = _theme === 'clair' || _theme === 'light' || _theme === 'her';
 		const isSystem = _theme === 'system';
 
 		let themeToApply = isLight ? 'light' : 'dark';
 		if (isSystem) {
 			themeToApply = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-		}
+		} 
 
 		/* Nettoyage classes HTML */
 		document.documentElement.classList.remove('dark', 'light');
@@ -145,10 +148,8 @@
 			document.documentElement.style.removeProperty(v);
 		});
 
-		/* Appliquer data-theme pour propagation CSS variables */
+		/* data-theme UNIQUEMENT pour les themes custom (pas clair/sombre = Open WebUI natif) */
 		const dataThemeMap: Record<string, string> = {
-			'sombre': 'sombre',
-			'dark': 'sombre',
 			'noir-oled': 'noir-oled',
 			'oled-dark': 'noir-oled',
 			'bleu-nuit': 'bleu-nuit',
@@ -158,8 +159,6 @@
 		const dataThemeValue = dataThemeMap[_theme];
 		if (dataThemeValue) {
 			document.documentElement.setAttribute('data-theme', dataThemeValue);
-		} else if (isSystem && themeToApply === 'dark') {
-			document.documentElement.setAttribute('data-theme', 'sombre');
 		} else {
 			document.documentElement.removeAttribute('data-theme');
 		}
@@ -168,13 +167,14 @@
 		const metaThemeColor = document.querySelector('meta[name="theme-color"]');
 		if (metaThemeColor) {
 			const metaColorMap: Record<string, string> = {
+				'clair': '#FFFFFF',
 				'sombre': '#050810',
 				'dark': '#050810',
 				'noir-oled': '#000000',
 				'oled-dark': '#000000',
 				'bleu-nuit': '#05081A',
 				'vert-foret': '#06150C',
-				'light': '#ffffff',
+				'light': '#FFFFFF',
 				'her': '#983724'
 			};
 			metaThemeColor.setAttribute('content', metaColorMap[_theme] ?? (themeToApply === 'dark' ? '#050810' : '#ffffff'));
@@ -209,9 +209,9 @@
 						on:change={() => themeChangeHandler(selectedTheme)}
 					>
 						<option value="system">⚙️ {$i18n.t('System')}</option>
-						<option value="sombre">🌑 Sombre</option>
+						<option value="clair">☀️ Clair</option>
+						<option value="sombre">� Sombre</option>
 						<option value="noir-oled">🌃 Noir OLED</option>
-						<option value="light">☀️ Clair</option>
 						<option value="bleu-nuit">🌌 Bleu Nuit</option>
 						<option value="vert-foret">🌿 Vert Forêt</option>
 						{#if $config?.features?.enable_easter_eggs}
@@ -277,6 +277,60 @@
 						{:else}
 							<span class="ml-2 self-center">{$i18n.t('Off')}</span>
 						{/if}
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- GabomaGPT Plan Pro — Airtel Money / Moov Money -->
+		<hr class="border-gray-100/30 dark:border-gray-850/30 my-3" />
+		<div>
+			<div class="mb-1.5 text-sm font-medium">Mon Plan GabomaGPT</div>
+			<div class="glass-card p-4">
+				<div class="flex items-center justify-between mb-3">
+					<div>
+						<div class="text-sm font-semibold flex items-center gap-1.5" style="color: {PLANS[gabomaState.plan].color}">
+							{PLANS[gabomaState.plan].icon} {PLANS[gabomaState.plan].name}
+						</div>
+						<div class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+							{gabomaState.tokens} / {gabomaState.tokensMax} jetons restants
+						</div>
+					</div>
+					<div class="w-12 h-12 relative">
+						<svg viewBox="0 0 36 36" class="w-12 h-12 -rotate-90">
+							<circle cx="18" cy="18" r="15.5" fill="none" stroke-width="2.5" class="stroke-gray-200 dark:stroke-gray-700"></circle>
+							<circle cx="18" cy="18" r="15.5" fill="none" stroke-width="2.5"
+								stroke-linecap="round"
+								style="stroke: {PLANS[gabomaState.plan].color}; stroke-dasharray: {2 * Math.PI * 15.5}; stroke-dashoffset: {2 * Math.PI * 15.5 * (1 - gabomaState.tokens / gabomaState.tokensMax)};"
+							></circle>
+						</svg>
+						<span class="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-gray-600 dark:text-gray-300">
+							{Math.round(gabomaState.tokens / gabomaState.tokensMax * 100)}%
+						</span>
+					</div>
+				</div>
+
+				<div class="flex gap-2">
+					<button
+						class="flex-1 rounded-xl py-2.5 text-xs font-semibold bg-[var(--accent)] text-[var(--accent-foreground)] transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
+						on:click={() => gabomaStore.openPaymentModal()}
+					>
+						📱 Recharger via Airtel Money
+					</button>
+					<button
+						class="flex-1 rounded-xl py-2.5 text-xs font-semibold transition-all duration-200 hover:opacity-90 active:scale-[0.97] bg-blue-600 text-white"
+						on:click={() => gabomaStore.openPaymentModal()}
+					>
+						📱 Recharger via Moov Money
+					</button>
+				</div>
+
+				<div class="mt-3 text-center">
+					<button
+						class="text-[11px] text-[var(--accent)] hover:underline transition-colors"
+						on:click={() => gabomaStore.openPaymentModal()}
+					>
+						Voir tous les plans (Pro, Elite, Black Panther)
 					</button>
 				</div>
 			</div>

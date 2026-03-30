@@ -49,14 +49,11 @@
 	import { Shortcut, shortcuts } from '$lib/shortcuts';
 
 	// GabomaGPT — Composants globaux
-	import { PaymentModal, PantherBar, UpgradeModal, BPWorkspace } from '$lib/components/gabomagpt';
-	import { gabomaStore, isPantherMode, isUpgradeModalOpen, isLowTokens } from '$lib/stores/gabomagpt';
-	import { isBPMode } from '$lib/stores/mode';
+	import { PaymentModal, UpgradeModal } from '$lib/components/gabomagpt';
+	import { gabomaStore, isUpgradeModalOpen, isLowTokens } from '$lib/stores/gabomagpt';
 
 	$: showPaymentModal = $gabomaStore.isPaymentModalOpen;
 	$: showUpgradeModal = $isUpgradeModalOpen;
-	$: panther = $isPantherMode;
-	$: bpActive = $isBPMode;
 
 	const i18n = getContext('i18n');
 
@@ -123,7 +120,9 @@
 		models.set(
 			await getModels(
 				localStorage.token,
-				$config?.features?.enable_direct_connections ? ($settings?.directConnections ?? null) : null
+				$config?.features?.enable_direct_connections ? ($settings?.directConnections ?? null) : null,
+				false,
+				true // Force refresh models on startup
 			)
 		);
 	};
@@ -353,12 +352,8 @@
 				checkForVersionUpdates();
 			}
 		}
-		// Persist showControls: track open/close state separately from saved size
-		// chatControlsSize always retains the last width for openPane()
-		await showControls.set(!$mobile ? localStorage.showControls === 'true' : false);
-		showControls.subscribe((value) => {
-			localStorage.showControls = value ? 'true' : 'false';
-		});
+		// GabomaGPT — Barre laterale droite desactivee
+		await showControls.set(false);
 
 		await tick();
 
@@ -413,11 +408,6 @@
 
 {#if $user}
 	<div class="app relative">
-		<!-- GabomaGPT — PantherBar en haut quand mode actif -->
-		{#if panther}
-			<PantherBar />
-		{/if}
-
 		<div
 			class="text-gray-700 dark:text-gray-100 bg-gray-50 dark:bg-gray-900 h-screen max-h-[100dvh] overflow-auto flex flex-row justify-end"
 		>
@@ -479,18 +469,13 @@
 					</div>
 				{/if}
 
-				{#if !bpActive}
-					<Sidebar />
-				{/if}
+				<Sidebar />
 
 				{#if loaded}
-					<div class="flex flex-1 h-full {bpActive ? 'flex-col md:flex-row' : ''}">
+					<div class="flex flex-1 h-full">
 						<div class="flex-1 min-w-0 h-full">
 							<slot />
 						</div>
-						{#if bpActive}
-							<BPWorkspace />
-						{/if}
 					</div>
 				{:else}
 					<div

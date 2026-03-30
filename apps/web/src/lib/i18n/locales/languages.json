@@ -68,6 +68,26 @@
 		"title": "Finnish (Suomalainen)"
 	},
 	{
+		"code": "fr-GA",
+		"title": "Français du Gabon 🇬🇦"
+	},
+	{
+		"code": "fan-GA",
+		"title": "Fang (Ékang) 🇬🇦"
+	},
+	{
+		"code": "pun-GA",
+		"title": "Punu (Yipunu) 🇬🇦"
+	},
+	{
+		"code": "mye-GA",
+		"title": "Myènè (Ómyènè) 🇬🇦"
+	},
+	{
+		"code": "nzb-GA",
+		"title": "Nzébi (Yinzébi) 🇬🇦"
+	},
+	{
 		"code": "fr-CA",
 		"title": "French (Canada)"
 	},

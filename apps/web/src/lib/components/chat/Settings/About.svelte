@@ -27,10 +27,7 @@
 			};
 		});
 
-		console.log(version);
-
 		updateAvailable = compareVersion(version.latest, version.current);
-		console.log(updateAvailable);
 	};
 
 	onMount(async () => {
@@ -146,31 +143,21 @@
 			</div>
 		{/if}
 
-		<div class="mt-2 text-xs text-gray-400 dark:text-gray-500">
-			Emoji graphics provided by
-			<a href="https://github.com/jdecked/twemoji" target="_blank">Twemoji</a>, licensed under
-			<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC-BY 4.0</a>.
-		</div>
-
-		<div>
-			<pre
-				class="text-xs text-gray-400 dark:text-gray-500">Copyright (c) {new Date().getFullYear()} <a
-					href="https://gabomagpt.com"
-					target="_blank"
-					class="underline">GabomaGPT Inc.</a
-				> <a href="https://github.com/gabomagpt/gabomagpt/blob/main/LICENSE" target="_blank"
-					>All rights reserved.</a
-				>
-</pre>
-		</div>
-
-		<div class="mt-2 text-xs text-gray-400 dark:text-gray-500">
-			{$i18n.t('Created by')}
-			<a
-				class=" text-gray-500 dark:text-gray-300 font-medium"
-				href="https://github.com/tjbck"
-				target="_blank">Timothy J. Baek</a
-			>
+		<div class="mt-3 pt-3 border-t border-gray-100 dark:border-gray-800">
+			<div class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+				<p class="font-medium text-gray-700 dark:text-gray-200">🇬🇦 GabomaGPT — IA Souveraine du Gabon</p>
+				<p class="mt-1">Conçu et développé par
+					<a class="font-semibold text-gray-700 dark:text-gray-200 hover:underline" href="https://smartandj.com" target="_blank">Daniel Jonathan ANDJ</a>,
+					Fondateur & CEO
+				</p>
+				<p class="mt-0.5">
+					<a class="font-medium text-gray-600 dark:text-gray-300 hover:underline" href="https://smartandj.com" target="_blank">SmartANDJ AI Technologies</a>
+					· Libreville, Gabon
+				</p>
+				<p class="mt-1.5 text-gray-400 dark:text-gray-500">
+					Copyright © {new Date().getFullYear()} SmartANDJ AI Technologies. Tous droits réservés.
+				</p>
+			</div>
 		</div>
 	</div>
 </div>

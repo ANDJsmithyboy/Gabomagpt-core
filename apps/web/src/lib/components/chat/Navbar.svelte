@@ -41,9 +41,6 @@
 
 	/* GabomaGPT */
 	import { TokenBadge, UpgradeButton } from '$lib/components/gabomagpt';
-	import { isPantherMode } from '$lib/stores/gabomagpt';
-
-	$: panther = $isPantherMode;
 
 	const i18n = getContext('i18n');
 
@@ -81,7 +78,7 @@
 	class="sticky top-0 z-30 w-full {chat?.id
 		? 'pt-0.5 pb-1'
 		: 'pt-1 pb-1'} -mb-12 flex flex-col items-center drag-region
-		border-b border-[var(--border)]
+		glass-header
 		transition-all duration-200"
 >
 	<div class="flex items-center w-full pl-1.5 pr-1">
@@ -94,7 +91,7 @@
 
 		<div class=" flex max-w-full w-full mx-auto px-1.5 md:px-2 pt-0.5 bg-transparent">
 			<div class="flex items-center w-full max-w-full">
-				{#if !$showSidebar}
+				{#if $mobile && !$showSidebar}
 					<div
 						class="-translate-x-0.5 mr-1 self-start flex flex-none items-center"
 					>
@@ -106,7 +103,7 @@
 								}}
 							>
 								<img
-									src="{WEBUI_BASE_URL}/static/gabomagpt-logo.jpeg"
+									src="/gabomagpt-logo.jpeg"
 									alt="GabomaGPT"
 									class="size-7 rounded-lg object-cover"
 									draggable="false"
@@ -220,21 +217,22 @@
 						</Menu>
 					{/if}
 
-					{#if $user?.role === 'admin' || ($user?.permissions.chat?.controls ?? true)}
-						<Tooltip content={$i18n.t('Controls')}>
-							<button
-								class=" flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition"
-								on:click={async () => {
-									await showControls.set(!$showControls);
-								}}
-								aria-label="Controls"
-							>
-								<div class=" m-auto self-center">
-									<Knobs className=" size-5" strokeWidth="1" />
-								</div>
-							</button>
-						</Tooltip>
-					{/if}
+					<!-- GabomaGPT: Barre laterale droite desactivee sur PC -->
+				{#if false && ($user?.role === 'admin' || ($user?.permissions.chat?.controls ?? true))}
+					<Tooltip content={$i18n.t('Controls')}>
+						<button
+							class=" flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition"
+							on:click={async () => {
+								await showControls.set(!$showControls);
+							}}
+							aria-label="Controls"
+						>
+							<div class=" m-auto self-center">
+								<Knobs className=" size-5" strokeWidth="1" />
+							</div>
+						</button>
+					</Tooltip>
+				{/if}
 
 					{#if $user !== undefined && $user !== null}
 						<UserMenu

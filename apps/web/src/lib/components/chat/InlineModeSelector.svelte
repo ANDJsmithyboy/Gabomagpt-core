@@ -5,10 +5,16 @@
 
 <script lang="ts">
 	import { activeMode, MODEL_MAP, type Mode } from '$lib/stores/mode';
+	import { WEBUI_BASE_URL } from '$lib/constants';
 
 	let open = false;
 	let selectorEl: HTMLDivElement;
 	const modes: Mode[] = ['flash', 'pro', 'bp'];
+	const MODE_IMAGES: Record<Mode, string> = {
+		flash: `${WEBUI_BASE_URL}/flash-image.jpg`,
+		pro: `${WEBUI_BASE_URL}/dauphin-image.jpg`,
+		bp: `${WEBUI_BASE_URL}/black-panther-image.jpg`
+	};
 
 	$: current = MODEL_MAP[$activeMode];
 
@@ -36,26 +42,7 @@
 		style="--mode-color: {current.color}; --mode-glow: {current.colorGlow};"
 	>
 		<span class="mode-icon">
-			{#if $activeMode === 'flash'}
-				<svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-					<path d="M12 2C9.5 2 7 3.5 6 6C5 8.5 6 11 7 12.5L4 15C3.5 15.5 4 16.5 5 16L8 14C9.5 15.5 11.5 16 13.5 15.5C16 15 18 13 19 10.5C20 8 19.5 5 17.5 3.5C16 2.5 14 2 12 2Z" fill="url(#fg1)"/>
-					<circle cx="8.5" cy="8" r="1" fill="#1a1a2e"/>
-					<defs><linearGradient id="fg1" x1="4" y1="2" x2="20" y2="16"><stop offset="0%" stop-color="#F5A623"/><stop offset="50%" stop-color="#E040A0"/><stop offset="100%" stop-color="#7B42F6"/></linearGradient></defs>
-				</svg>
-			{:else if $activeMode === 'pro'}
-				<svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-					<path d="M3 12C3 12 5 8 9 7C11 6.5 13 7 14 8C15 9 16 10 18 10C20 10 21 9 21 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-					<path d="M14 8C14.5 9.5 14 11 13 12C12 13 10.5 13.5 9 13C7.5 12.5 6.5 11.5 6 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-					<circle cx="7.5" cy="9" r="0.8" fill="currentColor"/>
-				</svg>
-			{:else}
-				<svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-					<path d="M6 4C4 5 3 7 3 9C3 11 4 13 6 14.5C8 16 10 17 12 17C14 17 16 16 17.5 14.5C19 13 20 11 20 9C20 7 19 5.5 17 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-					<path d="M6 4C7 3 8.5 3 10 3.5C11.5 4 12 5 12 5C12 5 12.5 4 14 3.5C15.5 3 17 3.5 17 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-					<path d="M8 10L10 11.5L9 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-					<path d="M16 10L14 11.5L15 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-				</svg>
-			{/if}
+			<img src={MODE_IMAGES[$activeMode]} alt={current.label} class="mode-icon-image" draggable="false" />
 		</span>
 		<span class="mode-name">{current.label}</span>
 		<svg class="mode-chevron" class:open width="10" height="10" viewBox="0 0 10 10" fill="none">
@@ -81,26 +68,7 @@
 					style="--opt-color: {config.color};"
 				>
 					<span class="opt-icon">
-						{#if mode === 'flash'}
-							<svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-								<path d="M12 2C9.5 2 7 3.5 6 6C5 8.5 6 11 7 12.5L4 15C3.5 15.5 4 16.5 5 16L8 14C9.5 15.5 11.5 16 13.5 15.5C16 15 18 13 19 10.5C20 8 19.5 5 17.5 3.5C16 2.5 14 2 12 2Z" fill="url(#fdd)"/>
-								<circle cx="8.5" cy="8" r="1" fill="#1a1a2e"/>
-								<defs><linearGradient id="fdd" x1="4" y1="2" x2="20" y2="16"><stop offset="0%" stop-color="#F5A623"/><stop offset="50%" stop-color="#E040A0"/><stop offset="100%" stop-color="#7B42F6"/></linearGradient></defs>
-							</svg>
-						{:else if mode === 'pro'}
-							<svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-								<path d="M3 12C3 12 5 8 9 7C11 6.5 13 7 14 8C15 9 16 10 18 10C20 10 21 9 21 9" stroke="var(--opt-color)" stroke-width="1.8" stroke-linecap="round"/>
-								<path d="M14 8C14.5 9.5 14 11 13 12C12 13 10.5 13.5 9 13C7.5 12.5 6.5 11.5 6 10" stroke="var(--opt-color)" stroke-width="1.8" stroke-linecap="round"/>
-								<circle cx="7.5" cy="9" r="0.8" fill="var(--opt-color)"/>
-							</svg>
-						{:else}
-							<svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-								<path d="M6 4C4 5 3 7 3 9C3 11 4 13 6 14.5C8 16 10 17 12 17C14 17 16 16 17.5 14.5C19 13 20 11 20 9C20 7 19 5.5 17 4.5" stroke="var(--opt-color)" stroke-width="1.6" stroke-linecap="round"/>
-								<path d="M6 4C7 3 8.5 3 10 3.5C11.5 4 12 5 12 5C12 5 12.5 4 14 3.5C15.5 3 17 3.5 17 4.5" stroke="var(--opt-color)" stroke-width="1.6" stroke-linecap="round"/>
-								<path d="M8 10L10 11.5L9 13" stroke="var(--opt-color)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-								<path d="M16 10L14 11.5L15 13" stroke="var(--opt-color)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-						{/if}
+						<img src={MODE_IMAGES[mode]} alt={config.label} class="opt-icon-image" draggable="false" />
 					</span>
 					<div class="opt-info">
 						<span class="opt-name">{config.label}</span>
@@ -152,6 +120,13 @@
 		width: 14px;
 		height: 14px;
 		flex-shrink: 0;
+	}
+
+	.mode-icon-image {
+		width: 14px;
+		height: 14px;
+		border-radius: 4px;
+		object-fit: cover;
 	}
 
 	.mode-name {
@@ -213,6 +188,13 @@
 		width: 16px;
 		height: 16px;
 		flex-shrink: 0;
+	}
+
+	.opt-icon-image {
+		width: 16px;
+		height: 16px;
+		border-radius: 4px;
+		object-fit: cover;
 	}
 
 	.opt-info {

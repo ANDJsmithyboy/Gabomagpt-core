@@ -209,13 +209,15 @@
 />
 
 <div class="w-full h-screen max-h-[100dvh] text-white relative" id="auth-page">
-	<div class="w-full h-full absolute top-0 left-0 bg-white dark:bg-black"></div>
+	<div class="w-full h-full absolute top-0 left-0 bg-gradient-to-br from-[#050810] via-[#0A0F1E] to-[#080B12]"></div>
+	<!-- Cercle dore flou en fond -->
+	<div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full bg-[#C9A84C]/5 blur-[120px] pointer-events-none"></div>
 
 	<div class="w-full absolute top-0 left-0 right-0 h-8 drag-region" />
 
 	{#if loaded}
 		<div
-			class="fixed bg-transparent min-h-screen w-full flex justify-center font-primary z-50 text-black dark:text-white"
+			class="fixed bg-transparent min-h-screen w-full flex justify-center font-primary z-50 text-white"
 			id="auth-container"
 		>
 			<div class="w-full px-10 min-h-screen flex flex-col text-center">
@@ -235,14 +237,14 @@
 					</div>
 				{:else}
 					<div class="my-auto flex flex-col justify-center items-center">
-						<div class=" sm:max-w-md my-auto pb-10 w-full dark:text-gray-100">
+						<div class="sm:max-w-md my-auto pb-10 w-full text-gray-100" style="backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);background:rgba(5,8,16,0.6);border:0.5px solid rgba(255,255,255,0.08);border-radius:24px;padding:2.5rem;box-shadow:0 25px 60px rgba(0,0,0,0.4);">
 							{#if $config?.metadata?.auth_logo_position === 'center'}
 								<div class="flex justify-center mb-6">
 									<img
 										id="logo"
 										crossorigin="anonymous"
-										src="{WEBUI_BASE_URL}/static/favicon.png"
-										class="size-24 rounded-full"
+										src="{WEBUI_BASE_URL}/static/gabomagpt-logo.jpeg"
+										class="size-24 rounded-full ring-2 ring-[#C9A84C]/30"
 										alt="{$WEBUI_NAME} logo"
 									/>
 								</div>
@@ -255,17 +257,18 @@
 								}}
 							>
 								<div class="mb-1">
-									<div class=" text-2xl font-medium">
+									<div class="text-2xl font-semibold text-white" style="font-family:'Outfit',sans-serif;">
 										{#if $config?.onboarding ?? false}
-											{$i18n.t(`Get started with {{WEBUI_NAME}}`, { WEBUI_NAME: $WEBUI_NAME })}
+											Bienvenue sur {$WEBUI_NAME}
 										{:else if mode === 'ldap'}
-											{$i18n.t(`Sign in to {{WEBUI_NAME}} with LDAP`, { WEBUI_NAME: $WEBUI_NAME })}
+											Connexion LDAP
 										{:else if mode === 'signin'}
-											{$i18n.t(`Sign in to {{WEBUI_NAME}}`, { WEBUI_NAME: $WEBUI_NAME })}
+											Mbolo ! Connectez-vous
 										{:else}
-											{$i18n.t(`Sign up to {{WEBUI_NAME}}`, { WEBUI_NAME: $WEBUI_NAME })}
+											Créez votre compte
 										{/if}
 									</div>
+									<div class="text-xs text-[#C9A84C]/70 mt-1" style="font-family:'Outfit',sans-serif;">IA Souveraine du Gabon 🇬🇦</div>
 
 									{#if $config?.onboarding ?? false}
 										<div class="mt-1 text-xs font-medium text-gray-600 dark:text-gray-500">
@@ -380,14 +383,14 @@
 											</button>
 										{:else}
 											<button
-												class="bg-gray-700/5 hover:bg-gray-700/10 dark:bg-gray-100/5 dark:hover:bg-gray-100/10 dark:text-gray-300 dark:hover:text-white transition w-full rounded-full font-medium text-sm py-2.5"
+												class="bg-gradient-to-r from-[#C9A84C] to-[#D4AF37] hover:from-[#D4AF37] hover:to-[#E5C158] text-[#050810] transition-all duration-300 w-full rounded-full font-semibold text-sm py-3 shadow-lg shadow-[#C9A84C]/20 hover:shadow-[#C9A84C]/40"
 												type="submit"
 											>
 												{mode === 'signin'
-													? $i18n.t('Sign in')
+													? 'Se connecter'
 													: ($config?.onboarding ?? false)
-														? $i18n.t('Create Admin Account')
-														: $i18n.t('Create Account')}
+														? 'Créer le compte Admin'
+														: 'Créer mon compte'}
 											</button>
 
 											{#if $config?.features.enable_signup && !($config?.onboarding ?? false)}
@@ -587,17 +590,16 @@
 		</div>
 
 		{#if !$config?.metadata?.auth_logo_position}
-			<div class="fixed m-10 z-50">
-				<div class="flex space-x-2">
-					<div class=" self-center">
-						<img
-							id="logo"
-							crossorigin="anonymous"
-							src="{WEBUI_BASE_URL}/static/favicon.png"
-							class=" w-6 rounded-full"
-							alt=""
-						/>
-					</div>
+			<div class="fixed m-8 z-50">
+				<div class="flex items-center space-x-3">
+					<img
+						id="logo"
+						crossorigin="anonymous"
+						src="{WEBUI_BASE_URL}/static/gabomagpt-logo.jpeg"
+						class="w-8 h-8 rounded-full ring-1 ring-[#C9A84C]/20"
+						alt="GabomaGPT"
+					/>
+					<span class="text-white/80 text-sm font-semibold" style="font-family:'Outfit',sans-serif;">GabomaGPT</span>
 				</div>
 			</div>
 		{/if}

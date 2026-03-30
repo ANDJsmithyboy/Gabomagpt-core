@@ -24,7 +24,7 @@ export interface ModeConfig {
 export const MODEL_MAP: Record<Mode, ModeConfig> = {
 	flash: {
 		label: 'Flash',
-		emoji: '⚡',
+		emoji: 'flash',
 		model: 'llama-3.3-8b-instant',
 		provider: 'groq',
 		color: '#F57F17',
@@ -34,7 +34,7 @@ export const MODEL_MAP: Record<Mode, ModeConfig> = {
 	},
 	pro: {
 		label: 'Pro',
-		emoji: '🐬',
+		emoji: 'pro',
 		model: 'llama-3.3-70b-versatile',
 		provider: 'groq',
 		color: '#01579B',
@@ -44,7 +44,7 @@ export const MODEL_MAP: Record<Mode, ModeConfig> = {
 	},
 	bp: {
 		label: 'Black Panther',
-		emoji: '🐆',
+		emoji: 'bp',
 		model: 'claude-sonnet-4-20250514',
 		provider: 'anthropic',
 		color: '#FF2244',

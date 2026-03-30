@@ -1,27 +1,27 @@
-/* ── Google Fonts — Outfit + Sora + JetBrains Mono ── */
+﻿/*  - - Google Fonts  - Outfit + Sora + JetBrains Mono  - - */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* ══════════════════════════════════════════════════════════
+/* ==========================================================
    GabomaGPT · app.css
    SmartANDJ AI Technologies · Constitution Zion Core
    Fondateur : Daniel Jonathan ANDJ
    Design System : Zion Core Obsidian
-   ══════════════════════════════════════════════════════════ */
+  ========================================================== */
 
 @reference "./tailwind.css";
 
-/* ── Polices locales existantes (fallback) ── */
+/*  - - Polices locales existantes (fallback)  - - */
 @font-face {
 	font-family: 'Vazirmatn';
 	src: url('/assets/fonts/Vazirmatn-Variable.ttf');
 	font-display: swap;
 }
 
-/* ── ZION CORE OBSIDIAN — Design System ─────────────── */
+/*  - - ZION CORE OBSIDIAN  - Design System  - - - - - - - - - - - - - - - */
 :root {
 	--app-text-scale: 1;
 
-	/* ── BACKGROUNDS — Nuits profondes du Gabon ── */
+	/*  - - BACKGROUNDS  - Nuits profondes du Gabon  - - */
 	--bg-void:              #050505;
 	--bg-deep:              #080B12;
 	--bg-panel:             #0B0F1A;
@@ -30,7 +30,7 @@
 	--bg-overlay:           #1A2438;
 	--bg-glass:             rgba(15,21,32,0.85);
 
-	/* ── VERTS FORÊT GABONAISE — Ogooué ── */
+	/*  - - VERTS FOR=ST GABONAISE  - Ogooué  - - */
 	--green-void:           #040D08;
 	--green-forest:         #0A1F14;
 	--green-bottle:         #0F2D1C;
@@ -39,14 +39,14 @@
 	--green-emerald:        #2ECC8A;
 	--green-neon:           #00FF88;
 
-	/* ── BLEUS NUIT ATLANTIQUE — Drapeau gabonais ── */
+	/*  - - BLEUS NUIT ATLANTIQUE  - Drapeau gabonais  - - */
 	--blue-night:           #0D1526;
 	--blue-marine:          #0F2040;
 	--blue-sapphire:        #1A3A6B;
 	--blue-accent:          #2D6BE4;
 	--blue-sky:             #4A9EFF;
 
-	/* ── 5 PÉTALES — LOGO OFFICIEL GABOMAGPT ── */
+	/*  - - 5 P=?TALES  - LOGO OFFICIEL GABOMAGPT  - - */
 	--gabon-green:          #22C55E;
 	--gabon-blue:           #38BDF8;
 	--gabon-yellow:         #FACC15;
@@ -64,40 +64,39 @@
 	--petal-elephant:       #4A148C;
 	--petal-elephant-glow:  #CE93D8;
 
-	/* ── OR GABONAIS — Mines de Moanda ── */
+	/*  - - OR GABONAIS  - Mines de Moanda  - - */
 	--gold-earth:           #7A4800;
 	--gold-gabon:           #C9A84C;
 	--gold-bright:          #E8C86A;
 
-	/* ── BLACK PANTHER ── */
+	/*  - - OR & ACCENTS  - - */
 	--gabon-gold:           #D4A417;
-	--gabon-neon:           #00FF87;
 	--gabon-orange:         #FF6B00;
 
-	/* ── ADN SMARTANDJ — Signature fondateur ── */
+	/*  - - ADN SMARTANDJ  - Signature fondateur  - - */
 	--andj-cyan:            #00BFFF;
 	--andj-magenta:         #FF007F;
 	--andj-yellow:          #FFE600;
 
-	/* ── IBOGA / BLACK PANTHER — Vision Bwiti ── */
+	/*  - - IBOGA  - Vision Bwiti  - - */
 	--iboga-void:           #050008;
 	--iboga-deep:           #1A0010;
 	--iboga-bwiti:          #CC0033;
 	--iboga-fire:           #FF2244;
 
-	/* ── ACCENT DYNAMIQUE (change selon thème choisi) ── */
+	/*  - - ACCENT DYNAMIQUE (change selon thème choisi)  - - */
 	--accent:               var(--gabon-green);
 	--accent-10:            color-mix(in srgb, var(--accent) 10%, transparent);
 	--accent-20:            color-mix(in srgb, var(--accent) 20%, transparent);
 	--accent-35:            color-mix(in srgb, var(--accent) 35%, transparent);
 	--accent-foreground:    #000000;
 
-	/* ── BACKGROUNDS APPLE-DARK ── */
+	/*  - - BACKGROUNDS APPLE-DARK  - - */
 	--bg-primary:           #04061A;
 	--bg-surface-2:         #111438;
 	--bg-surface-3:         #171B4A;
 
-	/* ── BORDURES ── */
+	/*  - - BORDURES  - - */
 	--border:               rgba(255,255,255,0.07);
 	--border-hover:         rgba(255,255,255,0.14);
 	--border-focus:         var(--accent-35);
@@ -108,7 +107,7 @@
 	--border-emerald:       rgba(46,204,138,0.15);
 	--border-bp:            rgba(255,34,68,0.25);
 
-	/* ── TEXTE ── */
+	/*  - - TEXTE  - - */
 	--text-primary:         #EEF2FF;
 	--text-secondary:       rgba(238,242,255,0.6);
 	--text-tertiary:        rgba(238,242,255,0.35);
@@ -116,7 +115,7 @@
 	--text-gold:            #C9A84C;
 	--text-emerald:         #2ECC8A;
 
-	/* ── OMBRES APPLE ── */
+	/*  - - OMBRES APPLE  - - */
 	--shadow-sm:            0 1px 2px rgba(0,0,0,0.4);
 	--shadow-md:            0 4px 16px rgba(0,0,0,0.5);
 	--shadow-lg:            0 12px 40px rgba(0,0,0,0.6);
@@ -126,12 +125,12 @@
 	--shadow-gold:          0 0 20px rgba(201,168,76,0.15);
 	--shadow-bp:            0 0 30px rgba(255,34,68,0.2);
 
-	/* ── TYPOGRAPHIE ── */
+	/*  - - TYPOGRAPHIE  - - */
 	--font-display:         'Outfit', sans-serif;
 	--font-body:            'Sora', sans-serif;
 	--font-mono:            'JetBrains Mono', monospace;
 
-	/* ── RAYONS ── */
+	/*  - - RAYONS  - - */
 	--radius-sm:            6px;
 	--radius-md:            10px;
 	--radius-lg:            14px;
@@ -140,66 +139,49 @@
 	--radius-msg-user:      18px 4px 18px 18px;
 }
 
-/* ── Thèmes des 5 pétales (accent uniquement) ── */
+/* -- Light mode overrides for semantic text/border/shadow variables -- */
+html:not(.dark) {
+	--text-primary:         #1A1A2E;
+	--text-secondary:       rgba(26, 26, 46, 0.65);
+	--text-tertiary:        rgba(26, 26, 46, 0.40);
+	--text-muted:           #8A8FA8;
+	--border:               rgba(0, 0, 0, 0.08);
+	--border-hover:         rgba(0, 0, 0, 0.15);
+	--border-default:       rgba(0, 0, 0, 0.08);
+	--bg-deep:              #FFFFFF;
+	--bg-panel:             #F8F9FA;
+	--bg-surface:           #F0F1F3;
+	--bg-elevated:          #E8E9EB;
+	--bg-overlay:           #DFE0E2;
+	--shadow-sm:            0 1px 2px rgba(0,0,0,0.06);
+	--shadow-md:            0 4px 16px rgba(0,0,0,0.08);
+	--shadow-lg:            0 12px 40px rgba(0,0,0,0.12);
+}
+
+/*  - - Thèmes des 5 pétales (accent uniquement)  - - */
 [data-accent="foret"]    { --accent: #22C55E; }
 [data-accent="ocean"]    { --accent: #38BDF8; }
 [data-accent="soleil"]   { --accent: #FACC15; --accent-foreground: #1a1a1a; }
 [data-accent="flamme"]   { --accent: #EF4444; }
 [data-accent="nuit"]     { --accent: #7C3AED; }
 
-/* ══════════════════════════════════════════════════════════
-   ZION-CORE THEMES — Propagation totale
+/* ==========================================================
+   ZION-CORE THEMES �?" Propagation totale
    Chaque thème override --color-gray-* (Tailwind v4)
    + variables sémantiques --zc-* pour navbar/input/sidebar
-   ══════════════════════════════════════════════════════════ */
+  ========================================================== */
 
-/* ── SOMBRE (Obsidian) — Défaut ZION-CORE ──────────── */
-[data-theme="sombre"] {
-  --color-gray-50:        #0A0F1A;
-  --color-gray-100:       #111827;
-  --color-gray-200:       #1E293B;
-  --color-gray-300:       #334155;
-  --color-gray-400:       #475569;
-  --color-gray-500:       #64748B;
-  --color-gray-600:       #94A3B8;
-  --color-gray-950:       #020304;
-  --color-gray-900:       #050810;
-  --color-gray-850:       #0A0F1A;
-  --color-gray-800:       #111827;
-  --color-gray-700:       #1E293B;
+/* SOMBRE = Open WebUI default dark mode (no override needed) */
 
-  --zc-background:        #050810;
-  --zc-surface:           #020304;
-  --zc-input:             #0A0F1A;
-  --zc-navbar:            rgba(5, 8, 16, 0.92);
-
-  --bg-deep:              #050810;
-  --bg-panel:             #020304;
-  --bg-surface:           #0A0F1A;
-  --bg-elevated:          #111827;
-  --bg-overlay:           #1E293B;
-
-  --text-primary:         #EEF2FF;
-  --text-secondary:       rgba(238, 242, 255, 0.65);
-  --text-tertiary:        rgba(238, 242, 255, 0.35);
-  --text-muted:           rgba(238, 242, 255, 0.18);
-
-  --border:               rgba(238, 242, 255, 0.07);
-  --border-hover:         rgba(238, 242, 255, 0.14);
-  --border-default:       rgba(238, 242, 255, 0.07);
-
-  color-scheme: dark;
-}
-
-/* ── NOIR OLED — Fond pur #000000, surface #050505 ─── */
+/*  - - NOIR OLED  - Fond pur #000000, surface #050505  - - - */
 [data-theme="noir-oled"] {
-  --color-gray-50:        #0A0A0A;
-  --color-gray-100:       #121212;
-  --color-gray-200:       #1A1A1A;
-  --color-gray-300:       #2A2A2A;
-  --color-gray-400:       #3A3A3A;
-  --color-gray-500:       #5A5A5A;
-  --color-gray-600:       #7A7A7A;
+  --color-gray-50:        #F0F0F0;
+  --color-gray-100:       #E0E0E0;
+  --color-gray-200:       #C8C8C8;
+  --color-gray-300:       #B0B0B0;
+  --color-gray-400:       #999999;
+  --color-gray-500:       #808080;
+  --color-gray-600:       #6B6B6B;
   --color-gray-950:       #000000;
   --color-gray-900:       #050505;
   --color-gray-850:       #0A0A0A;
@@ -229,15 +211,15 @@
   color-scheme: dark;
 }
 
-/* ── BLEU NUIT — Fond #05081A, surface #030511 ─────── */
+/*  - - BLEU NUIT  - Fond #05081A, surface #030511  - - - - - - - */
 /* Inspiré des nuits sans lune sur l'Atlantique gabonais */
 [data-theme="bleu-nuit"] {
-  --color-gray-50:        #0C1025;
-  --color-gray-100:       #141A35;
-  --color-gray-200:       #1E2850;
-  --color-gray-300:       #2A3668;
-  --color-gray-400:       #3B4A80;
-  --color-gray-500:       #5668A0;
+  --color-gray-50:        #ECF0FF;
+  --color-gray-100:       #DCE2F6;
+  --color-gray-200:       #C8D0F0;
+  --color-gray-300:       #B5C0EA;
+  --color-gray-400:       #A0ADE0;
+  --color-gray-500:       #8B9AD0;
   --color-gray-600:       #7B8DC0;
   --color-gray-950:       #030511;
   --color-gray-900:       #05081A;
@@ -250,10 +232,10 @@
   --zc-input:             #0C1025;
   --zc-navbar:            rgba(5, 8, 26, 0.92);
 
-  --accent:               #3B82F6;
-  --accent-10:            rgba(59, 130, 246, 0.10);
-  --accent-20:            rgba(59, 130, 246, 0.20);
-  --accent-35:            rgba(59, 130, 246, 0.35);
+  --accent:               #C9A227;
+  --accent-10:            rgba(201, 162, 39, 0.10);
+  --accent-20:            rgba(201, 162, 39, 0.20);
+  --accent-35:            rgba(201, 162, 39, 0.35);
   --accent-foreground:    #ffffff;
 
   --bg-deep:              #05081A;
@@ -274,15 +256,15 @@
   color-scheme: dark;
 }
 
-/* ── VERT FORÊT — Fond #06150C, surface #040E08 ────── */
-/* Inspiré de la canopée du Parc de la Lopé             */
+/*  - - VERT FOR=ST  - Fond #06150C, surface #040E08  - - - - - - */
+/* Inspiré de la canopée du Parc de la Lopé  */
 [data-theme="vert-foret"] {
-  --color-gray-50:        #0C1F14;
-  --color-gray-100:       #142A1C;
-  --color-gray-200:       #1E3D2A;
-  --color-gray-300:       #2A5238;
-  --color-gray-400:       #3A6A4A;
-  --color-gray-500:       #508560;
+  --color-gray-50:        #E6F5EB;
+  --color-gray-100:       #D8F0DC;
+  --color-gray-200:       #C4E8CC;
+  --color-gray-300:       #AED8B8;
+  --color-gray-400:       #98C8A5;
+  --color-gray-500:       #82B490;
   --color-gray-600:       #70A580;
   --color-gray-950:       #040E08;
   --color-gray-900:       #06150C;
@@ -319,134 +301,47 @@
   color-scheme: dark;
 }
 
-/* ── BLACK PANTHER MODE — Override structurel total ── */
-/* Activé via body.mode-bp — Obsidian #020304 + Or #FFD700 */
-[data-theme="black-panther"],
-body.mode-bp {
-  --color-gray-50:        #060A14;
-  --color-gray-100:       #0D1424;
-  --color-gray-200:       #121B30;
-  --color-gray-300:       #1A2540;
-  --color-gray-400:       #253258;
-  --color-gray-500:       #3A4A70;
-  --color-gray-600:       #5A6A90;
-  --color-gray-950:       #010102;
-  --color-gray-900:       #020304;
-  --color-gray-850:       #060A14;
-  --color-gray-800:       #0D1424;
-  --color-gray-700:       #121B30;
+/* CLAIR = Open WebUI default light mode (no override needed) */
 
-  --zc-background:        #020304;
-  --zc-surface:           #010102;
-  --zc-input:             #060A14;
-  --zc-navbar:            rgba(2, 3, 4, 0.95);
-
-  --accent:               #D4A417;
-  --accent-10:            rgba(212, 164, 23, 0.10);
-  --accent-20:            rgba(212, 164, 23, 0.20);
-  --accent-35:            rgba(212, 164, 23, 0.35);
-  --accent-foreground:    #000000;
-
-  --bg-deep:              #020304;
-  --bg-panel:             #010102;
-  --bg-surface:           #060A14;
-  --bg-surface-2:         #0D1424;
-  --bg-surface-3:         #121B30;
-  --bg-elevated:          #0D1424;
-  --bg-overlay:           #121B30;
-
-  --text-primary:         #EEF2FF;
-  --text-secondary:       rgba(238, 242, 255, 0.65);
-  --text-tertiary:        rgba(238, 242, 255, 0.35);
-  --text-muted:           rgba(238, 242, 255, 0.18);
-  --text-gold:            #D4A417;
-
-  --border:               rgba(212, 164, 23, 0.10);
-  --border-hover:         rgba(212, 164, 23, 0.20);
-  --border-default:       rgba(212, 164, 23, 0.10);
-  --border-gold:          rgba(212, 164, 23, 0.25);
-
-  color-scheme: dark;
-}
-
-/* ── Corps principal — Zion Core ── */
+/* -- GabomaGPT Typography (ne casse PAS les themes Open WebUI) -- */
 body {
-	background: var(--zc-background, var(--bg-deep)) !important;
-	color: var(--text-primary);
-	font-family: var(--font-body);
+	font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
 }
-
 h1, h2, h3, h4 {
-	font-family: var(--font-display);
+	font-family: 'Outfit', sans-serif;
 }
-
 code, pre, .agent-trace {
-	font-family: var(--font-mono);
+	font-family: 'JetBrains Mono', monospace;
 }
 
-/* ── Forcer la propagation des thèmes sur sidebar/navbar/input ── */
-
-/* Zone principale — suit --zc-background */
-.app > div {
-	background: var(--zc-background, var(--bg-deep)) !important;
+/* -- Glassmorphism pour themes sombres -- */
+.dark #sidebar {
+	backdrop-filter: blur(24px) saturate(180%);
+	-webkit-backdrop-filter: blur(24px) saturate(180%);
 }
 
-/* Sidebar — utilise --zc-surface (le plus sombre) */
-#sidebar {
-	background: var(--zc-surface, var(--bg-panel)) !important;
-}
-
-/* Sidebar gradients haut/bas */
-#sidebar .sidebar-bg-gradient-to-b,
-#sidebar .sidebar-bg-gradient-to-t {
-	--tw-gradient-from: var(--zc-surface, var(--bg-panel)) !important;
-}
-
-/* Sidebar inner elements — texte + hover */
-#sidebar .sidebar {
-	color: var(--text-secondary) !important;
-}
-
-/* Sidebar user/profile section */
-#sidebar .font-primary {
-	color: var(--text-primary) !important;
-}
-
-/* Navbar — utilise --zc-navbar avec blur */
-nav.sticky {
-	background: var(--zc-navbar, rgba(5, 8, 16, 0.92)) !important;
+.dark nav.sticky {
 	backdrop-filter: blur(20px) saturate(180%);
 	-webkit-backdrop-filter: blur(20px) saturate(180%);
 }
 
-/* Chat input bubble — utilise --zc-input */
-#chat-input-container {
-	background: var(--zc-input, var(--bg-surface)) !important;
-	border-color: var(--border) !important;
+.dark [role="dialog"] {
+	backdrop-filter: blur(24px) saturate(180%);
+	-webkit-backdrop-filter: blur(24px) saturate(180%);
+	border: 1px solid rgba(255,255,255,0.06);
+	border-radius: 16px;
+	box-shadow: 0 25px 60px rgba(0,0,0,0.5);
 }
 
-/* Outer input wrapper — subtle themed bg */
-#message-input-container {
-	background: color-mix(in srgb, var(--zc-input, var(--bg-surface)) 30%, transparent) !important;
-	border-color: var(--border, rgba(255,255,255,0.07)) !important;
+.dark [role="menu"] {
+	backdrop-filter: blur(16px) saturate(180%);
+	-webkit-backdrop-filter: blur(16px) saturate(180%);
+	border: 1px solid rgba(255,255,255,0.06);
+	border-radius: 12px;
+	box-shadow: 0 12px 40px rgba(0,0,0,0.5);
 }
 
-/* BP mode — deeper input bg */
-body.mode-bp #message-input-container {
-	background: rgba(5, 8, 16, 0.95) !important;
-	border-color: rgba(212, 164, 23, 0.12) !important;
-}
-body.mode-bp #chat-input-container {
-	background: rgba(6, 10, 20, 0.98) !important;
-}
-
-/* Chat main area background */
-.chat-container,
-[id^="chat-"] {
-	background: transparent !important;
-}
-
-/* ── Aura de réflexion — animation 5 couleurs ── */
+/*  - - Aura de réflexion  - animation 5 couleurs  - - */
 @keyframes aura-spin {
 	from { transform: rotate(0deg); }
 	to   { transform: rotate(360deg); }
@@ -526,6 +421,62 @@ textarea::placeholder {
 
 .markdown-prose {
 	@apply prose dark:prose-invert prose-blockquote:border-s-gray-100 prose-blockquote:dark:border-gray-800 prose-blockquote:border-s-2 prose-blockquote:not-italic prose-blockquote:font-normal  prose-headings:font-semibold prose-hr:my-4 prose-hr:border-gray-50 prose-hr:dark:border-gray-850 prose-p:my-0 prose-img:my-1 prose-headings:my-1 prose-pre:my-0 prose-table:my-0 prose-blockquote:my-0 prose-ul:-my-0 prose-ol:-my-0 prose-li:-my-0 whitespace-pre-line;
+	font-family: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+	font-size: 15px;
+	line-height: 1.7;
+	letter-spacing: -0.01em;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.markdown-prose pre {
+	border-radius: 12px;
+	padding: 1rem 1.25rem;
+	font-size: 13.5px;
+	line-height: 1.6;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.dark .markdown-prose pre {
+	background: rgba(0, 0, 0, 0.35);
+	border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+html:not(.dark) .markdown-prose pre {
+	background: #f6f8fa;
+	border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.markdown-prose code:not(pre code) {
+	font-size: 13px;
+	padding: 2px 6px;
+	border-radius: 6px;
+	font-weight: 500;
+}
+
+.dark .markdown-prose code:not(pre code) {
+	background: rgba(255, 255, 255, 0.08);
+	color: #e2e8f0;
+}
+
+html:not(.dark) .markdown-prose code:not(pre code) {
+	background: rgba(0, 0, 0, 0.05);
+	color: #1a202c;
+}
+
+.markdown-prose ol,
+.markdown-prose ul {
+	padding-left: 1.5rem;
+}
+
+.markdown-prose li {
+	margin-top: 0.25rem;
+	margin-bottom: 0.25rem;
+}
+
+.markdown-prose p + p {
+	margin-top: 0.75rem;
 }
 
 .markdown-prose-sm {
@@ -597,6 +548,7 @@ select {
 	-moz-appearance: none;
 	/* for Chrome */
 	-webkit-appearance: none;
+	appearance: none;
 }
 
 .dark select:not([class*='bg-transparent']) {
@@ -685,11 +637,13 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
 	/* display: none; <- Crashes Chrome on hover */
 	-webkit-appearance: none;
+	appearance: none;
 	margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
 input[type='number'] {
 	-moz-appearance: textfield; /* Firefox */
+	appearance: textfield;
 }
 
 .katex-display {
@@ -1101,7 +1055,7 @@ input[type='number'] {
 	white-space: nowrap;
 }
 
-/* body background défini dans :root Zion Core — pas de fallback blanc */
+/* body background défini dans :root Zion Core  - pas de fallback blanc */
 
 /* Position the handle relative to each LI */
 .pm-li--with-handle {
@@ -1216,35 +1170,66 @@ input[type='number'] {
 	padding-bottom: 2rem; /* space for the bottom toolbar */
 }
 
-/* ══════════════════════════════════════════════════════════
-   SECTION 4C — APPLE-LEVEL PREMIUM UX
+/* ==========================================================
+   SECTION 4C �?" APPLE-LEVEL PREMIUM UX
    GabomaGPT = qualité Apple + âme du Gabon
    SmartANDJ AI Technologies · Constitution Zion Core
-   ══════════════════════════════════════════════════════════ */
+  ========================================================== */
 
-/* ── 1. DEPTH BLUR — Apple frosted glass ── */
+/*  - - 1. DEPTH BLUR  - Apple frosted glass (theme-aware)  - - */
 .glass {
 	backdrop-filter: blur(20px) saturate(180%);
 	-webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+.dark .glass {
 	background: rgba(11, 15, 26, 0.75);
-	border: 0.5px solid rgba(255,255,255,0.08);
+	border: 0.5px solid rgba(255,255,255,0.06);
+}
+html:not(.dark) .glass {
+	background: rgba(255, 255, 255, 0.70);
+	border: 0.5px solid rgba(0,0,0,0.06);
 }
 
-.glass-gold {
-	backdrop-filter: blur(20px) saturate(180%);
-	-webkit-backdrop-filter: blur(20px) saturate(180%);
-	background: rgba(201, 168, 76, 0.06);
-	border: 0.5px solid rgba(201, 168, 76, 0.15);
+.glass-card {
+	backdrop-filter: blur(18px) saturate(160%);
+	-webkit-backdrop-filter: blur(18px) saturate(160%);
+	border-radius: 16px;
+	transition: box-shadow 200ms ease, transform 200ms ease;
+}
+.dark .glass-card {
+	background: rgba(11, 15, 26, 0.55);
+	border: 0.5px solid rgba(255,255,255,0.06);
+	box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+html:not(.dark) .glass-card {
+	background: rgba(255, 255, 255, 0.65);
+	border: 0.5px solid rgba(0,0,0,0.06);
+	box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+.glass-card:hover {
+	transform: translateY(-1px);
+}
+.dark .glass-card:hover {
+	box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+html:not(.dark) .glass-card:hover {
+	box-shadow: 0 8px 32px rgba(0,0,0,0.1);
 }
 
-.glass-bp {
-	backdrop-filter: blur(20px) saturate(180%);
-	-webkit-backdrop-filter: blur(20px) saturate(180%);
-	background: rgba(5, 0, 8, 0.85);
-	border: 0.5px solid rgba(255, 34, 68, 0.2);
+.glass-header {
+	backdrop-filter: blur(18px) saturate(180%);
+	-webkit-backdrop-filter: blur(18px) saturate(180%);
+}
+.dark .glass-header {
+	background: rgba(5, 8, 16, 0.80);
+	border-bottom: 0.5px solid rgba(255,255,255,0.05);
+}
+html:not(.dark) .glass-header {
+	background: rgba(255, 255, 255, 0.80);
+	border-bottom: 0.5px solid rgba(0,0,0,0.06);
 }
 
-/* ── 2. SHIMMER SKELETON — Apple loading (pas de spinners) ── */
+/*  - - 2. SHIMMER SKELETON  - Apple loading (pas de spinners)  - - */
 .skeleton {
 	background: linear-gradient(
 		90deg,
@@ -1262,7 +1247,7 @@ input[type='number'] {
 	100% { background-position:  200% 0; }
 }
 
-/* ── 3. TYPOGRAPHY — Apple SF Pro rhythm avec Outfit ── */
+/*  - - 3. TYPOGRAPHY  - Apple SF Pro rhythm avec Outfit  - - */
 h1 {
 	font-size: clamp(28px, 5vw, 48px);
 	font-weight: 700;
@@ -1299,7 +1284,7 @@ p, .body {
 	color: var(--text-muted);
 }
 
-/* Gradient text — Apple Vision Pro style */
+/* Gradient text  - Apple Vision Pro style */
 .text-gradient-gabon {
 	background: linear-gradient(135deg, #C9A84C, #2ECC8A);
 	-webkit-background-clip: text;
@@ -1314,7 +1299,7 @@ p, .body {
 	background-clip: text;
 }
 
-/* ── 4. SCROLL FADE EDGES — pas de bords durs ── */
+/*  - - 4. SCROLL FADE EDGES  - pas de bords durs  - - */
 .scroll-fade {
 	mask-image: linear-gradient(
 		to bottom,
@@ -1334,21 +1319,12 @@ p, .body {
 	-webkit-overflow-scrolling: touch;
 }
 
-/* ── 5. MODE TRANSITION — morphing couleur 400ms ── */
-*, *::before, *::after {
-	transition:
-		background-color 400ms ease,
-		border-color 400ms ease,
-		color 300ms ease,
-		box-shadow 400ms ease;
+/*  - - 5. MODE TRANSITION  - theme switch seulement  - - */
+html {
+	transition: background-color 200ms ease, color 200ms ease;
 }
 
-/* Exception : pas de transition sur les animations elles-mêmes */
-.reflection-ring, .aura-ring, .aura-svg, .skeleton, .arc {
-	transition: none !important;
-}
-
-/* ── 6. SPLASH CINÉMATIQUE — première impression mémorable ── */
+/*  - - 6. SPLASH CIN=?MATIQUE  - première impression mémorable  - - */
 .splash-logo {
 	opacity: 0;
 	transform: scale(0.7);
@@ -1364,814 +1340,16 @@ p, .body {
 	transform: translateY(10px);
 }
 
-/* ╔══════════════════════════════════════════════════════════════════╗
-   ║  GABOMAGPT · BLACK PANTHER MODE                                ║
-   ║  SmartANDJ AI Technologies · Fondateur: Daniel Jonathan ANDJ   ║
-   ║  JIA 2026 — Libreville, Gabon                                  ║
-   ║  "Le Gabon parle, le monde s'inspire."                         ║
-   ╚══════════════════════════════════════════════════════════════════╝ */
 
-/* ===== SECTION 0 : ROOT VARIABLES ===== */
-:root {
-  --glass-0: #020304;
-  --glass-1: #050810;
-  --glass-2: #080D18;
-  --gold: #C9A227;
-  --gold-light: #E8C547;
-  --gold-dark: #8B6914;
-  --gold-glow: rgba(201,162,39,0.15);
-  --panther-eye: #FFB300;
-  --panther-scan: rgba(255,179,0,0.8);
-  --bp-cyan: #00B4D8;
-  --bp-magenta: #ec4899;
-  --bp-text-primary: rgba(248,250,252,0.92);
-  --bp-text-muted: rgba(248,250,252,0.45);
-  --bp-text-hint: rgba(248,250,252,0.2);
-  --bp-ease: cubic-bezier(0.25, 0.8, 0.25, 1);
-}
+/* BLACK PANTHER MODE - SUPPRIME (Phase 2 future) */
 
-/* ===== SECTION 1 : BODY GLOBAL ===== */
-.dark.panther-mode body,
-body.panther-mode {
-  background: var(--glass-1) !important;
-  background-image: radial-gradient(
-    ellipse 60% 50% at 50% 40%,
-    rgba(201,162,39,0.04) 0%,
-    transparent 70%
-  ) !important;
-  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  color: var(--bp-text-primary) !important;
-  -webkit-font-smoothing: antialiased !important;
-  -moz-osx-font-smoothing: grayscale !important;
-}
 
-/* Safe area padding for native apps (Capacitor) */
-.panther-mode {
-  padding-top: env(safe-area-inset-top) !important;
-  padding-bottom: env(safe-area-inset-bottom) !important;
-  padding-left: env(safe-area-inset-left) !important;
-  padding-right: env(safe-area-inset-right) !important;
-}
-
-/* ===== SECTION 2 : SIDEBAR PANTHER ===== */
-.panther-mode #sidebar,
-.panther-mode [id*="sidebar"],
-.panther-mode aside,
-.panther-mode nav[class*="sidebar"],
-.panther-mode .sidebar {
-  background: var(--glass-0) !important;
-  border-right: 1px solid rgba(201,162,39,0.1) !important;
-  font-family: 'Outfit', sans-serif !important;
-}
-
-/* Barre dorée en haut du sidebar */
-.panther-mode #sidebar::before,
-.panther-mode aside::before {
-  content: '' !important;
-  display: block !important;
-  height: 2px !important;
-  background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent) !important;
-  opacity: 0.6 !important;
-}
-
-/* Sidebar items hover */
-.panther-mode #sidebar a:hover,
-.panther-mode #sidebar button:hover,
-.panther-mode aside a:hover,
-.panther-mode aside button:hover {
-  background: rgba(201,162,39,0.05) !important;
-  box-shadow: inset 3px 0 0 rgba(201,162,39,0.4) !important;
-  transition: all 0.25s var(--bp-ease) !important;
-}
-
-/* Sidebar active item */
-.panther-mode #sidebar a[aria-current],
-.panther-mode #sidebar .active,
-.panther-mode aside .bg-gray-900,
-.panther-mode aside .bg-gray-850 {
-  background: rgba(201,162,39,0.08) !important;
-  border-left: 2px solid var(--gold) !important;
-}
-
-/* New chat button */
-.panther-mode #sidebar-new-chat-button,
-.panther-mode [id*="new-chat"] {
-  border: 1px solid rgba(201,162,39,0.25) !important;
-  border-radius: 12px !important;
-  color: var(--gold) !important;
-  transition: all 0.25s var(--bp-ease) !important;
-}
-
-.panther-mode #sidebar-new-chat-button:hover,
-.panther-mode [id*="new-chat"]:hover {
-  border-color: var(--gold) !important;
-  box-shadow: 0 0 20px rgba(201,162,39,0.12) !important;
-  background: rgba(201,162,39,0.06) !important;
-}
-
-/* Sidebar footer signature */
-.panther-mode #sidebar::after,
-.panther-mode aside::after {
-  content: 'by SmartANDJ AI 🇬🇦' !important;
-  display: block !important;
-  text-align: center !important;
-  font-size: 9px !important;
-  opacity: 0.2 !important;
-  color: var(--gold) !important;
-  padding: 8px 0 !important;
-  letter-spacing: 1px !important;
-  font-family: 'Outfit', sans-serif !important;
-}
-
-/* ===== SECTION 3 : HEADER GLASS ===== */
-.panther-mode nav[class*="sticky"],
-.panther-mode .sticky.top-0,
-.panther-mode header {
-  background: rgba(5,8,16,0.88) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-  border-bottom: 1px solid rgba(201,162,39,0.08) !important;
-  font-family: 'Outfit', sans-serif !important;
-}
-
-/* Fil d'or shimmer */
-.panther-mode nav[class*="sticky"]::before,
-.panther-mode .sticky.top-0::before {
-  content: '' !important;
-  position: absolute !important;
-  bottom: -1px !important;
-  left: 0 !important;
-  right: 0 !important;
-  height: 1.5px !important;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    rgba(201,162,39,0.0) 20%,
-    rgba(201,162,39,0.6) 50%,
-    rgba(201,162,39,0.0) 80%,
-    transparent 100%
-  ) !important;
-  background-size: 200% 100% !important;
-  animation: gold-shimmer 4s ease-in-out infinite !important;
-  z-index: 10 !important;
-}
-
-@keyframes gold-shimmer {
-  0%   { background-position: -200% 0; }
-  50%  { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-
-/* ===== SECTION 4 : WELCOME SCREEN "TRÔNE GABONAIS" ===== */
-
-/* Main welcome title */
-.panther-mode .text-3xl,
-.panther-mode .text-4xl,
-.panther-mode [class*="font-bold"][class*="text-3"],
-.panther-mode [class*="font-bold"][class*="text-4"] {
-  background: linear-gradient(135deg, var(--bp-cyan) 0%, var(--gold) 60%, var(--gold-light) 100%) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
-  font-family: 'Outfit', sans-serif !important;
-  font-weight: 800 !important;
-  letter-spacing: -1px !important;
-}
-
-/* Subtitle */
-.panther-mode .text-sm.text-gray-500,
-.panther-mode .text-sm.text-gray-400,
-.panther-mode [class*="text-gray-"][class*="text-sm"] {
-  color: rgba(201,162,39,0.6) !important;
-  font-size: 14px !important;
-  font-weight: 300 !important;
-  letter-spacing: 2px !important;
-  text-transform: uppercase !important;
-  font-family: 'Outfit', sans-serif !important;
-}
-
-/* Suggestion cards — Manus style but refined */
-.panther-mode button[class*="suggestion"],
-.panther-mode [class*="prompt-suggestion"],
-.panther-mode .flex.gap-2 > button,
-.panther-mode .grid > button {
-  background: rgba(2,3,4,0.8) !important;
-  border: 1px solid rgba(201,162,39,0.25) !important;
-  border-radius: 12px !important;
-  padding: 14px 20px !important;
-  color: var(--bp-text-primary) !important;
-  font-family: 'Outfit', sans-serif !important;
-  transition: all 0.25s var(--bp-ease) !important;
-}
-
-.panther-mode button[class*="suggestion"]:hover,
-.panther-mode [class*="prompt-suggestion"]:hover,
-.panther-mode .flex.gap-2 > button:hover,
-.panther-mode .grid > button:hover {
-  border-color: var(--gold) !important;
-  box-shadow: 0 0 20px rgba(201,162,39,0.12) !important;
-  transform: translateY(-2px) !important;
-  background: rgba(201,162,39,0.04) !important;
-}
-
-/* ===== SECTION 5 : THOUGHT PROCESS "ŒIL PANTHÈRE" ===== */
-
-/* Container pour le thought process */
-.panther-mode .thinking,
-.panther-mode details summary,
-.panther-mode details[open] summary,
-.panther-mode [class*="reasoning"],
-.panther-mode [class*="thinking"],
-.panther-mode .message-status,
-.panther-mode .animate-pulse {
-  position: relative !important;
-  background: rgba(2,3,4,0.6) !important;
-  border: 1px solid rgba(201,162,39,0.12) !important;
-  border-radius: 16px !important;
-  padding: 16px !important;
-  overflow: hidden !important;
-  font-family: 'Outfit', sans-serif !important;
-}
-
-/* Panther Eyes — SVG data URI */
-.panther-mode .thinking::before,
-.panther-mode details[open] summary::before,
-.panther-mode [class*="reasoning"]::before {
-  content: '' !important;
-  display: block !important;
-  width: 140px !important;
-  height: 28px !important;
-  margin: 0 auto 12px auto !important;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='28' viewBox='0 0 140 28'%3E%3Cdefs%3E%3CradialGradient id='iris' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23000'/%3E%3Cstop offset='35%25' stop-color='%23FFB300'/%3E%3Cstop offset='70%25' stop-color='%23C9A227'/%3E%3Cstop offset='100%25' stop-color='%238B6914'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cellipse cx='30' cy='14' rx='26' ry='12' fill='%23111' stroke='%23C9A227' stroke-width='0.5'/%3E%3Cellipse cx='30' cy='14' rx='18' ry='10' fill='url(%23iris)'/%3E%3Cellipse cx='30' cy='14' rx='6' ry='9' fill='%23000'/%3E%3Cellipse cx='110' cy='14' rx='26' ry='12' fill='%23111' stroke='%23C9A227' stroke-width='0.5'/%3E%3Cellipse cx='110' cy='14' rx='18' ry='10' fill='url(%23iris)'/%3E%3Cellipse cx='110' cy='14' rx='6' ry='9' fill='%23000'/%3E%3C/svg%3E") !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  background-size: contain !important;
-  filter: drop-shadow(0 0 20px rgba(255,179,0,0.35)) !important;
-  animation: panther-breathe 3s ease-in-out infinite !important;
-}
-
-@keyframes panther-breathe {
-  0%, 100% { filter: drop-shadow(0 0 20px rgba(255,179,0,0.35)); transform: scaleY(1); }
-  15%      { transform: scaleY(0.15); }
-  20%      { transform: scaleY(1); }
-  50%      { filter: drop-shadow(0 0 30px rgba(255,179,0,0.5)); }
-}
-
-/* Scan line across eyes */
-.panther-mode .thinking::after,
-.panther-mode details[open] summary::after,
-.panther-mode [class*="reasoning"]::after {
-  content: '' !important;
-  position: absolute !important;
-  top: 16px !important;
-  left: 0 !important;
-  height: 1.5px !important;
-  width: 100% !important;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    rgba(255,179,0,0.0) 30%,
-    rgba(255,179,0,0.9) 50%,
-    rgba(255,179,0,0.0) 70%,
-    transparent 100%
-  ) !important;
-  animation: gold-scan 2s ease-in-out infinite !important;
-  pointer-events: none !important;
-  z-index: 2 !important;
-}
-
-@keyframes gold-scan {
-  0%   { transform: translateX(-100%); opacity: 0; }
-  10%  { opacity: 1; }
-  90%  { opacity: 1; }
-  100% { transform: translateX(100%); opacity: 0; }
-}
-
-/* THOUGHT PROCESS label */
-.panther-mode details[open] summary span,
-.panther-mode .thinking > span:first-child {
-  font-size: 10px !important;
-  letter-spacing: 3px !important;
-  color: var(--gold) !important;
-  opacity: 0.7 !important;
-  text-transform: uppercase !important;
-  font-weight: 600 !important;
-  font-family: 'Outfit', sans-serif !important;
-}
-
-/* Agent steps cascade */
-.panther-mode details[open] > div > *,
-.panther-mode .thinking > div > *,
-.panther-mode [class*="reasoning"] > div > * {
-  animation: step-appear 0.4s var(--bp-ease) forwards !important;
-  opacity: 0 !important;
-}
-
-.panther-mode details[open] > div > *:nth-child(1),
-.panther-mode .thinking > div > *:nth-child(1) { animation-delay: 0.1s !important; }
-.panther-mode details[open] > div > *:nth-child(2),
-.panther-mode .thinking > div > *:nth-child(2) { animation-delay: 0.4s !important; }
-.panther-mode details[open] > div > *:nth-child(3),
-.panther-mode .thinking > div > *:nth-child(3) { animation-delay: 0.7s !important; }
-.panther-mode details[open] > div > *:nth-child(4),
-.panther-mode .thinking > div > *:nth-child(4) { animation-delay: 1.0s !important; }
-.panther-mode details[open] > div > *:nth-child(5),
-.panther-mode .thinking > div > *:nth-child(5) { animation-delay: 1.3s !important; }
-
-@keyframes step-appear {
-  from { opacity: 0; transform: translateX(-8px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-/* Step icons — pulse dot for active, check for done */
-.panther-mode .animate-pulse::before {
-  content: '' !important;
-  display: inline-block !important;
-  width: 8px !important;
-  height: 8px !important;
-  border-radius: 50% !important;
-  background: var(--gold) !important;
-  margin-right: 8px !important;
-  animation: pulse-gold 1.5s ease-in-out infinite !important;
-  vertical-align: middle !important;
-}
-
-/* ===== SECTION 6 : INPUT BAR "PANTHÈRE PRÊTE" ===== */
-.panther-mode textarea,
-.panther-mode [id*="chat-input"],
-.panther-mode #chat-input,
-.panther-mode .chat-input {
-  background: rgba(2,3,4,0.9) !important;
-  border: 1px solid rgba(201,162,39,0.18) !important;
-  border-radius: 24px !important;
-  color: var(--bp-text-primary) !important;
-  font-family: 'Outfit', sans-serif !important;
-  font-size: 15px !important;
-  transition: all 0.25s var(--bp-ease) !important;
-}
-
-.panther-mode textarea:focus,
-.panther-mode [id*="chat-input"]:focus,
-.panther-mode #chat-input:focus {
-  border-color: var(--gold) !important;
-  box-shadow:
-    0 0 0 1px rgba(201,162,39,0.4),
-    0 0 30px rgba(201,162,39,0.08) !important;
-  outline: none !important;
-}
-
-.panther-mode textarea::placeholder {
-  color: var(--bp-text-hint) !important;
-  font-family: 'Outfit', sans-serif !important;
-}
-
-/* ===== SECTION 7 : BOUTON ENVOI "OR MASSIF" ===== */
-.panther-mode button[type="submit"],
-.panther-mode [id*="send-message"],
-.panther-mode button[aria-label*="Send"],
-.panther-mode button[aria-label*="send"],
-.panther-mode .send-button {
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%) !important;
-  color: var(--glass-0) !important;
-  border: none !important;
-  border-radius: 12px !important;
-  font-weight: 700 !important;
-  font-family: 'Outfit', sans-serif !important;
-  transition: all 0.2s var(--bp-ease) !important;
-  animation: pulse-gold 2s ease-in-out infinite !important;
-  min-width: 44px !important;
-  min-height: 44px !important;
-}
-
-.panther-mode button[type="submit"]:hover,
-.panther-mode [id*="send-message"]:hover,
-.panther-mode button[aria-label*="Send"]:hover {
-  transform: scale(1.05) !important;
-  box-shadow: 0 0 24px rgba(201,162,39,0.35), 0 0 60px rgba(201,162,39,0.12) !important;
-}
-
-.panther-mode button[type="submit"]:active,
-.panther-mode [id*="send-message"]:active {
-  transform: scale(0.96) !important;
-}
-
-@keyframes pulse-gold {
-  0%, 100% { box-shadow: 0 0 8px rgba(201,162,39,0.2); }
-  50%      { box-shadow: 0 0 18px rgba(201,162,39,0.4), 0 0 40px rgba(201,162,39,0.1); }
-}
-
-/* ===== SECTION 8 : MESSAGES ===== */
-
-/* User bubble */
-.panther-mode [class*="user-message"],
-.panther-mode .bg-gray-50.dark\:bg-gray-800,
-.panther-mode [class*="rounded"][class*="bg-gray"] {
-  background: rgba(201,162,39,0.06) !important;
-  border: 1px solid rgba(201,162,39,0.1) !important;
-  border-radius: 18px 18px 4px 18px !important;
-  font-family: 'Outfit', sans-serif !important;
-  animation: msg-appear 0.3s var(--bp-ease) both !important;
-}
-
-/* AI bubble — transparent */
-.panther-mode [class*="assistant-message"],
-.panther-mode .prose {
-  background: transparent !important;
-  color: var(--bp-text-primary) !important;
-  font-family: 'Outfit', sans-serif !important;
-  animation: msg-appear 0.3s var(--bp-ease) both !important;
-}
-
-@keyframes msg-appear {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ===== SECTION 9 : CODE BLOCKS ===== */
-.panther-mode pre,
-.panther-mode pre[class*="language-"],
-.panther-mode code {
-  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace !important;
-}
-
-.panther-mode pre,
-.panther-mode pre[class*="language-"] {
-  background: var(--glass-0) !important;
-  border-left: 2px solid var(--gold) !important;
-  border-radius: 12px !important;
-  border: 1px solid rgba(201,162,39,0.08) !important;
-  border-left: 3px solid var(--gold) !important;
-}
-
-.panther-mode code {
-  color: var(--gold-light) !important;
-}
-
-.panther-mode pre code {
-  color: var(--bp-text-primary) !important;
-}
-
-/* Inline code */
-.panther-mode :not(pre) > code {
-  background: rgba(201,162,39,0.08) !important;
-  border: 1px solid rgba(201,162,39,0.12) !important;
-  border-radius: 6px !important;
-  padding: 2px 6px !important;
-  font-size: 0.9em !important;
-  color: var(--gold-light) !important;
-}
-
-/* ===== SECTION 10 : SCROLLBAR ===== */
-.panther-mode ::-webkit-scrollbar {
-  width: 3px !important;
-  height: 3px !important;
-}
-
-.panther-mode ::-webkit-scrollbar-track {
-  background: transparent !important;
-}
-
-.panther-mode ::-webkit-scrollbar-thumb {
-  background: rgba(201,162,39,0.25) !important;
-  border-radius: 10px !important;
-}
-
-.panther-mode ::-webkit-scrollbar-thumb:hover {
-  background: rgba(201,162,39,0.45) !important;
-}
-
-/* Firefox scrollbar */
-.panther-mode * {
-  scrollbar-width: thin !important;
-  scrollbar-color: rgba(201,162,39,0.25) transparent !important;
-}
-
-/* ===== SECTION 11 : SÉLECTION TEXTE ===== */
-.panther-mode ::selection {
-  background: rgba(201,162,39,0.2) !important;
-  color: #fff !important;
-}
-
-.panther-mode ::-moz-selection {
-  background: rgba(201,162,39,0.2) !important;
-  color: #fff !important;
-}
-
-/* ===== SECTION 12 : MODALS GLASS ===== */
-.panther-mode [role="dialog"],
-.panther-mode .modal,
-.panther-mode [class*="modal"],
-.panther-mode [class*="Modal"] {
-  background: rgba(5,8,16,0.95) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-  border: 1px solid rgba(201,162,39,0.12) !important;
-  border-radius: 20px !important;
-  font-family: 'Outfit', sans-serif !important;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.6) !important;
-}
-
-/* Modal titles */
-.panther-mode [role="dialog"] h2,
-.panther-mode [role="dialog"] h3,
-.panther-mode .modal h2,
-.panther-mode .modal h3 {
-  background: linear-gradient(135deg, var(--bp-cyan), var(--gold)) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
-  font-family: 'Outfit', sans-serif !important;
-  font-weight: 700 !important;
-}
-
-/* Modal backdrop */
-.panther-mode [class*="backdrop"],
-.panther-mode .fixed.inset-0[class*="bg-black"] {
-  background: rgba(0,0,0,0.7) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-}
-
-/* ===== SECTION 13 : BUTTONS GLOBAL ===== */
-.panther-mode button {
-  font-family: 'Outfit', sans-serif !important;
-  transition: all 0.2s var(--bp-ease) !important;
-}
-
-.panther-mode button:hover {
-  transform: translateY(-1px) !important;
-}
-
-.panther-mode button:active {
-  transform: scale(0.97) !important;
-}
-
-/* ===== SECTION 14 : TOKEN BAR CONSUMPTION ===== */
-@keyframes gold-consume {
-  0%   { width: 100%; background: var(--gold); }
-  70%  { background: var(--gold); }
-  85%  { background: #EF4444; }
-  100% { width: 0%; background: #EF4444; }
-}
-
-.panther-mode .token-bar {
-  animation: gold-consume 300s linear forwards !important;
-}
-
-/* ===== SECTION 15 : LINKS ===== */
-.panther-mode a {
-  color: var(--gold) !important;
-  text-decoration: none !important;
-  transition: all 0.2s var(--bp-ease) !important;
-}
-
-.panther-mode a:hover {
-  color: var(--gold-light) !important;
-  text-decoration: underline !important;
-  text-underline-offset: 3px !important;
-}
-
-/* ===== SECTION 16 : DROPDOWN / SELECT ===== */
-.panther-mode select,
-.panther-mode [role="listbox"],
-.panther-mode [role="menu"] {
-  background: var(--glass-0) !important;
-  border: 1px solid rgba(201,162,39,0.15) !important;
-  border-radius: 12px !important;
-  color: var(--bp-text-primary) !important;
-  font-family: 'Outfit', sans-serif !important;
-}
-
-.panther-mode option {
-  background: var(--glass-1) !important;
-  color: var(--bp-text-primary) !important;
-}
-
-/* ===== SECTION 17 : TOOLTIPS ===== */
-.panther-mode [role="tooltip"],
-.panther-mode .tooltip {
-  background: rgba(5,8,16,0.95) !important;
-  border: 1px solid rgba(201,162,39,0.15) !important;
-  border-radius: 8px !important;
-  color: var(--bp-text-primary) !important;
-  font-family: 'Outfit', sans-serif !important;
-  font-size: 12px !important;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important;
-}
-
-/* ===== SECTION 18 : LOADING / SPINNER ===== */
-.panther-mode .spinner,
-.panther-mode [class*="Spinner"],
-.panther-mode svg.animate-spin {
-  color: var(--gold) !important;
-}
-
-/* ════════════════════════════════════════════════════════════════
-   MOBILE-FIRST RESPONSIVE — PHASE 2
-   Cible : iPhone SE → iPhone 15 Pro Max, Galaxy S24
-   Touch targets 44×44px minimum partout
-   ════════════════════════════════════════════════════════════════ */
-
-@media (max-width: 768px) {
-
-  /* === MOBILE : Safe areas (Capacitor/PWA) === */
-  .panther-mode {
-    padding-top: env(safe-area-inset-top) !important;
-    padding-bottom: env(safe-area-inset-bottom) !important;
-  }
-
-  /* === MOBILE : Sidebar slide-over === */
-  .panther-mode #sidebar,
-  .panther-mode aside,
-  .panther-mode [id*="sidebar"] {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    bottom: 0 !important;
-    z-index: 50 !important;
-    width: 80vw !important;
-    max-width: 320px !important;
-    transform: translateX(-100%) !important;
-    transition: transform 0.3s var(--bp-ease) !important;
-    box-shadow: 8px 0 40px rgba(0,0,0,0.6) !important;
-  }
-
-  .panther-mode #sidebar.show,
-  .panther-mode aside.show,
-  .panther-mode [id*="sidebar"][class*="show"],
-  .panther-mode [id*="sidebar"][style*="translate(0"] {
-    transform: translateX(0) !important;
-  }
-
-  /* === MOBILE : Touch targets 44px minimum === */
-  .panther-mode button,
-  .panther-mode a,
-  .panther-mode [role="button"] {
-    min-height: 44px !important;
-    min-width: 44px !important;
-  }
-
-  /* === MOBILE : Suggestion cards stack === */
-  .panther-mode button[class*="suggestion"],
-  .panther-mode [class*="prompt-suggestion"],
-  .panther-mode .flex.gap-2 > button,
-  .panther-mode .grid > button {
-    padding: 16px !important;
-    font-size: 14px !important;
-    border-radius: 14px !important;
-  }
-
-  /* === MOBILE : Input bar floating above keyboard === */
-  .panther-mode textarea,
-  .panther-mode [id*="chat-input"],
-  .panther-mode #chat-input {
-    font-size: 16px !important; /* Prevents iOS zoom on focus */
-    border-radius: 20px !important;
-    padding: 14px 16px !important;
-    padding-bottom: calc(14px + env(safe-area-inset-bottom)) !important;
-  }
-
-  /* Input container fixed at bottom */
-  .panther-mode [class*="bottom-0"],
-  .panther-mode .fixed.bottom-0 {
-    padding-bottom: env(safe-area-inset-bottom) !important;
-  }
-
-  /* === MOBILE : Send button larger === */
-  .panther-mode button[type="submit"],
-  .panther-mode [id*="send-message"],
-  .panther-mode button[aria-label*="Send"] {
-    min-width: 48px !important;
-    min-height: 48px !important;
-    border-radius: 14px !important;
-  }
-
-  /* === MOBILE : Thought Process eyes reduced 30% === */
-  .panther-mode .thinking::before,
-  .panther-mode details[open] summary::before,
-  .panther-mode [class*="reasoning"]::before {
-    width: 98px !important;
-    height: 20px !important;
-    margin-bottom: 8px !important;
-  }
-
-  /* === MOBILE : Messages full width === */
-  .panther-mode [class*="user-message"],
-  .panther-mode [class*="assistant-message"],
-  .panther-mode .prose {
-    max-width: 100% !important;
-    font-size: 15px !important;
-    line-height: 1.6 !important;
-  }
-
-  /* === MOBILE : Code blocks horizontal scroll === */
-  .panther-mode pre,
-  .panther-mode pre[class*="language-"] {
-    font-size: 13px !important;
-    padding: 12px !important;
-    border-radius: 10px !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-
-  /* === MOBILE : Modals full-screen === */
-  .panther-mode [role="dialog"],
-  .panther-mode .modal,
-  .panther-mode [class*="modal"],
-  .panther-mode [class*="Modal"] {
-    border-radius: 16px 16px 0 0 !important;
-    max-height: 90vh !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    position: fixed !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-  }
-
-  /* === MOBILE : Header compact === */
-  .panther-mode nav[class*="sticky"],
-  .panther-mode .sticky.top-0 {
-    padding-top: env(safe-area-inset-top) !important;
-  }
-
-  /* === MOBILE : Welcome title smaller === */
-  .panther-mode .text-3xl,
-  .panther-mode .text-4xl {
-    font-size: 1.8rem !important;
-    letter-spacing: -0.5px !important;
-  }
-}
-
-/* ── Extra small devices (iPhone SE, Galaxy A) ── */
-@media (max-width: 375px) {
-  .panther-mode .text-3xl,
-  .panther-mode .text-4xl {
-    font-size: 1.5rem !important;
-  }
-
-  .panther-mode .thinking::before,
-  .panther-mode details[open] summary::before {
-    width: 80px !important;
-    height: 16px !important;
-  }
-
-  .panther-mode button[class*="suggestion"],
-  .panther-mode .grid > button {
-    padding: 12px 14px !important;
-    font-size: 13px !important;
-  }
-}
-
-/* ── Landscape mobile ── */
-@media (max-height: 500px) and (orientation: landscape) {
-  .panther-mode .thinking::before,
-  .panther-mode details[open] summary::before {
-    width: 70px !important;
-    height: 14px !important;
-    margin-bottom: 6px !important;
-  }
-}
-
-/* ── iPad / Tablet tweaks ── */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .panther-mode #sidebar,
-  .panther-mode aside {
-    width: 280px !important;
-  }
-
-  .panther-mode [role="dialog"],
-  .panther-mode .modal {
-    max-width: 560px !important;
-    border-radius: 20px !important;
-  }
-}
-
-/* ── Dark mode forced — no light leaks ── */
-.panther-mode,
-.panther-mode *,
-.panther-mode *::before,
-.panther-mode *::after {
-  color-scheme: dark !important;
-}
-
-/* ── iOS tap highlight removal ── */
-.panther-mode * {
-  -webkit-tap-highlight-color: transparent !important;
-}
-
-/* ── Prevent iOS rubber banding on main container ── */
-.panther-mode .app {
-  overscroll-behavior: none !important;
-}
-
-/* ===== END GABOMAGPT BLACK PANTHER MODE ===== */
-
-/* ══════════════════════════════════════════════════════════
-   SECTION 5 — CAPACITOR MOBILE-FIRST PRO
+/* ==========================================================
+   SECTION 5 �?" CAPACITOR MOBILE-FIRST PRO
    Safe areas, touch targets, native feel
-   ══════════════════════════════════════════════════════════ */
+  ========================================================== */
 
-/* ── Safe Area Insets (notch, home indicator, status bar) ── */
+/*  - - Safe Area Insets (notch, home indicator, status bar)  - - */
 :root {
   --safe-area-top: env(safe-area-inset-top, 0px);
   --safe-area-bottom: env(safe-area-inset-bottom, 0px);
@@ -2179,7 +1357,7 @@ body.panther-mode {
   --safe-area-right: env(safe-area-inset-right, 0px);
 }
 
-/* ── Body padding pour Capacitor natif ── */
+/*  - - Body padding pour Capacitor natif  - - */
 body.capacitor {
   padding-top: var(--safe-area-top);
   padding-bottom: var(--safe-area-bottom);
@@ -2191,7 +1369,7 @@ body.capacitor {
   overscroll-behavior: none;
 }
 
-/* ── Texte sélectionnable dans le chat uniquement ── */
+/*  - - Texte sélectionnable dans le chat uniquement  - - */
 body.capacitor .message-content,
 body.capacitor pre,
 body.capacitor code,
@@ -2201,7 +1379,7 @@ body.capacitor input {
   user-select: text;
 }
 
-/* ── Touch targets minimum 44px (Apple HIG) ── */
+/*  - - Touch targets minimum 44px (Apple HIG)  - - */
 @media (max-width: 768px) {
   button,
   a,
@@ -2214,7 +1392,7 @@ body.capacitor input {
   /* Chat input plus grand sur mobile */
   .message-input textarea,
   [contenteditable] {
-    font-size: 16px !important; /* Empêche le zoom iOS */
+  font-size: 16px !important; /* Empêche le zoom iOS */
     min-height: 48px;
   }
 
@@ -2265,14 +1443,14 @@ body.capacitor input {
   }
 }
 
-/* ── Animation native-feel pour les transitions ── */
+/*  - - Animation native-feel pour les transitions  - - */
 @media (max-width: 768px) {
   .sidebar-transition {
     transition: transform 300ms cubic-bezier(0.32, 0.72, 0, 1) !important;
   }
 }
 
-/* ── Keyboard push-up (Capacitor Keyboard plugin) ── */
+/*  - - Keyboard push-up (Capacitor Keyboard plugin)  - - */
 body.keyboard-visible {
   --keyboard-height: var(--keyboard-height, 0px);
 }
@@ -2283,12 +1461,12 @@ body.keyboard-visible .message-input-container {
   margin-bottom: 0 !important;
 }
 
-/* ── Pull-to-refresh désactivé (conflit avec chat scroll) ── */
+/*  - - Pull-to-refresh désactivé (conflit avec chat scroll)  - - */
 body.capacitor {
   overscroll-behavior-y: contain;
 }
 
-/* ── Splash screen fade out ── */
+/*  - - Splash screen fade out  - - */
 @keyframes splashFadeOut {
   from { opacity: 1; }
   to { opacity: 0; pointer-events: none; }
@@ -2298,7 +1476,7 @@ body.capacitor {
   animation: splashFadeOut 400ms ease-out forwards;
 }
 
-/* ── Status bar space on Android ── */
+/*  - - Status bar space on Android  - - */
 @supports (padding-top: env(safe-area-inset-top)) {
   .capacitor-android nav,
   .capacitor-android header {
@@ -2306,4 +1484,8 @@ body.capacitor {
   }
 }
 
-/* ===== END CAPACITOR MOBILE-FIRST ===== */
+/* ========================================================== END CAPACITOR MOBILE-FIRST ========================================================== */
+
+/* Old glassmorphism/contrast sections removed - handled by .dark selectors above */
+
+

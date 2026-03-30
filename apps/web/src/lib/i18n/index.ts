@@ -59,6 +59,11 @@ export const initI18n = (defaultLocale?: string | undefined) => {
 			},
 			fallbackLng: {
 				fr: ['fr-FR'],
+				'fr-GA': ['fr-FR'],
+				'fan-GA': ['fr-FR'],
+				'pun-GA': ['fr-FR'],
+				'mye-GA': ['fr-FR'],
+				'nzb-GA': ['fr-FR'],
 				default: fallbackDefaultLocale
 			},
 			ns: 'translation',

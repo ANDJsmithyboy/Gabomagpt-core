@@ -69,12 +69,11 @@
 	import HotkeyHint from '../common/HotkeyHint.svelte';
 
 	// GabomaGPT — composants et stores
-	import { gabomaStore, isPantherMode, isLowTokens } from '$lib/stores/gabomagpt';
+	import { gabomaStore, isLowTokens } from '$lib/stores/gabomagpt';
 	import { currentTheme } from '$lib/stores/theme';
 	import { PlanBadge, UpgradePrompt, ThemeSelector } from '$lib/components/gabomagpt';
 	import { cn } from '$lib/utils/cn';
 
-	$: panther = $isPantherMode;
 	$: lowTokens = $isLowTokens;
 
 	const BREAKPOINT = 768;
@@ -715,9 +714,9 @@
 					>
 						<div class=" self-center flex items-center justify-center size-9">
 							<img
-								src="{WEBUI_BASE_URL}/static/favicon.png"
+								src="/gabomagpt-logo.jpeg"
 								class="sidebar-new-chat-icon size-6 rounded-full group-hover:hidden"
-								alt=""
+								alt="GabomaGPT"
 							/>
 
 							<Sidebar className="size-5 hidden group-hover:flex" />
@@ -1452,7 +1451,7 @@
 
 	{#if !$mobile}
 		<div
-			class="relative flex items-center justify-center group border-l border-gray-50 dark:border-gray-850/30 hover:border-gray-200 dark:hover:border-gray-800 transition z-20"
+			class="relative flex items-center justify-center group border-l border-transparent hover:border-gray-200 dark:hover:border-gray-800 transition z-20"
 			id="sidebar-resizer"
 			on:mousedown={resizeStartHandler}
 			role="separator"

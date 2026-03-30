@@ -177,7 +177,7 @@
 		>
 			<!-- Poignée mobile -->
 			<div class="flex justify-center pt-3 sm:hidden">
-				<div class="h-1 w-10 rounded-full bg-white/10"></div>
+				<div class="h-1 w-10 rounded-full bg-black/10 dark:bg-white/10"></div>
 			</div>
 
 			<div class="p-6">
@@ -359,9 +359,9 @@
 								rel="noopener"
 								class={cn(
 									'flex-1 rounded-2xl py-3 text-center text-sm font-semibold',
-									'bg-[rgba(255,255,255,0.06)] text-[var(--text-secondary)]',
+									'bg-gray-100 dark:bg-[rgba(255,255,255,0.06)] text-[var(--text-secondary)]',
 									'transition-all duration-200',
-									'hover:bg-[rgba(255,255,255,0.1)] active:scale-[0.97]'
+									'hover:bg-gray-200 dark:hover:bg-[rgba(255,255,255,0.1)] active:scale-[0.97]'
 								)}
 							>
 								Support
