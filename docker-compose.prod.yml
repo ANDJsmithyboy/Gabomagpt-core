@@ -1,11 +1,8 @@
 # GabomaGPT · docker-compose.prod.yml · SmartANDJ AI Technologies
-# Production deployment: Frontend (Open WebUI) + Caddy reverse proxy
+# Production deployment: Frontend direct sur port 80
 # Usage: docker compose -f docker-compose.prod.yml up -d
 
-version: "3.9"
-
 services:
-  # ── GabomaGPT Frontend (Open WebUI fork) ──────────────────
   gabomagpt:
     build:
       context: ./apps/web
@@ -16,7 +13,7 @@ services:
     container_name: gabomagpt-web
     restart: always
     ports:
-      - "3000:8080"
+      - "80:8080"
     volumes:
       - gabomagpt-data:/app/backend/data
     environment:
@@ -25,22 +22,17 @@ services:
       - CUSTOM_NAME=GabomaGPT
       - WEBUI_AUTH=true
       - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:-gabomagpt-secret-change-me}
-      # Groq LLM
       - OPENAI_API_BASE_URL=https://api.groq.com/openai/v1
       - OPENAI_API_KEY=${GROQ_API_KEY}
-      # Tavily Search
       - RAG_WEB_SEARCH_ENGINE=tavily
       - RAG_WEB_SEARCH_RESULT_COUNT=5
       - TAVILY_API_KEY=${TAVILY_API_KEY}
-      # Performance — VPS 2GB RAM
       - WEBUI_WORKERS=1
       - ENV=prod
     deploy:
       resources:
         limits:
           memory: 1536M
-    networks:
-      - gabomagpt-net
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 30s
@@ -48,33 +40,6 @@ services:
       retries: 3
       start_period: 40s
 
-  # ── Caddy Reverse Proxy (Auto SSL via Let's Encrypt) ──────
-  caddy:
-    image: caddy:2-alpine
-    container_name: gabomagpt-caddy
-    restart: always
-    ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy-data:/data
-      - caddy-config:/config
-    networks:
-      - gabomagpt-net
-    depends_on:
-      gabomagpt:
-        condition: service_healthy
-
 volumes:
   gabomagpt-data:
     driver: local
-  caddy-data:
-    driver: local
-  caddy-config:
-    driver: local
-
-networks:
-  gabomagpt-net:
-    driver: bridge
