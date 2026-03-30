@@ -13,7 +13,7 @@ services:
     container_name: gabomagpt-web
     restart: always
     ports:
-      - "80:8080"
+      - "3000:8080"
     volumes:
       - gabomagpt-data:/app/backend/data
     environment:

@@ -11,7 +11,7 @@ const config: CapacitorConfig = {
   webDir: 'build',
 
   server: {
-    url: process.env.CAPACITOR_SERVER_URL || 'http://31.220.80.217',
+    url: process.env.CAPACITOR_SERVER_URL || 'http://31.220.80.217:3000',
     cleartext: true,
     androidScheme: 'https',
     iosScheme: 'ionic',
