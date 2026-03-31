@@ -59,7 +59,7 @@
 		scrollToTab(selectedTab);
 	}
 
-	const scrollToTab = (tabId: string) => {
+	const scrollToTab = (tabId) => {
 		const tabElement = document.getElementById(tabId);
 		if (tabElement) {
 			tabElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
@@ -67,8 +67,8 @@
 	};
 
 	let search = '';
-	let searchDebounceTimeout: any;
-	let filteredSettings: any[] = [];
+	let searchDebounceTimeout;
+	let filteredSettings = [];
 
 	const allSettings = [
 		{

@@ -13,13 +13,13 @@
 	import EyeSlash from '$lib/components/icons/EyeSlash.svelte';
 	import { getGabomaGPTModelName } from '$lib/utils/gabomagpt-models';
 
-	const i18n = getContext('i18n') as any;
+	const i18n = getContext('i18n');
 
-	export let modelIds: string[] = [];
-	export let models: any[] = [];
-	export let atSelectedModel: any;
+	export let modelIds = [];
+	export let models = [];
+	export let atSelectedModel;
 
-	export let onSelect = (e: any) => {};
+	export let onSelect = (e) => {};
 
 	let mounted = false;
 	let selectedModelIdx = 0;
