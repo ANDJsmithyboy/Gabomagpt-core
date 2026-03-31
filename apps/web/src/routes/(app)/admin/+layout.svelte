@@ -22,7 +22,7 @@
 
 <svelte:head>
 	<title>
-		{$i18n.t('Admin Panel')} • {$WEBUI_NAME}
+		{$i18n.t('Gouvernance & Flux')} • {$WEBUI_NAME}
 	</title>
 </svelte:head>
 
@@ -64,7 +64,7 @@
 							class="min-w-fit p-1.5 {$page.url.pathname.includes('/admin/users')
 								? ''
 								: 'text-gray-300 dark:text-gray-600 hover:text-gray-700 dark:hover:text-white'} transition select-none"
-							href="/admin">{$i18n.t('Users')}</a
+							href="/admin">{$i18n.t('Utilisateurs')}</a
 						>
 
 						{#if $config?.features.enable_admin_analytics ?? true}
@@ -73,7 +73,7 @@
 								class="min-w-fit p-1.5 {$page.url.pathname.includes('/admin/analytics')
 									? ''
 									: 'text-gray-300 dark:text-gray-600 hover:text-gray-700 dark:hover:text-white'} transition select-none"
-								href="/admin/analytics">{$i18n.t('Analytics')}</a
+								href="/admin/analytics">{$i18n.t('Analytique')}</a
 							>
 						{/if}
 
@@ -82,7 +82,7 @@
 							class="min-w-fit p-1.5 {$page.url.pathname.includes('/admin/evaluations')
 								? ''
 								: 'text-gray-300 dark:text-gray-600 hover:text-gray-700 dark:hover:text-white'} transition select-none"
-							href="/admin/evaluations">{$i18n.t('Evaluations')}</a
+							href="/admin/evaluations">{$i18n.t('Évaluations')}</a
 						>
 
 						<a
@@ -90,7 +90,7 @@
 							class="min-w-fit p-1.5 {$page.url.pathname.includes('/admin/functions')
 								? ''
 								: 'text-gray-300 dark:text-gray-600 hover:text-gray-700 dark:hover:text-white'} transition select-none"
-							href="/admin/functions">{$i18n.t('Functions')}</a
+							href="/admin/functions">{$i18n.t('Fonctions')}</a
 						>
 
 						<a
@@ -98,7 +98,7 @@
 							class="min-w-fit p-1.5 {$page.url.pathname.includes('/admin/settings')
 								? ''
 								: 'text-gray-300 dark:text-gray-600 hover:text-gray-700 dark:hover:text-white'} transition select-none"
-							href="/admin/settings">{$i18n.t('Settings')}</a
+							href="/admin/settings">{$i18n.t('Paramètres')}</a
 						>
 					</div>
 				</div>

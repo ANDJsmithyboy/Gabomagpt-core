@@ -23,6 +23,16 @@
 	let mounted = false;
 	let selectedModelIdx = 0;
 
+	/* Salutation gabonaise selon l'heure du jour */
+	function getGreeting(): string {
+		const hour = new Date().getHours();
+		const name = $user?.name?.split(' ')[0] || 'ami';
+		if (hour >= 5 && hour < 12) return `Mbolo ! Bonjour ${name} ☀️`;
+		if (hour >= 12 && hour < 18) return `Akeva ! Bon après-midi ${name}`;
+		if (hour >= 18 && hour < 22) return `Bonsoir ${name}, on gère quoi ? 🌙`;
+		return `C'est tard ${name}, GabomaGPT veille 🔥`;
+	}
+
 	$: if (modelIds.length > 0) {
 		selectedModelIdx = models.length - 1;
 	}
@@ -92,7 +102,7 @@
 				{#if models[selectedModelIdx]?.name}
 					{models[selectedModelIdx]?.name}
 				{:else}
-					Mbolo, {$user?.name} !
+					{getGreeting()}
 				{/if}
 			</div>
 

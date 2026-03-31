@@ -3,10 +3,10 @@
 </script>
 
 <div
-	class="mx-auto py-0.5 text-center select-none opacity-70 hover:opacity-100 transition-opacity"
+	class="disclaimer mx-auto py-0.5 text-center select-none"
 	aria-label="Avertissement GabomaGPT"
 >
-	<p class="text-[10px] leading-tight text-gray-500 dark:text-gray-400">
-		GabomaGPT peut commettre des erreurs. Vérifiez les informations importantes.
+	<p class="text-[11px] leading-tight font-light tracking-wide" style="color: rgba(255,255,255,0.18);">
+		GabomaGPT peut faire des erreurs · Vérifiez les informations importantes
 	</p>
 </div>

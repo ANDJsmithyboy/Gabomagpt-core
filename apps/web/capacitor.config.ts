@@ -1,6 +1,6 @@
 /* GabomaGPT · capacitor.config.ts · SmartANDJ AI Technologies
    Configuration Capacitor — Network-First Hybrid Mobile App
-   VPS Production: 31.220.80.217
+   Production: https://gabomagpt.andjanalytics.com
    Fondateur: Daniel Jonathan ANDJ */
 
 import type { CapacitorConfig } from '@capacitor/cli';
@@ -11,11 +11,11 @@ const config: CapacitorConfig = {
   webDir: 'build',
 
   server: {
-    url: process.env.CAPACITOR_SERVER_URL || 'http://31.220.80.217:3000',
-    cleartext: true,
+    url: process.env.CAPACITOR_SERVER_URL || 'https://gabomagpt.andjanalytics.com',
+    cleartext: false,
     androidScheme: 'https',
     iosScheme: 'ionic',
-    allowNavigation: ['31.220.80.217', '*.smartandj.ai', 'api.groq.com']
+    allowNavigation: ['gabomagpt.andjanalytics.com', '*.andjanalytics.com', '*.smartandj.ai', 'api.groq.com']
   },
 
   plugins: {
@@ -57,7 +57,7 @@ const config: CapacitorConfig = {
 
   android: {
     backgroundColor: '#050810',
-    allowMixedContent: true,
+    allowMixedContent: false,
     captureInput: true,
     webContentsDebuggingEnabled: false,
     overrideUserAgent: 'GabomaGPT-Android/1.0',

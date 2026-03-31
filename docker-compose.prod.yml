@@ -1,6 +1,11 @@
 # GabomaGPT · docker-compose.prod.yml · SmartANDJ AI Technologies
-# Production deployment: Frontend direct sur port 80
-# Usage: docker compose -f docker-compose.prod.yml up -d
+# Production deployment with SSL reverse proxy
+# Domain: https://gabomagpt.andjanalytics.com
+# VPS: 31.220.80.217
+#
+# Usage:
+#   cp .env.example .env   # fill in secrets
+#   docker compose -f docker-compose.prod.yml up -d --build
 
 services:
   gabomagpt:
@@ -13,32 +18,52 @@ services:
     container_name: gabomagpt-web
     restart: always
     ports:
-      - "3000:8080"
+      - "127.0.0.1:3000:8080"
     volumes:
       - gabomagpt-data:/app/backend/data
     environment:
+      # ── Core ──
       - NODE_OPTIONS=--max-old-space-size=4000
       - WEBUI_NAME=GabomaGPT
       - CUSTOM_NAME=GabomaGPT
       - WEBUI_AUTH=true
       - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:-gabomagpt-secret-change-me}
+      - WEBUI_URL=https://gabomagpt.andjanalytics.com
+      - WEBUI_WORKERS=1
+      - ENV=prod
+      # ── LLM API (Groq) ──
       - OPENAI_API_BASE_URL=https://api.groq.com/openai/v1
       - OPENAI_API_KEY=${GROQ_API_KEY}
+      # ── Anthropic (Black Panther mode) ──
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      # ── RAG / Web Search ──
       - RAG_WEB_SEARCH_ENGINE=tavily
       - RAG_WEB_SEARCH_RESULT_COUNT=5
       - TAVILY_API_KEY=${TAVILY_API_KEY}
-      - WEBUI_WORKERS=1
-      - ENV=prod
+      # ── Google OAuth 2.0 ──
+      - ENABLE_OAUTH_SIGNUP=true
+      - OAUTH_PROVIDER_NAME=Google
+      - GOOGLE_OAUTH_CLIENT_ID=${GOOGLE_OAUTH_CLIENT_ID}
+      - GOOGLE_OAUTH_CLIENT_SECRET=${GOOGLE_OAUTH_CLIENT_SECRET}
+      - OPENID_PROVIDER_URL=https://accounts.google.com/.well-known/openid-configuration
+      - OAUTH_SCOPES=openid email profile
+      # ── Voice (Whisper STT + TTS) ──
+      - AUDIO_STT_ENGINE=openai
+      - AUDIO_STT_OPENAI_API_BASE_URL=https://api.groq.com/openai/v1
+      - AUDIO_STT_OPENAI_API_KEY=${GROQ_API_KEY}
+      - AUDIO_TTS_ENGINE=openai
+      - AUDIO_TTS_OPENAI_API_BASE_URL=https://api.openai.com/v1
+      - AUDIO_TTS_OPENAI_API_KEY=${OPENAI_TTS_API_KEY}
     deploy:
       resources:
         limits:
-          memory: 1536M
+          memory: 2048M
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 60s
 
 volumes:
   gabomagpt-data:

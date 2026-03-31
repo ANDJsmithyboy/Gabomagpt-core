@@ -73,7 +73,7 @@
 	const allSettings = [
 		{
 			id: 'general',
-			title: 'General',
+			title: 'Constitution',
 			route: '/admin/settings/general',
 			keywords: [
 				'general',
@@ -96,7 +96,7 @@
 		},
 		{
 			id: 'connections',
-			title: 'Connections',
+			title: 'Connexions',
 			route: '/admin/settings/connections',
 			keywords: [
 				'connections',
@@ -111,7 +111,7 @@
 		},
 		{
 			id: 'models',
-			title: 'Models',
+			title: 'Modèles',
 			route: '/admin/settings/models',
 			keywords: [
 				'models',
@@ -161,7 +161,7 @@
 		},
 		{
 			id: 'web',
-			title: 'Web Search',
+			title: 'Recherche Web',
 			route: '/admin/settings/web',
 			keywords: [
 				'web search',
@@ -182,7 +182,7 @@
 		},
 		{
 			id: 'code-execution',
-			title: 'Code Execution',
+			title: 'Exécution Code',
 			route: '/admin/settings/code-execution',
 			keywords: ['code execution', 'python', 'sandbox', 'compiler', 'jupyter', 'interpreter']
 		},
@@ -240,7 +240,7 @@
 		},
 		{
 			id: 'db',
-			title: 'Database',
+			title: 'Base de Données',
 			route: '/admin/settings/db',
 			keywords: ['database', 'export', 'import', 'backup', 'chats', 'users']
 		}
