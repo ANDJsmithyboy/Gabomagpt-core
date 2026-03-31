@@ -243,9 +243,9 @@
 									<img
 										id="logo"
 										crossorigin="anonymous"
-										src="{WEBUI_BASE_URL}/static/gabomagpt-logo.jpeg"
+										src="/gabomagpt-logo.jpeg"
 										class="size-24 rounded-full ring-2 ring-[#C9A84C]/30"
-										alt="{$WEBUI_NAME} logo"
+										alt="GabomaGPT logo"
 									/>
 								</div>
 							{/if}
@@ -595,7 +595,7 @@
 					<img
 						id="logo"
 						crossorigin="anonymous"
-						src="{WEBUI_BASE_URL}/static/gabomagpt-logo.jpeg"
+						src="/gabomagpt-logo.jpeg"
 						class="w-8 h-8 rounded-full ring-1 ring-[#C9A84C]/20"
 						alt="GabomaGPT"
 					/>

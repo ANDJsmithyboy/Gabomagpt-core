@@ -47,42 +47,14 @@
 
 {#key mounted}
 	<div class="m-auto w-full max-w-6xl px-4 sm:px-8 lg:px-20 flex flex-col items-center justify-center">
-		<!-- Logo centré Claude-mobile style -->
-		<div class="flex flex-col items-center mb-4 sm:mb-6" in:fade={{ duration: 300 }}>
-			{#if models.length === 0 || !models[0]?.info?.meta?.profile_image_url}
-				<img
-					src="/gabomagpt-logo.jpeg"
-					class="size-16 sm:size-20 rounded-2xl shadow-lg ring-1 ring-black/5 dark:ring-white/10"
-					alt="GabomaGPT"
-					draggable="false"
-				/>
-			{:else}
-				<div class="flex -space-x-4 items-center">
-					{#each models as model, modelIdx}
-						<button
-							on:click={() => {
-								selectedModelIdx = modelIdx;
-							}}
-						>
-							<Tooltip
-								content={marked.parse(
-									sanitizeResponseContent(
-										models[selectedModelIdx]?.info?.meta?.description ?? ''
-									).replaceAll('\n', '<br>')
-								)}
-								placement="right"
-							>
-								<img
-									src={`${WEBUI_API_BASE_URL}/models/model/profile/image?id=${model?.id}&lang=${$i18n.language}`}
-									class="size-14 sm:size-16 rounded-full border-2 border-white dark:border-gray-800 shadow-md"
-									alt="logo"
-									draggable="false"
-								/>
-							</Tooltip>
-						</button>
-					{/each}
-				</div>
-			{/if}
+		<!-- Logo GabomaGPT centré (style Claude/Gemini) -->
+		<div class="flex flex-col items-center mb-6 sm:mb-8" in:fade={{ duration: 300 }}>
+			<img
+				src="/gabomagpt-logo.jpeg"
+				class="size-16 sm:size-20 rounded-2xl shadow-lg ring-1 ring-black/5 dark:ring-white/10"
+				alt="GabomaGPT"
+				draggable="false"
+			/>
 		</div>
 
 		{#if $temporaryChatEnabled}
@@ -97,15 +69,11 @@
 			</Tooltip>
 		{/if}
 
-		<!-- Greeting centré -->
-			<div class="text-center mb-4 sm:mb-6 font-primary" in:fade={{ duration: 200 }}>
-				<div class="text-2xl sm:text-3xl font-semibold text-gray-800 dark:text-gray-100 tracking-tight">
-					{#if models[selectedModelIdx]?.name}
-						{getGabomaGPTModelName(models[selectedModelIdx]?.id, models[selectedModelIdx]?.name)}
-					{:else}
-						{getGreeting()}
-					{/if}
-				</div>
+		<!-- Greeting GabomaGPT (jamais de nom de modèle) -->
+		<div class="text-center mb-6 sm:mb-8 font-primary" in:fade={{ duration: 200 }}>
+			<div class="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100 tracking-tight welcome-message">
+				{getGreeting()}
+			</div>
 
 			<div class="mt-1.5" in:fade={{ duration: 200, delay: 200 }}>
 				{#if models[selectedModelIdx]?.info?.meta?.description ?? null}
