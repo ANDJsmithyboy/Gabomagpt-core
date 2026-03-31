@@ -59,7 +59,7 @@
 		scrollToTab(selectedTab);
 	}
 
-	const scrollToTab = (tabId) => {
+	const scrollToTab = (tabId: string) => {
 		const tabElement = document.getElementById(tabId);
 		if (tabElement) {
 			tabElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
@@ -67,8 +67,8 @@
 	};
 
 	let search = '';
-	let searchDebounceTimeout;
-	let filteredSettings = [];
+	let searchDebounceTimeout: any;
+	let filteredSettings: any[] = [];
 
 	const allSettings = [
 		{
@@ -532,6 +532,11 @@
 				on:save={async () => {
 					toast.success($i18n.t('Settings saved successfully!'));
 
+					await tick();
+					await config.set(await getBackendConfig());
+				}}
+				saveSettings={async () => {
+					toast.success($i18n.t('Settings saved successfully!'));
 					await tick();
 					await config.set(await getBackendConfig());
 				}}

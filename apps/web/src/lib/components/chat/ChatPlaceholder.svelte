@@ -13,13 +13,13 @@
 	import EyeSlash from '$lib/components/icons/EyeSlash.svelte';
 	import { getGabomaGPTModelName } from '$lib/utils/gabomagpt-models';
 
-	const i18n = getContext('i18n');
+	const i18n = getContext('i18n') as any;
 
-	export let modelIds = [];
-	export let models = [];
-	export let atSelectedModel;
+	export let modelIds: string[] = [];
+	export let models: any[] = [];
+	export let atSelectedModel: any;
 
-	export let onSelect = (e) => {};
+	export let onSelect = (e: any) => {};
 
 	let mounted = false;
 	let selectedModelIdx = 0;
@@ -76,39 +76,22 @@
 			</div>
 
 			<div class="mt-1.5" in:fade={{ duration: 200, delay: 200 }}>
-				{#if models[selectedModelIdx]?.info?.meta?.description ?? null}
+				{#if models[selectedModelIdx]?.info?.meta?.description}
 					<div
 						class="text-sm sm:text-base font-normal text-gray-500 dark:text-gray-400 line-clamp-3 markdown max-w-md mx-auto"
 					>
 						{@html marked.parse(
 							sanitizeResponseContent(
-								models[selectedModelIdx]?.info?.meta?.description
+								models[selectedModelIdx]?.info?.meta?.description || ''
 							).replaceAll('\n', '<br>')
 						)}
 					</div>
-					{#if models[selectedModelIdx]?.info?.meta?.user}
-						<div class="mt-0.5 text-xs font-normal text-gray-400 dark:text-gray-500">
-							By
-							{#if models[selectedModelIdx]?.info?.meta?.user.community}
-								<a
-									href="https://gabomagpt.com/m/{models[selectedModelIdx]?.info?.meta?.user
-										.username}"
-									>{models[selectedModelIdx]?.info?.meta?.user.name
-										? models[selectedModelIdx]?.info?.meta?.user.name
-										: `@${models[selectedModelIdx]?.info?.meta?.user.username}`}</a
-								>
-							{:else}
-								{models[selectedModelIdx]?.info?.meta?.user.name}
-							{/if}
-						</div>
-					{/if}
 				{:else}
 					<div class="text-sm sm:text-base text-gray-400 dark:text-gray-500 font-normal">
 						{$i18n.t('Comment puis-je vous aider aujourd\'hui ?')}
 					</div>
 				{/if}
 			</div>
-		</div>
 
 		<!-- Suggestions responsive grid -->
 		<div class="w-full max-w-2xl font-primary" in:fade={{ duration: 200, delay: 300 }}>
