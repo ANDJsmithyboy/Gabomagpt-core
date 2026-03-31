@@ -64,7 +64,26 @@ services:
       timeout: 10s
       retries: 3
       start_period: 60s
+    # ── Coolify / Traefik integration ──
+    networks:
+      - coolify
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.gabomagpt.rule=Host(`gabomagpt.andjanalytics.com`)"
+      - "traefik.http.routers.gabomagpt.entrypoints=websecure"
+      - "traefik.http.routers.gabomagpt.tls.certresolver=letsencrypt"
+      - "traefik.http.services.gabomagpt.loadbalancer.server.port=8080"
+      - "traefik.http.routers.gabomagpt.tls=true"
+      # Redirect HTTP to HTTPS
+      - "traefik.http.routers.gabomagpt-http.rule=Host(`gabomagpt.andjanalytics.com`)"
+      - "traefik.http.routers.gabomagpt-http.entrypoints=web"
+      - "traefik.http.routers.gabomagpt-http.middlewares=redirect-to-https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
 
 volumes:
   gabomagpt-data:
     driver: local
+
+networks:
+  coolify:
+    external: true

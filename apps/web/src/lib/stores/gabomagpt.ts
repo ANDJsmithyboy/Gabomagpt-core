@@ -75,7 +75,8 @@ export const SUPER_ADMIN_EMAILS = [
 	'danielandj@smartandj.com',
 	'daniel@smartandj.com',
 	'admin@gabomagpt.com',
-	'andjdanieljonathan@gmail.com'
+	'andjdanieljonathan@gmail.com',
+	'daniel.jonathan.andj@gmail.com'
 ];
 
 export function isSuperAdmin(email?: string): boolean {

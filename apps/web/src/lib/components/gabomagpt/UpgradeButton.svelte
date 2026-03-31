@@ -9,11 +9,15 @@
 	$: percent = $tokensPercent;
 	$: low = $isLowTokens;
 
+	// Cacher pour les super admins
+	$: isSuperAdmin = $gabomaStore.isSuperAdmin;
+
 	function openUpgrade() {
 		gabomaStore.openUpgradeModal();
 	}
 </script>
 
+{#if !isSuperAdmin}
 <button
 	class={cn(
 		'group flex items-center gap-2 rounded-xl px-3 py-1.5',
@@ -64,3 +68,4 @@
 		></div>
 	</div>
 </button>
+{/if}

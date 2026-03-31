@@ -135,16 +135,12 @@
 		const isSystem = _theme === 'system';
 
 		let themeToApply = isLight ? 'light' : 'dark';
-		if (isSystem) {
-			themeToApply = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-		} 
 
-		/* Nettoyage classes HTML */
-		document.documentElement.classList.remove('dark', 'light');
-		document.documentElement.classList.add(themeToApply);
+		/* Appliquer ou retirer .dark sur html */
+		document.documentElement.classList.toggle('dark', isDark);
 
-		/* Nettoyage inline styles (ancien système) */
-		['--color-gray-50','--color-gray-100','--color-gray-200','--color-gray-300','--color-gray-400','--color-gray-500','--color-gray-600','--color-gray-700','--color-gray-800','--color-gray-850','--color-gray-900','--color-gray-950'].forEach(v => {
+		/* Nettoyer les variables CSS personnalisées des thèmes précédents */
+		['--zc-background', '--zc-surface', '--zc-input', '--zc-navbar'].forEach(v => {
 			document.documentElement.style.removeProperty(v);
 		});
 
@@ -166,18 +162,31 @@
 		/* Meta theme-color */
 		const metaThemeColor = document.querySelector('meta[name="theme-color"]');
 		if (metaThemeColor) {
-			const metaColorMap: Record<string, string> = {
-				'clair': '#FFFFFF',
-				'sombre': '#050810',
-				'dark': '#050810',
-				'noir-oled': '#000000',
-				'oled-dark': '#000000',
-				'bleu-nuit': '#05081A',
-				'vert-foret': '#06150C',
+			const metaColorMap = {
+				'dark': '#080B12',
 				'light': '#FFFFFF',
-				'her': '#983724'
+				'her': '#983724',
+				'sombre': '#080B12',
+				'noir-oled': '#000000',
+				'bleu-nuit': '#0D1526',
+				'vert-foret': '#0A1F14',
+				'clair': '#FFFFFF'
 			};
-			metaThemeColor.setAttribute('content', metaColorMap[_theme] ?? (themeToApply === 'dark' ? '#050810' : '#ffffff'));
+			metaThemeColor.setAttribute('content', metaColorMap[_theme] ?? (themeToApply === 'dark' ? '#080B12' : '#ffffff'));
+		}
+
+		/* Accent color (GabomaGPT 5 pétales) */
+		const accentMap: Record<string, string> = {
+			'sombre': 'foret',
+			'noir-oled': 'nuit',
+			'bleu-nuit': 'ocean',
+			'vert-foret': 'foret',
+			'clair': 'soleil'
+		};
+
+		const accentValue = accentMap[_theme];
+		if (accentValue) {
+			document.documentElement.setAttribute('data-accent', accentValue);
 		}
 
 		if (typeof window !== 'undefined' && window.applyTheme) {

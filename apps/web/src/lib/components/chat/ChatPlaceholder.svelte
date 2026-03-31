@@ -11,6 +11,7 @@
 	import { sanitizeResponseContent } from '$lib/utils';
 	import Tooltip from '$lib/components/common/Tooltip.svelte';
 	import EyeSlash from '$lib/components/icons/EyeSlash.svelte';
+	import { getGabomaGPTModelName } from '$lib/utils/gabomagpt-models';
 
 	const i18n = getContext('i18n');
 
@@ -97,14 +98,14 @@
 		{/if}
 
 		<!-- Greeting centré -->
-		<div class="text-center mb-4 sm:mb-6 font-primary" in:fade={{ duration: 200 }}>
-			<div class="text-2xl sm:text-3xl font-semibold text-gray-800 dark:text-gray-100 tracking-tight">
-				{#if models[selectedModelIdx]?.name}
-					{models[selectedModelIdx]?.name}
-				{:else}
-					{getGreeting()}
-				{/if}
-			</div>
+			<div class="text-center mb-4 sm:mb-6 font-primary" in:fade={{ duration: 200 }}>
+				<div class="text-2xl sm:text-3xl font-semibold text-gray-800 dark:text-gray-100 tracking-tight">
+					{#if models[selectedModelIdx]?.name}
+						{getGabomaGPTModelName(models[selectedModelIdx]?.id, models[selectedModelIdx]?.name)}
+					{:else}
+						{getGreeting()}
+					{/if}
+				</div>
 
 			<div class="mt-1.5" in:fade={{ duration: 200, delay: 200 }}>
 				{#if models[selectedModelIdx]?.info?.meta?.description ?? null}
