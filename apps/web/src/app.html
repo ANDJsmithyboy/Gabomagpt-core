@@ -60,6 +60,15 @@
 					'noir-oled': '#000000', 'oled-dark': '#000000',
 					'bleu-nuit': '#05081A', 'vert-foret': '#06150C'
 				};
+				// Accent color — restauration immédiate pour éviter FOUC
+				var storedAccent = localStorage.getItem('gabomagpt_theme') || 'foret';
+				var validAccents = ['foret','ocean','soleil','flamme','nuit'];
+				if (validAccents.indexOf(storedAccent) !== -1) {
+					document.documentElement.setAttribute('data-accent', storedAccent);
+				} else {
+					document.documentElement.setAttribute('data-accent', 'foret');
+				}
+
 				var storedTheme = localStorage.theme;
 				var zionKey = zionThemeMap[storedTheme];
 

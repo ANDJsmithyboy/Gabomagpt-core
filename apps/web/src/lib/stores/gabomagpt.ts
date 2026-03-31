@@ -70,6 +70,19 @@ export const PLANS: Record<PlanKey, PlanConfig> = {
 
 export const AGENT_COST = 50;
 
+// Super Admin — jetons illimités (Daniel Jonathan ANDJ)
+export const SUPER_ADMIN_EMAILS = [
+	'danielandj@smartandj.com',
+	'daniel@smartandj.com',
+	'admin@gabomagpt.com',
+	'andjdanieljonathan@gmail.com'
+];
+
+export function isSuperAdmin(email?: string): boolean {
+	if (!email) return false;
+	return SUPER_ADMIN_EMAILS.includes(email.toLowerCase());
+}
+
 export type PaymentStep = 'choose_plan' | 'choose_operator' | 'processing' | 'success' | 'error';
 export type OperatorKey = 'airtel' | 'moov';
 
@@ -77,6 +90,7 @@ export interface GabomaState {
 	plan: PlanKey;
 	tokens: number;
 	tokensMax: number;
+	isSuperAdmin: boolean;
 	isPantherMode: boolean;
 	isPaymentModalOpen: boolean;
 	isUpgradeModalOpen: boolean;
@@ -98,6 +112,7 @@ const defaultState: GabomaState = {
 	plan: 'flash',
 	tokens: 50,
 	tokensMax: 50,
+	isSuperAdmin: false,
 	isPantherMode: false,
 	isPaymentModalOpen: false,
 	isUpgradeModalOpen: false,
@@ -167,6 +182,11 @@ function createGabomaStore() {
 		consumeTokens(amount: number): boolean {
 			let success = false;
 			update((s) => {
+				// Super Admin = jetons illimités
+				if (s.isSuperAdmin) {
+					success = true;
+					return s;
+				}
 				if (s.tokens >= amount) {
 					const newState = { ...s, tokens: s.tokens - amount };
 					saveState(newState);
@@ -259,7 +279,28 @@ function createGabomaStore() {
 
 		setUser(name: string, email: string) {
 			update((s) => {
-				const newState = { ...s, userName: name, userEmail: email };
+				const superAdmin = isSuperAdmin(email);
+				const newState = {
+					...s,
+					userName: name,
+					userEmail: email,
+					isSuperAdmin: superAdmin,
+					// Super admin gets unlimited tokens
+					...(superAdmin ? { tokens: 999999, tokensMax: 999999 } : {})
+				};
+				saveState(newState);
+				return newState;
+			});
+		},
+
+		setSuperAdmin(email: string, role?: string) {
+			update((s) => {
+				const superAdmin = isSuperAdmin(email) || role === 'admin';
+				const newState = {
+					...s,
+					isSuperAdmin: superAdmin,
+					...(superAdmin ? { tokens: 999999, tokensMax: 999999 } : {})
+				};
 				saveState(newState);
 				return newState;
 			});

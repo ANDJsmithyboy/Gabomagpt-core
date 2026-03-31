@@ -148,7 +148,7 @@
 			document.documentElement.style.removeProperty(v);
 		});
 
-		/* data-theme UNIQUEMENT pour les themes custom (pas clair/sombre = Open WebUI natif) */
+		/* data-theme UNIQUEMENT pour les themes custom (pas clair/sombre = GabomaGPT natif) */
 		const dataThemeMap: Record<string, string> = {
 			'noir-oled': 'noir-oled',
 			'oled-dark': 'noir-oled',
