@@ -45,7 +45,7 @@
 	});
 </script>
 
-{#key mounted}
+{#if mounted}
 	<div class="m-auto w-full max-w-6xl px-4 sm:px-8 lg:px-20 flex flex-col items-center justify-center">
 		<!-- Logo GabomaGPT centré (style Claude/Gemini) -->
 		<div class="flex flex-col items-center mb-6 sm:mb-8" in:fade={{ duration: 300 }}>
@@ -105,4 +105,4 @@
 			/>
 		</div>
 	</div>
-{/key}
+{/if}
