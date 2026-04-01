@@ -59,12 +59,12 @@
 
 		{#if $temporaryChatEnabled}
 			<Tooltip
-				content={$i18n.t("This chat won't appear in history and your messages will not be saved.")}
+				content={i18n?.t("This chat won't appear in history and your messages will not be saved.") ?? "This chat won't appear in history"}
 				className="w-full flex justify-center mb-1"
 				placement="top"
 			>
 				<div class="flex items-center gap-2 text-gray-500 text-sm mt-1 w-fit">
-					<EyeSlash strokeWidth="2.5" className="size-4" />{$i18n.t('Temporary Chat')}
+					<EyeSlash strokeWidth="2.5" className="size-4" />{i18n?.t('Temporary Chat') ?? 'Temporary Chat'}
 				</div>
 			</Tooltip>
 		{/if}
@@ -88,7 +88,7 @@
 					</div>
 				{:else}
 					<div class="text-sm sm:text-base text-gray-400 dark:text-gray-500 font-normal">
-						{$i18n.t('Comment puis-je vous aider aujourd\'hui ?')}
+						{i18n?.t('Comment puis-je vous aider aujourd\'hui ?') ?? 'Comment puis-je vous aider aujourd\'hui ?'}
 					</div>
 				{/if}
 			</div>
