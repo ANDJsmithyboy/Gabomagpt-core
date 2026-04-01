@@ -10,6 +10,7 @@
 	const i18n = getContext('i18n');
 
 	$: gabomaState = $gabomaStore;
+	$: currentI18n = i18n;
 
 	import AdvancedParams from './Advanced/AdvancedParams.svelte';
 	import Textarea from '$lib/components/common/Textarea.svelte';
@@ -21,7 +22,7 @@
 	let selectedTheme = 'system';
 
 	let languages: Awaited<ReturnType<typeof getLanguages>> = [];
-	let lang = $i18n.language;
+	let lang = i18n?.language || 'en';
 	let notificationEnabled = false;
 	let system = '';
 
@@ -35,9 +36,9 @@
 			saveSettings({ notificationEnabled: notificationEnabled });
 		} else {
 			toast.error(
-				$i18n.t(
+				i18n?.t(
 					'Response notifications cannot be activated as the website permissions have been denied. Please visit your browser settings to grant the necessary access.'
-				)
+				) ?? 'Permission denied'
 			);
 		}
 	};
@@ -204,22 +205,22 @@
 <div class="flex flex-col h-full justify-between text-sm" id="tab-general">
 	<div class="  overflow-y-scroll max-h-[28rem] md:max-h-full">
 		<div class="">
-			<div class=" mb-1 text-sm font-medium">{$i18n.t('WebUI Settings')}</div>
+			<div class=" mb-1 text-sm font-medium">{i18n?.t('WebUI Settings') ?? 'WebUI Settings'}</div>
 
 			<div class="flex w-full justify-between">
-				<div class=" self-center text-xs font-medium">{$i18n.t('Theme')}</div>
+				<div class=" self-center text-xs font-medium">{i18n?.t('Theme') ?? 'Theme'}</div>
 				<div class="flex items-center relative">
 					<select
 						class="w-fit pr-8 rounded-sm py-2 px-2 text-xs bg-transparent text-right {$settings.highContrastMode
 							? ''
 							: 'outline-hidden'}"
 						bind:value={selectedTheme}
-						placeholder={$i18n.t('Select a theme')}
+						placeholder={i18n?.t('Select a theme') ?? 'Select a theme'}
 						on:change={() => themeChangeHandler(selectedTheme)}
 					>
-						<option value="system">⚙️ {$i18n.t('System')}</option>
+						<option value="system">⚙️ {i18n?.t('System') ?? 'System'}</option>
 						<option value="clair">☀️ Clair</option>
-						<option value="sombre">� Sombre</option>
+						<option value="sombre">🌙 Sombre</option>
 						<option value="noir-oled">🌃 Noir OLED</option>
 						<option value="bleu-nuit">🌌 Bleu Nuit</option>
 						<option value="vert-foret">🌿 Vert Forêt</option>

@@ -3,11 +3,13 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { toast } from 'svelte-sonner';
-
-	import { config } from '$lib/stores';
 	import { getBackendConfig } from '$lib/apis';
-	import Database from './Settings/Database.svelte';
+	import { getDocs } from '$lib/apis/documents';
+	import { config, user, models, theme, mobile, settings } from '$lib/stores';
 
+	const i18n = getContext('i18n');
+
+	import Database from './Settings/Database.svelte';
 	import General from './Settings/General.svelte';
 	import Pipelines from './Settings/Pipelines.svelte';
 	import Audio from './Settings/Audio.svelte';
@@ -17,7 +19,6 @@
 	import Connections from './Settings/Connections.svelte';
 	import Documents from './Settings/Documents.svelte';
 	import WebSearch from './Settings/WebSearch.svelte';
-
 	import Evaluations from './Settings/Evaluations.svelte';
 	import CodeExecution from './Settings/CodeExecution.svelte';
 	import Integrations from './Settings/Integrations.svelte';
@@ -26,8 +27,6 @@
 	import DocumentChartBar from '../icons/DocumentChartBar.svelte';
 	import Search from '../icons/Search.svelte';
 	import XMark from '../icons/XMark.svelte';
-
-	const i18n = getContext('i18n');
 
 	let selectedTab = 'general';
 
@@ -67,7 +66,7 @@
 	};
 
 	let search = '';
-	let searchDebounceTimeout;
+	let searchDebounceTimeout = null;
 	let filteredSettings = [];
 
 	const allSettings = [
