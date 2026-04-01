@@ -4,7 +4,6 @@
 	import { goto } from '$app/navigation';
 	import { toast } from 'svelte-sonner';
 	import { getBackendConfig } from '$lib/apis';
-	import { getDocs } from '$lib/apis/documents';
 	import { config, user, models, theme, mobile, settings } from '$lib/stores';
 
 	const i18n = getContext('i18n');
