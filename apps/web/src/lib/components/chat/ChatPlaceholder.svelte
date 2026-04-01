@@ -13,21 +13,22 @@
 	import EyeSlash from '$lib/components/icons/EyeSlash.svelte';
 	import { getGabomaGPTModelName } from '$lib/utils/gabomagpt-models';
 
-	const i18n = getContext('i18n');
+	/** @type {any} */
+	const i18n: any = getContext('i18n');
 
-	export let modelIds = [];
-	export let models = [];
-	export let atSelectedModel;
+	export let modelIds: string[] = [];
+	export let models: any[] = [];
+	export let atSelectedModel: any;
 
-	export let onSelect = (e) => {};
+	export let onSelect: (e: any) => void = () => {};
 
-	let mounted = false;
-	let selectedModelIdx = 0;
+	let mounted: boolean = false;
+	let selectedModelIdx: number = 0;
 
 	/* Salutation gabonaise selon l'heure du jour */
 	function getGreeting(): string {
 		const hour = new Date().getHours();
-		const name = $user?.name?.split(' ')[0] || 'ami';
+		const name = ($user as any)?.name?.split(' ')[0] || 'ami';
 		if (hour >= 5 && hour < 12) return `Mbolo ! Bonjour ${name} ☀️`;
 		if (hour >= 12 && hour < 18) return `Akeva ! Bon après-midi ${name}`;
 		if (hour >= 18 && hour < 22) return `Bonsoir ${name}, on gère quoi ? 🌙`;
@@ -38,7 +39,7 @@
 		selectedModelIdx = models.length - 1;
 	}
 
-	$: models = modelIds.map((id) => $_models.find((m) => m.id === id));
+	$: models = modelIds.map((id: string) => $_models.find((m: any) => m.id === id));
 
 	onMount(() => {
 		mounted = true;
