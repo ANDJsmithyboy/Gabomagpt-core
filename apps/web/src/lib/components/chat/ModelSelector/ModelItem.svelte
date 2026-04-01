@@ -6,6 +6,7 @@
 
 	import { mobile, settings, user } from '$lib/stores';
 	import { WEBUI_API_BASE_URL, WEBUI_BASE_URL } from '$lib/constants';
+	import { getGabomaModelName, getGabomaModelIcon } from '$lib/utils/modelUtils';
 
 	import Tooltip from '$lib/components/common/Tooltip.svelte';
 	import { copyToClipboard, sanitizeResponseContent } from '$lib/utils';
@@ -87,9 +88,10 @@
 			</div>
 
 			<div class="flex items-center">
-				<Tooltip content={`${item.label} (${item.value})`} placement="top-start">
-					<div class="line-clamp-1">
-						{item.label}
+				<Tooltip content={`${getGabomaModelName(item.value)} (${item.value})`} placement="top-start">
+					<div class="line-clamp-1 flex items-center gap-1">
+						<span class="text-sm">{getGabomaModelIcon(item.value)}</span>
+						{getGabomaModelName(item.value)}
 					</div>
 				</Tooltip>
 			</div>
