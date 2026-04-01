@@ -57,6 +57,7 @@
 		scrollToTab(selectedTab);
 	}
 
+	/** @param {string} tabId */
 	const scrollToTab = (tabId) => {
 		const tabElement = document.getElementById(tabId);
 		if (tabElement) {
@@ -65,7 +66,9 @@
 	};
 
 	let search = '';
+	/** @type {ReturnType<typeof setTimeout> | null} */
 	let searchDebounceTimeout = null;
+	/** @type {any[]} */
 	let filteredSettings = [];
 
 	const allSettings = [

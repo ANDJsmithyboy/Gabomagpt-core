@@ -2,12 +2,15 @@
 	import { models } from '$lib/stores';
 	import { getGabomaModelName, getGabomaModelIcon, getGabomaModelTier } from '$lib/utils/modelUtils';
 	
-	// Find the actual selected model from the chat component
-	$: selectedModel = models.find(m => m.id === atSelectedModel?.id) || models[0];
+	// Local state for selected model
+	let selectedModelId: string | null = null;
+	
+	$: if (!selectedModelId && $models.length > 0) {
+		selectedModelId = $models[0]?.id || null;
+	}
 	
 	function selectModel(modelId: string) {
-		// This would need to be connected to the actual model selection logic
-		console.log('Selected model:', modelId);
+		selectedModelId = modelId;
 	}
 	
 	function getTier(modelId: string): string {
@@ -19,7 +22,7 @@
 	{#each $models as model}
 		<button
 			class="gaboma-model-pill {getTier(model.id)} 
-			       {$selectedModel === model.id ? 'active' : ''}"
+			       {selectedModelId === model.id ? 'active' : ''}"
 			on:click={() => selectModel(model.id)}
 		>
 			{#if getTier(model.id) === 'flash'}⚡{/if}
