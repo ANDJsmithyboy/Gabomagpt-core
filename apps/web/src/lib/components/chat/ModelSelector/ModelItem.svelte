@@ -30,14 +30,14 @@
 
 	export let onClick: () => void = () => {};
 
-	const copyLinkHandler = async (model) => {
+	const copyLinkHandler = async (model: any) => {
 		const baseUrl = window.location.origin;
 		const res = await copyToClipboard(`${baseUrl}/?model=${encodeURIComponent(model.id)}`);
 
 		if (res) {
-			toast.success($i18n.t('Copied link to clipboard'));
+			toast.success(i18n?.t('Copied link to clipboard') ?? 'Copied link to clipboard');
 		} else {
-			toast.error($i18n.t('Failed to copy link'));
+			toast.error(i18n?.t('Failed to copy link') ?? 'Failed to copy link');
 		}
 	};
 
@@ -47,7 +47,7 @@
 <button
 	role="option"
 	aria-selected={value === item.value}
-	aria-label={$i18n.t('Select {{modelName}} model', { modelName: item.label })}
+	aria-label={i18n?.t('Select {{modelName}} model', { modelName: item.label }) ?? 'Select model'}
 	class="flex group/item w-full text-left font-medium line-clamp-1 select-none items-center rounded-button py-2 pl-3 pr-1.5 text-sm text-gray-700 dark:text-gray-100 outline-hidden transition-all duration-75 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl cursor-pointer data-highlighted:bg-muted {index ===
 	selectedModelIdx
 		? 'bg-gray-100 dark:bg-gray-800 group-hover:bg-transparent'
@@ -79,8 +79,8 @@
 			<div class="flex items-center min-w-fit">
 				<Tooltip content={$user?.role === 'admin' ? (item?.value ?? '') : ''} placement="top-start">
 					<img
-						src={`${WEBUI_API_BASE_URL}/models/model/profile/image?id=${item.model.id}&lang=${$i18n.language}`}
-						alt={$i18n.t('{{modelName}} profile image', { modelName: item.label })}
+						src={`${WEBUI_API_BASE_URL}/models/model/profile/image?id=${item.model.id}&lang=${i18n?.language || 'en'}`}
+						alt={i18n?.t('{{modelName}} profile image', { modelName: item.label }) ?? 'Profile image'}
 						class="rounded-full size-5 flex items-center"
 						loading="lazy"
 					/>

@@ -1,9 +1,13 @@
 <script lang="ts">
-	import { models, selectedModel } from '$lib/stores';
+	import { models } from '$lib/stores';
 	import { getGabomaModelName, getGabomaModelIcon, getGabomaModelTier } from '$lib/utils/modelUtils';
 	
+	// Find the actual selected model from the chat component
+	$: selectedModel = models.find(m => m.id === atSelectedModel?.id) || models[0];
+	
 	function selectModel(modelId: string) {
-		selectedModel.set(modelId);
+		// This would need to be connected to the actual model selection logic
+		console.log('Selected model:', modelId);
 	}
 	
 	function getTier(modelId: string): string {
