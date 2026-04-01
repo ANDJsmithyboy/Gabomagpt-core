@@ -527,7 +527,13 @@
 		{:else if selectedTab === 'evaluations'}
 			<Evaluations />
 		{:else if selectedTab === 'integrations'}
-			<Integrations />
+			<Integrations
+				saveSettings={async () => {
+					toast.success($i18n.t('Settings saved successfully!'));
+					await tick();
+					await config.set(await getBackendConfig());
+				}}
+			/>
 		{:else if selectedTab === 'documents'}
 			<Documents
 				on:save={async () => {
