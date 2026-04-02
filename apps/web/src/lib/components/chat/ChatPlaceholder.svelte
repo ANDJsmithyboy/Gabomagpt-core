@@ -93,6 +93,7 @@
 					</div>
 				{/if}
 			</div>
+		</div>
 
 		<!-- Suggestions responsive grid -->
 		<div class="w-full max-w-2xl font-primary" in:fade={{ duration: 200, delay: 300 }}>
