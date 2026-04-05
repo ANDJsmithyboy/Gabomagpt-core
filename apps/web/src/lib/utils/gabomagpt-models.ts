@@ -90,6 +90,38 @@ export function getGabomaGPTModelName(modelId: string, _originalName?: string): 
 }
 
 /**
+ * Tiers visibles pour les utilisateurs non-admin.
+ * L'admin voit TOUT. Les users voient uniquement Flash, Pro, Black Panther.
+ */
+export const USER_VISIBLE_TIERS = ['GabomaGPT Flash', 'GabomaGPT Pro', 'GabomaGPT Black Panther'];
+
+/**
+ * Descriptions affichees dans le selecteur pour chaque tier.
+ */
+export const TIER_DESCRIPTIONS: Record<string, string> = {
+	'GabomaGPT Flash': 'Rapide et léger — réponses instantanées',
+	'GabomaGPT Pro': 'Puissant et polyvalent — raisonnement avancé',
+	'GabomaGPT Black Panther': 'Agent autonome — actions Airtel Money, navigation web'
+};
+
+/**
+ * Filtre les modeles pour les utilisateurs non-admin.
+ * Retourne seulement 1 modele par tier visible (Flash, Pro, Black Panther).
+ */
+export function filterModelsForUser(models: any[], isAdmin: boolean): any[] {
+	if (isAdmin) return models;
+	const seen = new Set<string>();
+	return models.filter((m) => {
+		if (!m?.id) return false;
+		const tierName = getGabomaGPTModelName(m.id, m.name);
+		if (!USER_VISIBLE_TIERS.includes(tierName)) return false;
+		if (seen.has(tierName)) return false;
+		seen.add(tierName);
+		return true;
+	});
+}
+
+/**
  * Retourne la description courte du tier pour l'UI.
  */
 export function getGabomaGPTModelDescription(modelId: string): string {

@@ -822,4 +822,28 @@ a[href*="openwebui"] {
     font-size: 12px !important;
     color: rgba(255,255,255,0.4) !important;
   }
+
+  /* ── FIX 3: TTS/STT mobile-friendly buttons ── */
+  [id^="speak-button-"] {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    padding: 10px !important;
+  }
+
+  [id^="speak-button-"] svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  /* Make voice recording button larger on mobile */
+  button[aria-label="Record"],
+  button[aria-label="Voice Input"] {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+
+  /* Ensure action buttons in response messages are always visible on mobile */
+  .group .invisible {
+    visibility: visible !important;
+  }
 }

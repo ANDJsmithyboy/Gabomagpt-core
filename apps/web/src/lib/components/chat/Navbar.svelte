@@ -16,7 +16,7 @@
 		temporaryChatEnabled,
 		user
 	} from '$lib/stores';
-	import { getGabomaGPTModelName } from '$lib/utils/gabomagpt-models';
+	import { getGabomaGPTModelName, filterModelsForUser, TIER_DESCRIPTIONS } from '$lib/utils/gabomagpt-models';
 
 	import { slide } from 'svelte/transition';
 	import { page } from '$app/stores';
@@ -65,6 +65,7 @@
 	let showDownloadChatModal = false;
 	let showModelSheet = false;
 
+	$: isAdmin = ($user as any)?.role === 'admin';
 	$: currentModelId = selectedModels?.[0] ?? '';
 	$: currentModel = $_models.find((m) => m.id === currentModelId);
 	$: currentModelDisplay = currentModel
@@ -364,40 +365,38 @@
 				<div class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2">
 					{$i18n.t('Select a model')}
 				</div>
-				{#each $_models.filter((m) => !(m?.info?.meta?.hidden ?? false)) as model (model.id)}
-					<button
-						class="flex items-center gap-3 w-full px-3 py-3 rounded-xl transition-all
-							{model.id === currentModelId
-								? 'bg-gray-100 dark:bg-gray-800'
-								: 'hover:bg-gray-50 dark:hover:bg-gray-850'}"
-						on:click={() => {
-							selectedModels = [model.id];
-							showModelSheet = false;
-						}}
-					>
-						<img
-							src="{WEBUI_API_BASE_URL}/models/model/profile/image?id={model.id}"
-							alt=""
-							class="size-8 rounded-lg object-cover shrink-0"
-							on:error={(e) => { e.target.src = '/favicon.png'; }}
-						/>
-						<div class="flex flex-col items-start min-w-0">
-							<span class="text-sm font-semibold text-gray-800 dark:text-gray-100 truncate w-full text-left">
-								{getGabomaGPTModelName(model.id, model.name)}
-							</span>
-							{#if model?.info?.meta?.description}
-								<span class="text-xs text-gray-400 dark:text-gray-500 truncate w-full text-left">
-									{model.info.meta.description.slice(0, 60)}
-								</span>
-							{/if}
-						</div>
-						{#if model.id === currentModelId}
-							<svg class="size-5 text-green-500 shrink-0 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-								<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-							</svg>
-						{/if}
-					</button>
-				{/each}
+				{#each filterModelsForUser($_models.filter((m) => !(m?.info?.meta?.hidden ?? false)), isAdmin) as model (model.id)}
+				{@const tierName = getGabomaGPTModelName(model.id, model.name)}
+				<button
+					class="flex items-center gap-3 w-full px-3 py-3 rounded-xl transition-all
+						{model.id === currentModelId
+							? 'bg-gray-100 dark:bg-gray-800'
+							: 'hover:bg-gray-50 dark:hover:bg-gray-850'}"
+					on:click={() => {
+						selectedModels = [model.id];
+						showModelSheet = false;
+					}}
+				>
+					<img
+						src="/gabomagpt-logo.jpeg"
+						alt=""
+						class="size-8 rounded-lg object-cover shrink-0"
+					/>
+					<div class="flex flex-col items-start min-w-0">
+						<span class="text-sm font-semibold text-gray-800 dark:text-gray-100 truncate w-full text-left">
+							{tierName}
+						</span>
+						<span class="text-xs text-gray-400 dark:text-gray-500 truncate w-full text-left">
+							{TIER_DESCRIPTIONS[tierName] ?? ''}
+						</span>
+					</div>
+					{#if model.id === currentModelId}
+						<svg class="size-5 text-green-500 shrink-0 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+						</svg>
+					{/if}
+				</button>
+			{/each}
 			</div>
 		</div>
 	</div>

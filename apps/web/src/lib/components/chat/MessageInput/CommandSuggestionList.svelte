@@ -3,6 +3,7 @@
 	import Knowledge from './Commands/Knowledge.svelte';
 	import Models from './Commands/Models.svelte';
 	import Skills from './Commands/Skills.svelte';
+	import { user } from '$lib/stores';
 
 	export let char = '';
 	export let query = '';
@@ -11,6 +12,8 @@
 	export let onSelect = (e) => {};
 	export let onUpload = (e) => {};
 	export let insertTextHandler = (text) => {};
+
+	$: isAdmin = $user?.role === 'admin';
 
 	let suggestionElement = null;
 	let filteredItems = [];
@@ -96,7 +99,7 @@
 					}
 				}}
 			/>
-		{:else if char === '@'}
+		{:else if char === '@' && isAdmin}
 			<Models
 				bind:this={suggestionElement}
 				{query}

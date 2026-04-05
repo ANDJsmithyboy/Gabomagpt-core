@@ -6,7 +6,7 @@
 	import Tooltip from '../common/Tooltip.svelte';
 
 	import { updateUserSettings } from '$lib/apis/users';
-	import { getGabomaGPTModelName } from '$lib/utils/gabomagpt-models';
+	import { getGabomaGPTModelName, filterModelsForUser } from '$lib/utils/gabomagpt-models';
 	const i18n = getContext('i18n');
 
 	export let selectedModels = [''];
@@ -58,7 +58,7 @@
 					<Selector
 						id={`${selectedModelIdx}`}
 						placeholder={$i18n.t('Select a model')}
-						items={$models.map((model) => ({
+						items={filterModelsForUser($models, $user?.role === 'admin').map((model) => ({
 							value: model.id,
 							label: getGabomaGPTModelName(model.id, model.name),
 							model: model
