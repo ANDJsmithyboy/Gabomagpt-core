@@ -7,7 +7,7 @@
 
 	import { updateUserSettings } from '$lib/apis/users';
 	import { getGabomaGPTModelName, filterModelsForUser } from '$lib/utils/gabomagpt-models';
-	const i18n = getContext('i18n');
+	const i18n: any = getContext('i18n');
 
 	export let selectedModels = [''];
 	export let disabled = false;
@@ -26,11 +26,11 @@
 		toast.success($i18n.t('Default model updated'));
 	};
 
-	const pinModelHandler = async (modelId) => {
-		let pinnedModels = $settings?.pinnedModels ?? [];
+	const pinModelHandler = async (modelId: string) => {
+		let pinnedModels: any[] = ($settings as any)?.pinnedModels ?? [];
 
 		if (pinnedModels.includes(modelId)) {
-			pinnedModels = pinnedModels.filter((id) => id !== modelId);
+			pinnedModels = pinnedModels.filter((id: any) => id !== modelId);
 		} else {
 			pinnedModels = [...new Set([...pinnedModels, modelId])];
 		}

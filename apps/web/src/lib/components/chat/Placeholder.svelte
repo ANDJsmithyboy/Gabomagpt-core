@@ -30,24 +30,24 @@
 	import FolderPlaceholder from './Placeholder/FolderPlaceholder.svelte';
 	import FolderTitle from './Placeholder/FolderTitle.svelte';
 
-	const i18n = getContext('i18n');
+	const i18n: any = getContext('i18n');
 
 	export let createMessagePair: Function;
 	export let stopResponse: Function;
 
 	export let autoScroll = false;
 
-	export let atSelectedModel: Model | undefined;
-	export let selectedModels: [''];
+	export let atSelectedModel: any;
+	export let selectedModels: string[];
 
-	export let history;
+	export let history: any;
 
 	export let prompt = '';
-	export let files = [];
-	export let messageInput = null;
+	export let files: any[] = [];
+	export let messageInput: any = null;
 
-	export let selectedToolIds = [];
-	export let selectedFilterIds = [];
+	export let selectedToolIds: string[] = [];
+	export let selectedFilterIds: string[] = [];
 
 	export let showCommands = false;
 
@@ -55,15 +55,15 @@
 	export let codeInterpreterEnabled = false;
 	export let webSearchEnabled = false;
 
-	export let onUpload: Function = (e) => {};
-	export let onSelect = (e) => {};
-	export let onChange = (e) => {};
+	export let onUpload: Function = (e: any) => {};
+	export let onSelect = (e: any) => {};
+	export let onChange = (e: any) => {};
 
-	export let toolServers = [];
+	export let toolServers: any[] = [];
 
 	export let dragged = false;
 
-	let models = [];
+	let models: any[] = [];
 	let selectedModelIdx = 0;
 
 	/* Salutation gabonaise selon l'heure du jour */

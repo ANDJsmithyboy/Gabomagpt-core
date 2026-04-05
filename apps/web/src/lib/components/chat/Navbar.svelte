@@ -365,7 +365,7 @@
 				<div class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2">
 					{$i18n.t('Select a model')}
 				</div>
-				{#each filterModelsForUser($_models.filter((m) => !(m?.info?.meta?.hidden ?? false)), isAdmin) as model (model.id)}
+				{#each filterModelsForUser($_models.filter((m) => !((m?.info?.meta as any)?.hidden ?? false)), isAdmin) as model (model.id)}
 				{@const tierName = getGabomaGPTModelName(model.id, model.name)}
 				<button
 					class="flex items-center gap-3 w-full px-3 py-3 rounded-xl transition-all
