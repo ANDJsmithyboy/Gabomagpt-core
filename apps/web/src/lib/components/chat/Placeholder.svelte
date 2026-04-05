@@ -81,7 +81,7 @@
 		selectedModelIdx = models.length - 1;
 	}
 
-	$: models = selectedModels.map((id) => $_models.find((m) => m.id === id));
+	$: models = selectedModels.map((id: any) => $_models.find((m: any) => m.id === id));
 </script>
 
 <div class="m-auto w-full max-w-6xl px-2 @2xl:px-20 translate-y-6 py-24 text-center">
@@ -153,8 +153,7 @@
 					bind:atSelectedModel
 					bind:showCommands
 					bind:dragged
-					{toolServers}
-					{stopResponse}
+						{stopResponse}
 					{createMessagePair}
 					placeholder={$i18n.t('On gère quoi aujourd\'hui ?')}
 					{onChange}

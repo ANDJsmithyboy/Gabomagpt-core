@@ -48,7 +48,7 @@
 
 	export let initNewChat: Function;
 	export let shareEnabled: boolean = false;
-	export let scrollTop = 0;
+	export const scrollTop = 0;
 
 	export let chat: any;
 	export let history: any;
@@ -82,7 +82,7 @@
 		initNewChat();
 	}}
 	aria-label="New Chat"
-/>
+></button>
 
 <nav
 	class="sticky top-0 z-30 w-full {chat?.id
