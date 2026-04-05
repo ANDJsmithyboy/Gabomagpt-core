@@ -13,6 +13,7 @@
 
 	import { WEBUI_NAME, config, mobile, models as _models, settings, user } from '$lib/stores';
 	import { WEBUI_API_BASE_URL, WEBUI_BASE_URL } from '$lib/constants';
+	import { getGabomaGPTModelName } from '$lib/utils/gabomagpt-models';
 	import {
 		createNewModel,
 		deleteModelById,
@@ -493,12 +494,12 @@
 									<div class="flex h-full w-full flex-1 flex-col justify-start self-center group">
 										<div class="flex-1 w-full">
 											<div class="flex items-center justify-between w-full">
-												<Tooltip content={model.name} className=" w-fit" placement="top-start">
+												<Tooltip content={getGabomaGPTModelName(model.id, model.name)} className=" w-fit" placement="top-start">
 													<a
 														class=" font-medium line-clamp-1 hover:underline capitalize"
 														href={`/?models=${encodeURIComponent(model.id)}`}
 													>
-														{model.name}
+														{getGabomaGPTModelName(model.id, model.name)}
 													</a>
 												</Tooltip>
 

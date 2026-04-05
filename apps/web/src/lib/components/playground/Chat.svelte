@@ -7,6 +7,7 @@
 
 	import { goto } from '$app/navigation';
 	import { onMount, tick, getContext } from 'svelte';
+	import { getGabomaGPTModelName } from '$lib/utils/gabomagpt-models';
 
 	import {
 		OLLAMA_API_BASE_URL,
@@ -479,8 +480,8 @@
 								>
 									{#each $models as model}
 										<option value={model.id} class="bg-gray-50 dark:bg-gray-700"
-											>{model.name}</option
-										>
+									>{getGabomaGPTModelName(model.id, model.name)}</option
+									>
 									{/each}
 								</select>
 							</div>

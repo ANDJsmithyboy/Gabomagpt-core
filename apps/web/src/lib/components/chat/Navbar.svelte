@@ -8,6 +8,7 @@
 		chatId,
 		config,
 		mobile,
+		models as _models,
 		settings,
 		showArchivedChats,
 		showControls,
@@ -15,6 +16,7 @@
 		temporaryChatEnabled,
 		user
 	} from '$lib/stores';
+	import { getGabomaGPTModelName } from '$lib/utils/gabomagpt-models';
 
 	import { slide } from 'svelte/transition';
 	import { page } from '$app/stores';
@@ -42,25 +44,32 @@
 	/* GabomaGPT */
 	import { TokenBadge, UpgradeButton } from '$lib/components/gabomagpt';
 
-	const i18n = getContext('i18n');
+	const i18n: any = getContext('i18n');
 
 	export let initNewChat: Function;
 	export let shareEnabled: boolean = false;
 	export let scrollTop = 0;
 
-	export let chat;
-	export let history;
-	export let selectedModels;
+	export let chat: any;
+	export let history: any;
+	export let selectedModels: string[];
 	export let showModelSelector = true;
 
 	export let onSaveTempChat: () => {};
 	export let archiveChatHandler: (id: string) => void;
 	export let moveChatHandler: (id: string, folderId: string) => void;
 
-	let closedBannerIds = [];
+	let closedBannerIds: string[] = [];
 
 	let showShareChatModal = false;
 	let showDownloadChatModal = false;
+	let showModelSheet = false;
+
+	$: currentModelId = selectedModels?.[0] ?? '';
+	$: currentModel = $_models.find((m) => m.id === currentModelId);
+	$: currentModelDisplay = currentModel
+		? getGabomaGPTModelName(currentModel.id, currentModel.name)
+		: 'GabomaGPT';
 </script>
 
 <ShareChatModal bind:show={showShareChatModal} chatId={$chatId} />
@@ -113,8 +122,26 @@
 					</div>
 				{/if}
 
-				<!-- ZION-CORE: Espace libéré — ModelSelector et ModeSwitch déplacés dans l'input -->
-				<div class="flex-1"></div>
+					<!-- Mobile model selector pill (Claude style) -->
+				<div class="flex-1 flex items-center justify-center min-w-0">
+					{#if $mobile && showModelSelector}
+						<button
+							class="flex items-center gap-1.5 px-3 py-1 rounded-full
+								bg-gray-50/80 dark:bg-gray-800/80 hover:bg-gray-100 dark:hover:bg-gray-750
+								border border-gray-200/60 dark:border-gray-700/60
+								transition-all duration-150 max-w-[200px] truncate"
+							on:click={() => { showModelSheet = !showModelSheet; }}
+							aria-label="Select model"
+						>
+							<span class="text-xs font-semibold text-gray-700 dark:text-gray-200 truncate">
+								{currentModelDisplay}
+							</span>
+							<svg class="size-3 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+							</svg>
+						</button>
+					{/if}
+				</div>
 
 				<div class="self-start flex flex-none items-center gap-1 text-gray-600 dark:text-gray-400">
 					<!-- GabomaGPT — Upgrade + Badge jetons -->
@@ -131,9 +158,9 @@
 									class="flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition"
 									id="temporary-chat-button"
 									on:click={async () => {
-										if (($settings?.temporaryChatByDefault ?? false) && $temporaryChatEnabled) {
-											// for proper initNewChat handling
-											await temporaryChatEnabled.set(null);
+										if (($settings as any)?.temporaryChatByDefault && $temporaryChatEnabled) {
+									// for proper initNewChat handling
+									await temporaryChatEnabled.set(false as any);
 										} else {
 											await temporaryChatEnabled.set(!$temporaryChatEnabled);
 										}
@@ -272,32 +299,20 @@
 	{/if}
 
 	<div class="absolute top-[100%] left-0 right-0 h-fit">
-		{#if !history.currentId && !$chatId && ($banners.length > 0 || ($config?.license_metadata?.type ?? null) === 'trial' || (($config?.license_metadata?.seats ?? null) !== null && $config?.user_count > $config?.license_metadata?.seats))}
+		{#if !history.currentId && !$chatId && ($banners.length > 0 || (($config as any)?.license_metadata?.type ?? null) === 'trial' || ((($config as any)?.license_metadata?.seats ?? null) !== null && ($config as any)?.user_count > ($config as any)?.license_metadata?.seats))}
 			<div class=" w-full z-30">
 				<div class=" flex flex-col gap-1 w-full">
-					{#if ($config?.license_metadata?.type ?? null) === 'trial'}
-						<Banner
-							banner={{
-								type: 'info',
-								title: 'Trial License',
-								content: $i18n.t(
-									'You are currently using a trial license. Please contact support to upgrade your license.'
-								)
-							}}
-						/>
-					{/if}
+					{#if (($config as any)?.license_metadata?.type ?? null) === 'trial'}
+					<Banner
+						banner={{ id: '__trial', timestamp: 0, type: 'info', title: 'Trial License', content: $i18n.t('You are currently using a trial license. Please contact support to upgrade your license.') }}
+					/>
+				{/if}
 
-					{#if ($config?.license_metadata?.seats ?? null) !== null && $config?.user_count > $config?.license_metadata?.seats}
-						<Banner
-							banner={{
-								type: 'error',
-								title: 'License Error',
-								content: $i18n.t(
-									'Exceeded the number of seats in your license. Please contact support to increase the number of seats.'
-								)
-							}}
-						/>
-					{/if}
+					{#if (($config as any)?.license_metadata?.seats ?? null) !== null && ($config as any)?.user_count > ($config as any)?.license_metadata?.seats}
+					<Banner
+						banner={{ id: '__seats', timestamp: 0, type: 'error', title: 'License Error', content: $i18n.t('Exceeded the number of seats in your license. Please contact support to increase the number of seats.') }}
+					/>
+				{/if}
 
 					{#each $banners.filter((b) => ![...JSON.parse(localStorage.getItem('dismissedBannerIds') ?? '[]'), ...closedBannerIds].includes(b.id)) as banner (banner.id)}
 						<Banner
@@ -326,3 +341,64 @@
 		{/if}
 	</div>
 </nav>
+
+<!-- Mobile Model Bottom Sheet -->
+{#if showModelSheet && $mobile}
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
+	<div
+		class="fixed inset-0 z-[1100] bg-black/50 backdrop-blur-sm"
+		on:click={() => { showModelSheet = false; }}
+	>
+		<div
+			class="fixed bottom-0 left-0 right-0 z-[1200] bg-white dark:bg-gray-900
+				rounded-t-2xl max-h-[60vh] overflow-y-auto
+				shadow-2xl border-t border-gray-200 dark:border-gray-700"
+			style="padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));"
+			on:click|stopPropagation
+		>
+			<div class="flex justify-center pt-3 pb-2">
+				<div class="w-10 h-1 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+			</div>
+			<div class="px-4 pb-2">
+				<div class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2">
+					{$i18n.t('Select a model')}
+				</div>
+				{#each $_models.filter((m) => !(m?.info?.meta?.hidden ?? false)) as model (model.id)}
+					<button
+						class="flex items-center gap-3 w-full px-3 py-3 rounded-xl transition-all
+							{model.id === currentModelId
+								? 'bg-gray-100 dark:bg-gray-800'
+								: 'hover:bg-gray-50 dark:hover:bg-gray-850'}"
+						on:click={() => {
+							selectedModels = [model.id];
+							showModelSheet = false;
+						}}
+					>
+						<img
+							src="{WEBUI_API_BASE_URL}/models/model/profile/image?id={model.id}"
+							alt=""
+							class="size-8 rounded-lg object-cover shrink-0"
+							on:error={(e) => { e.target.src = '/favicon.png'; }}
+						/>
+						<div class="flex flex-col items-start min-w-0">
+							<span class="text-sm font-semibold text-gray-800 dark:text-gray-100 truncate w-full text-left">
+								{getGabomaGPTModelName(model.id, model.name)}
+							</span>
+							{#if model?.info?.meta?.description}
+								<span class="text-xs text-gray-400 dark:text-gray-500 truncate w-full text-left">
+									{model.info.meta.description.slice(0, 60)}
+								</span>
+							{/if}
+						</div>
+						{#if model.id === currentModelId}
+							<svg class="size-5 text-green-500 shrink-0 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+							</svg>
+						{/if}
+					</button>
+				{/each}
+			</div>
+		</div>
+	</div>
+{/if}

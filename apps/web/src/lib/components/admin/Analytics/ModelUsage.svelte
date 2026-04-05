@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount, getContext } from 'svelte';
 	import { models } from '$lib/stores';
+	import { getGabomaGPTModelName } from '$lib/utils/gabomagpt-models';
 	import { getModelAnalytics } from '$lib/apis/analytics';
 	import Spinner from '$lib/components/common/Spinner.svelte';
 	import ChevronUp from '$lib/components/icons/ChevronUp.svelte';
@@ -144,13 +145,13 @@
 							<div class="flex items-center gap-2">
 								<img
 									src="{WEBUI_API_BASE_URL}/models/model/profile/image?id={model.model_id}"
-									alt={model.name}
+									alt={getGabomaGPTModelName(model.model_id, model.name)}
 									class="size-5 rounded-full object-cover shrink-0"
 									on:error={(e) => {
 										e.target.src = '/favicon.png';
 									}}
 								/>
-								<span class="font-medium text-gray-800 dark:text-gray-200">{model.name}</span>
+								<span class="font-medium text-gray-800 dark:text-gray-200">{getGabomaGPTModelName(model.model_id, model.name)}</span>
 							</div>
 						</td>
 						<td class="px-3 py-1.5 text-right font-medium text-gray-900 dark:text-white">

@@ -3,6 +3,7 @@
 	const i18n = getContext('i18n');
 
 	import Minus from '$lib/components/icons/Minus.svelte';
+	import { getGabomaGPTModelName } from '$lib/utils/gabomagpt-models';
 	import Tooltip from '$lib/components/common/Tooltip.svelte';
 
 	export let title = '';
@@ -55,7 +56,7 @@
 				<option value="">{$i18n.t('Select a model')}</option>
 				{#each models as model}
 					{#if !modelIds.includes(model.id)}
-						<option value={model.id} class="bg-gray-50 dark:bg-gray-700">{model.name}</option>
+						<option value={model.id} class="bg-gray-50 dark:bg-gray-700">{getGabomaGPTModelName(model.id, model.name)}</option>
 					{/if}
 				{/each}
 			</select>

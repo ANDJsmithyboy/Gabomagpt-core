@@ -28,11 +28,12 @@
 	/* Salutation gabonaise selon l'heure du jour */
 	function getGreeting(): string {
 		const hour = new Date().getHours();
-		const name = ($user as any)?.name?.split(' ')[0] || 'ami';
-		if (hour >= 5 && hour < 12) return `Mbolo ! Bonjour ${name} ☀️`;
-		if (hour >= 12 && hour < 18) return `Akeva ! Bon après-midi ${name}`;
-		if (hour >= 18 && hour < 22) return `Bonsoir ${name}, on gère quoi ? 🌙`;
-		return `C'est tard ${name}, GabomaGPT veille 🔥`;
+		const name = ($user as any)?.name?.split(' ')[0] || '';
+		const prenom = name ? `, ${name}` : '';
+		if (hour >= 5 && hour < 12) return `Mbolo ! Bonjour${prenom}`;
+		if (hour >= 12 && hour < 18) return `Mbolo ! Bon après-midi${prenom}`;
+		if (hour >= 18 && hour < 22) return `Mbolo ! Bonsoir${prenom}`;
+		return `Mbolo ! Bonne nuit${prenom}`;
 	}
 
 	$: if (modelIds.length > 0) {
@@ -48,11 +49,11 @@
 
 {#if mounted}
 	<div class="m-auto w-full max-w-6xl px-4 sm:px-8 lg:px-20 flex flex-col items-center justify-center">
-		<!-- Logo GabomaGPT centré (style Claude/Gemini) -->
-		<div class="flex flex-col items-center mb-6 sm:mb-8" in:fade={{ duration: 300 }}>
+		<!-- Logo GabomaGPT centre -->
+		<div class="flex flex-col items-center mb-4 sm:mb-6" in:fade={{ duration: 300 }}>
 			<img
 				src="/gabomagpt-logo.jpeg"
-				class="size-16 sm:size-20 rounded-2xl shadow-lg ring-1 ring-black/5 dark:ring-white/10"
+				class="size-20 sm:size-[100px] rounded-2xl shadow-lg ring-1 ring-black/5 dark:ring-white/10"
 				alt="GabomaGPT"
 				draggable="false"
 			/>
@@ -70,28 +71,15 @@
 			</Tooltip>
 		{/if}
 
-		<!-- Greeting GabomaGPT (jamais de nom de modèle) -->
+		<!-- Greeting Mbolo -->
 		<div class="text-center mb-6 sm:mb-8 font-primary" in:fade={{ duration: 200 }}>
-			<div class="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100 tracking-tight welcome-message">
-				{getGreeting()}
+			<div class="text-2xl sm:text-3xl font-bold tracking-tight welcome-message">
+				<span style="color: #D4AF37; font-size: 1.15em;">{getGreeting().split('!')[0]}!</span>
+				<span class="text-gray-800 dark:text-gray-100">{getGreeting().split('!').slice(1).join('!')}</span>
 			</div>
 
-			<div class="mt-1.5" in:fade={{ duration: 200, delay: 200 }}>
-				{#if models[selectedModelIdx]?.info?.meta?.description}
-					<div
-						class="text-sm sm:text-base font-normal text-gray-500 dark:text-gray-400 line-clamp-3 markdown max-w-md mx-auto"
-					>
-						{@html marked.parse(
-							sanitizeResponseContent(
-								models[selectedModelIdx]?.info?.meta?.description || ''
-							).replaceAll('\n', '<br>')
-						)}
-					</div>
-				{:else}
-					<div class="text-sm sm:text-base text-gray-400 dark:text-gray-500 font-normal">
-						{i18n?.t('Comment puis-je vous aider aujourd\'hui ?') ?? 'Comment puis-je vous aider aujourd\'hui ?'}
-					</div>
-				{/if}
+			<div class="mt-2 text-sm sm:text-base text-gray-400 dark:text-gray-500 font-normal" in:fade={{ duration: 200, delay: 200 }}>
+				Votre IA souveraine, toujours là pour vous.
 			</div>
 		</div>
 

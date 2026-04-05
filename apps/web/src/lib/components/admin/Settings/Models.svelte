@@ -7,6 +7,7 @@
 	const i18n = getContext('i18n');
 
 	import { WEBUI_NAME, config, mobile, models as _models, settings, user } from '$lib/stores';
+	import { getGabomaGPTModelName } from '$lib/utils/gabomagpt-models';
 	import {
 		createNewModel,
 		deleteAllModels,
@@ -594,7 +595,7 @@
 										placement="top-start"
 									>
 										<div class="font-medium line-clamp-1 flex items-center gap-2">
-											{model.name}
+											{getGabomaGPTModelName(model.id, model.name)}
 
 											<Badge
 												type={(model?.access_grants ?? []).some(

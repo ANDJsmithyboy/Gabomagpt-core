@@ -63,6 +63,7 @@
 		displayFileHandler
 	} from '$lib/utils';
 	import { AudioQueue } from '$lib/utils/audio';
+	import { getGabomaGPTModelName } from '$lib/utils/gabomagpt-models';
 
 	import {
 		archiveChatById,
@@ -1454,7 +1455,7 @@
 				done: true,
 
 				model: modelId,
-				modelName: model.name ?? model.id,
+				modelName: getGabomaGPTModelName(model.id, model.name),
 				modelIdx: 0,
 				timestamp: Math.floor(Date.now() / 1000)
 			};
@@ -1514,7 +1515,7 @@
 					childrenIds: [],
 					done: true,
 					model: model.id,
-					modelName: model.name ?? model.id,
+					modelName: getGabomaGPTModelName(model.id, model.name),
 					modelIdx: 0,
 					timestamp: Math.floor(Date.now() / 1000),
 					...message
@@ -1886,7 +1887,7 @@
 					role: 'assistant',
 					content: '',
 					model: model.id,
-					modelName: model.name ?? model.id,
+					modelName: getGabomaGPTModelName(model.id, model.name),
 					modelIdx: modelIdx ? modelIdx : _modelIdx,
 					timestamp: Math.floor(Date.now() / 1000) // Unix epoch
 				};
@@ -1941,7 +1942,7 @@
 					) {
 						toast.error(
 							$i18n.t('Model {{modelName}} is not vision capable', {
-								modelName: model.name ?? model.id
+								modelName: getGabomaGPTModelName(model.id, model.name)
 							})
 						);
 					}

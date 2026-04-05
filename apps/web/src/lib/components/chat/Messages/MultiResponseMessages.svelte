@@ -4,6 +4,7 @@
 	import { createEventDispatcher } from 'svelte';
 
 	import { mobile, models, settings } from '$lib/stores';
+	import { getGabomaGPTModelName } from '$lib/utils/gabomagpt-models';
 
 	import { generateMoACompletion } from '$lib/apis';
 	import { updateChatById } from '$lib/apis/chats';
@@ -281,7 +282,7 @@
 									>
 										<div class="flex items-center gap-1.5">
 											<div class="-translate-y-[1px]">
-												{model ? `${model.name}` : history.messages[_messageId]?.model}
+												{model ? getGabomaGPTModelName(model.id, model.name) : getGabomaGPTModelName(history.messages[_messageId]?.model || '')}
 											</div>
 										</div>
 									</button>

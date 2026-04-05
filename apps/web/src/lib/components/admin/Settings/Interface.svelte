@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getModels, getTaskConfig, updateTaskConfig } from '$lib/apis';
 	import { config, settings } from '$lib/stores';
+	import { getGabomaGPTModelName } from '$lib/utils/gabomagpt-models';
 	import { createEventDispatcher, onMount, getContext } from 'svelte';
 	import { toast } from 'svelte-sonner';
 
@@ -157,7 +158,7 @@
 							<option value="" selected>{$i18n.t('Current Model')}</option>
 							{#each models as model}
 								<option value={model.id} class="bg-gray-100 dark:bg-gray-700">
-									{model.name}
+									{getGabomaGPTModelName(model.id, model.name)}
 									{model?.connection_type === 'local' ? `(${$i18n.t('Local')})` : ''}
 								</option>
 							{/each}
@@ -200,7 +201,7 @@
 							<option value="" selected>{$i18n.t('Current Model')}</option>
 							{#each models as model}
 								<option value={model.id} class="bg-gray-100 dark:bg-gray-700">
-									{model.name}
+									{getGabomaGPTModelName(model.id, model.name)}
 									{model?.connection_type === 'local' ? `(${$i18n.t('Local')})` : ''}
 								</option>
 							{/each}

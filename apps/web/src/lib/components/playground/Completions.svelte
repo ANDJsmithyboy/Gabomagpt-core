@@ -9,6 +9,7 @@
 	import { chatCompletion } from '$lib/apis/openai';
 
 	import { splitStream } from '$lib/utils';
+	import { getGabomaGPTModelName } from '$lib/utils/gabomagpt-models';
 	import Spinner from '$lib/components/common/Spinner.svelte';
 	import Selector from '$lib/components/chat/ModelSelector/Selector.svelte';
 
@@ -132,7 +133,7 @@
 									placeholder={$i18n.t('Select a model')}
 									items={$models.map((model) => ({
 										value: model.id,
-										label: model.name,
+										label: getGabomaGPTModelName(model.id, model.name),
 										model: model
 									}))}
 									bind:value={selectedModelId}

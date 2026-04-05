@@ -2,93 +2,115 @@
    SmartANDJ AI Technologies · Constitution Zion Core
    Fondateur : Daniel Jonathan ANDJ
    
-   Mapping des noms techniques vers noms GabomaGPT Premium
-   Flash ⚡ / Pro 🐬 / Black Panther 🐆
+   REGLE ABSOLUE : Aucun nom tiers (Groq, Llama, Claude, OpenAI,
+   Whisper, Gemini, Deepseek, Qwen) ne doit JAMAIS apparaitre dans l'UI.
+   Seul l'admin Daniel connait les vrais modeles derriere chaque tier.
 */
 
-/** Correspondance nom technique → nom GabomaGPT affiche */
+/** Correspondance exacte nom technique → nom GabomaGPT */
 const MODEL_NAME_MAP: Record<string, string> = {
-	// ── Flash ⚡ (Groq rapide) ──
-	'llama-3.3-8b-instant': 'GabomaGPT Flash ⚡',
-	'llama3-8b-8192': 'GabomaGPT Flash ⚡',
-	'llama-3.1-8b-instant': 'GabomaGPT Flash ⚡',
-	'gemma2-9b-it': 'GabomaGPT Flash Lite ⚡',
+	// ── Flash (rapide, gratuit) ──
+	'llama-3.3-8b-instant': 'GabomaGPT Flash',
+	'llama3-8b-8192': 'GabomaGPT Flash',
+	'llama-3.1-8b-instant': 'GabomaGPT Flash',
+	'gemma2-9b-it': 'GabomaGPT Flash',
+	'gemma-7b-it': 'GabomaGPT Flash',
+	'gpt-oss-120b': 'GabomaGPT Flash',
+	'openai/gpt-oss-120b': 'GabomaGPT Flash',
 
-	// ── GPT-OSS 120B (Groq — modele principal) ──
-	'gpt-oss-120b': 'GabomaGPT Flash ⚡',
-	'openai/gpt-oss-120b': 'GabomaGPT Flash ⚡',
+	// ── Pro (equilibre, puissant) ──
+	'llama-3.3-70b-versatile': 'GabomaGPT Pro',
+	'llama3-70b-8192': 'GabomaGPT Pro',
+	'llama-3.1-70b-versatile': 'GabomaGPT Pro',
+	'mixtral-8x7b-32768': 'GabomaGPT Pro',
 
-	// ── Pro 🐬 (Groq puissant) ──
-	'llama-3.3-70b-versatile': 'GabomaGPT Pro 🐬',
-	'llama3-70b-8192': 'GabomaGPT Pro 🐬',
-	'llama-3.1-70b-versatile': 'GabomaGPT Pro 🐬',
-	'mixtral-8x7b-32768': 'GabomaGPT Pro Mix 🐬',
-	'deepseek-r1-distill-llama-70b': 'GabomaGPT Pro Deep 🐬',
+	// ── Elite (expert, precis) ──
+	'llama-3.1-405b-reasoning': 'GabomaGPT Elite',
+	'gpt-4o': 'GabomaGPT Elite',
+	'gpt-4o-mini': 'GabomaGPT Elite',
+	'gpt-4-turbo': 'GabomaGPT Elite',
 
-	// ── Black Panther 🐆 (Anthropic elite) ──
-	'claude-sonnet-4-20250514': 'GabomaGPT Panthère 🐆',
-	'claude-3-5-sonnet-20241022': 'GabomaGPT Panthère 🐆',
-	'claude-3-5-haiku-20241022': 'GabomaGPT Panthère Lite 🐆',
-	'claude-3-opus-20240229': 'GabomaGPT Panthère Elite 🐆',
+	// ── Black Panther (agent autonome) ──
+	'deepseek-r1-distill-llama-70b': 'GabomaGPT Black Panther',
+	'deepseek-coder': 'GabomaGPT Black Panther',
+	'qwen-2.5-72b': 'GabomaGPT Black Panther',
+	'qwen-2.5-coder-32b': 'GabomaGPT Black Panther',
 
-	// ── OpenAI (si configure) ──
-	'gpt-4o': 'GabomaGPT Elite 🌍',
-	'gpt-4o-mini': 'GabomaGPT Elite Lite 🌍',
-	'gpt-4-turbo': 'GabomaGPT Elite Turbo 🌍'
+	// ── Panthere Pro (API illimitee) ──
+	'claude-sonnet-4-20250514': 'GabomaGPT Panthere Pro',
+	'claude-3-5-sonnet-20241022': 'GabomaGPT Panthere Pro',
+	'claude-3-5-haiku-20241022': 'GabomaGPT Panthere Pro',
+	'claude-3-opus-20240229': 'GabomaGPT Panthere Pro',
+
+	// ── Voice (speech/audio) ──
+	'whisper-large-v3': 'GabomaGPT Voice',
+	'whisper-large-v3-turbo': 'GabomaGPT Voice',
+	'whisper-1': 'GabomaGPT Voice'
 };
 
+/** Mots-cles pour le pattern matching en fallback (JAMAIS de noms tiers) */
+const PATTERN_RULES: Array<{ patterns: string[]; display: string }> = [
+	{ patterns: ['whisper', 'tts', 'speech', 'audio', 'voice'], display: 'GabomaGPT Voice' },
+	{ patterns: ['panthere', 'claude', 'anthropic', 'opus', 'sonnet', 'haiku'], display: 'GabomaGPT Panthere Pro' },
+	{ patterns: ['black', 'panther', 'deepseek', 'qwen', 'coder'], display: 'GabomaGPT Black Panther' },
+	{ patterns: ['elite', '405b', 'gpt-4', 'gpt4'], display: 'GabomaGPT Elite' },
+	{ patterns: ['pro', '70b', 'mixtral', 'llama-3.3'], display: 'GabomaGPT Pro' },
+	{ patterns: ['flash', 'gemma', 'fast', '8b', 'instant', 'mini', 'small', 'lite'], display: 'GabomaGPT Flash' }
+];
+
 /**
- * Retourne le nom GabomaGPT Premium pour un modele donne.
- * Si le modele n'est pas dans la map, retourne le nom original
- * avec un nettoyage basique (suppression du prefixe provider).
+ * Retourne le nom GabomaGPT brande pour un modele donne.
+ * REGLE ABSOLUE : ne retourne JAMAIS un nom tiers.
+ * Fallback = "GabomaGPT Flash" (jamais un nom technique brut).
  */
-export function getGabomaGPTModelName(modelId: string, originalName?: string): string {
-	// Verifier la correspondance exacte
+export function getGabomaGPTModelName(modelId: string, _originalName?: string): string {
+	if (!modelId) return 'GabomaGPT Flash';
+
+	// 1. Correspondance exacte
 	if (MODEL_NAME_MAP[modelId]) {
 		return MODEL_NAME_MAP[modelId];
 	}
 
-	// Verifier par correspondance partielle (le modele peut avoir un prefixe comme "groq/")
+	// 2. Strip provider prefix (groq/, openai/, anthropic/, etc.)
 	const bareId = modelId.includes('/') ? modelId.split('/').pop()! : modelId;
 	if (MODEL_NAME_MAP[bareId]) {
 		return MODEL_NAME_MAP[bareId];
 	}
 
-	// Si pas de correspondance, retourner le nom original ou un nom nettoye
-	if (originalName) {
-		return originalName;
+	// 3. Pattern matching sur l'ID
+	const lower = (bareId + ' ' + (modelId || '')).toLowerCase();
+	for (const rule of PATTERN_RULES) {
+		if (rule.patterns.some((p) => lower.includes(p))) {
+			return rule.display;
+		}
 	}
 
-	// Nettoyage basique : capitaliser, supprimer les prefixes provider
-	return bareId
-		.replace(/^(groq|openai|anthropic)[/-]/i, '')
-		.replace(/-/g, ' ')
-		.replace(/\b\w/g, (c) => c.toUpperCase());
+	// 4. FALLBACK ABSOLU — jamais de nom tiers
+	return 'GabomaGPT Flash';
 }
 
 /**
- * Retourne la couleur d'accent associee au mode du modele.
+ * Retourne la description courte du tier pour l'UI.
+ */
+export function getGabomaGPTModelDescription(modelId: string): string {
+	const name = getGabomaGPTModelName(modelId);
+	if (name.includes('Voice')) return 'Reconnaissance vocale';
+	if (name.includes('Panthere Pro')) return 'API Illimitee';
+	if (name.includes('Black Panther')) return 'Agent Autonome';
+	if (name.includes('Elite')) return 'Expert & Precis';
+	if (name.includes('Pro')) return 'Equilibre & Puissant';
+	return 'Rapide & Gratuit';
+}
+
+/**
+ * Retourne la couleur d'accent associee au tier du modele.
  */
 export function getModelAccentColor(modelId: string): string {
-	const bareId = modelId.includes('/') ? modelId.split('/').pop()! : modelId;
-
-	// Flash = Jaune
-	if (bareId.includes('8b') || bareId.includes('gemma')) {
-		return '#FFD54F';
-	}
-	// Pro = Bleu
-	if (bareId.includes('70b') || bareId.includes('mixtral') || bareId.includes('deepseek')) {
-		return '#29B6F6';
-	}
-	// Panthere = Rouge
-	if (bareId.includes('claude')) {
-		return '#FF2244';
-	}
-	// Elite = Vert
-	if (bareId.includes('gpt')) {
-		return '#2ECC8A';
-	}
-
-	// Default = accent Zion Core
-	return 'var(--accent, #2ECC8A)';
+	const name = getGabomaGPTModelName(modelId);
+	if (name.includes('Voice')) return '#D4AF37';
+	if (name.includes('Panthere Pro')) return '#D4AF37';
+	if (name.includes('Black Panther')) return '#FF2244';
+	if (name.includes('Elite')) return '#D4AF37';
+	if (name.includes('Pro')) return '#1A3A2A';
+	return '#2ECC8A';
 }

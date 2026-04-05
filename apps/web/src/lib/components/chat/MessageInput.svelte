@@ -14,6 +14,7 @@
 	import { onMount, tick, getContext, createEventDispatcher } from 'svelte';
 
 	import { createPicker, getAuthToken } from '$lib/utils/google-drive-picker';
+	import { getGabomaGPTModelName } from '$lib/utils/gabomagpt-models';
 	import { pickAndDownloadFile } from '$lib/utils/onedrive-file-picker';
 	import { KokoroWorker } from '$lib/workers/KokoroWorker';
 
@@ -1229,7 +1230,7 @@
 												src={`${WEBUI_API_BASE_URL}/models/model/profile/image?id=${$models.find((model) => model.id === atSelectedModel.id).id}&lang=${$i18n.language}`}
 											/>
 											<div class="translate-y-[0.5px]">
-												<span class="">{atSelectedModel.name}</span>
+												<span class="">{getGabomaGPTModelName(atSelectedModel.id, atSelectedModel.name)}</span>
 											</div>
 										</div>
 										<div>

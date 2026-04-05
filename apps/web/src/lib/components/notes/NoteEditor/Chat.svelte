@@ -41,6 +41,7 @@
 	import { chatCompletion } from '$lib/apis/openai';
 
 	import { splitStream } from '$lib/utils';
+	import { getGabomaGPTModelName } from '$lib/utils/gabomagpt-models';
 
 	import Messages from '$lib/components/notes/NoteEditor/Chat/Messages.svelte';
 	import MessageInput from '$lib/components/channel/MessageInput.svelte';
@@ -423,7 +424,7 @@ Based on the user's instruction, update and enhance the existing notes or select
 								>
 									{#each $models.filter((model) => !(model?.info?.meta?.hidden ?? false)) as model}
 										<option value={model.id} class="bg-gray-50 dark:bg-gray-700"
-											>{model.name}</option
+											>{getGabomaGPTModelName(model.id, model.name)}</option
 										>
 									{/each}
 								</select>
