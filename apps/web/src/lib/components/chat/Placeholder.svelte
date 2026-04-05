@@ -38,7 +38,7 @@
 	export let autoScroll = false;
 
 	export let atSelectedModel: any;
-	export let selectedModels: string[];
+	export let selectedModels: any;
 
 	export let history: any;
 
@@ -104,7 +104,7 @@
 			{#if $selectedFolder}
 				<FolderTitle
 					folder={$selectedFolder}
-					onUpdate={async (folder) => {
+					onUpdate={async (folder: any) => {
 						await chats.set(await getChatList(localStorage.token, $currentChatPage));
 						currentChatPage.set(1);
 					}}
